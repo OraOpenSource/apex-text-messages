@@ -27,7 +27,7 @@ prompt APPLICATION 23762 - Text Messages
 -- Application Export:
 --   Application:     23762
 --   Name:            Text Messages
---   Date and Time:   14:43 Monday January 4, 2016
+--   Date and Time:   19:15 Tuesday January 5, 2016
 --   Exported By:     ALJAZ
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -36,20 +36,20 @@ prompt APPLICATION 23762 - Text Messages
 --
 
 -- Application Statistics:
---   Pages:                     14
---     Items:                   42
+--   Pages:                     15
+--     Items:                   47
 --     Validations:              4
 --     Processes:               25
---     Regions:                 36
---     Buttons:                 28
---     Dynamic Actions:         13
+--     Regions:                 38
+--     Buttons:                 32
+--     Dynamic Actions:         17
 --   Shared Components:
 --     Logic:
 --       Data Loading:           1
 --     Navigation:
 --       Lists:                  5
 --       Breadcrumbs:            1
---         Entries:              6
+--         Entries:              7
 --     Security:
 --       Authentication:         1
 --     User Interface:
@@ -64,7 +64,7 @@ prompt APPLICATION 23762 - Text Messages
 --         Breadcrumb:           1
 --         Button:               3
 --         Report:               8
---       LOVs:                   7
+--       LOVs:                   9
 --       Shortcuts:              1
 --     Globalization:
 --     Reports:
@@ -118,7 +118,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_value_02=>'<link rel="shortcut icon" href="#APP_IMAGES#fav-icon.png"><link rel="icon" sizes="16x16" href="#APP_IMAGES#fav-icon-16.png"><link rel="icon" sizes="32x32" href="#APP_IMAGES#fav-icon-32.png"><link rel="apple-touch-icon" sizes="180x180" href="#APP_IMAG'
 ||'ES#fav-icon-128.png">'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160104143540'
+,p_last_upd_yyyymmddhh24miss=>'20160105191504'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>5
 ,p_ui_type_name => null
@@ -184,8 +184,17 @@ wwv_flow_api.create_list_item(
 ,p_list_item_current_type=>'TARGET_PAGE'
 );
 wwv_flow_api.create_list_item(
- p_id=>wwv_flow_api.id(25839728028890110544)
+ p_id=>wwv_flow_api.id(13570606355529778)
 ,p_list_item_display_sequence=>20
+,p_list_item_link_text=>'Copy translations'
+,p_list_item_link_target=>'f?p=&APP_ID.:10:&SESSION.::&DEBUG.::::'
+,p_list_item_icon=>'fa-copy'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'10'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(25839728028890110544)
+,p_list_item_display_sequence=>30
 ,p_list_item_link_text=>'Prepared Messages'
 ,p_list_item_link_target=>'f?p=&APP_ID.:2:&SESSION.::&DEBUG.::::'
 ,p_list_item_icon=>'fa-edit'
@@ -194,7 +203,7 @@ wwv_flow_api.create_list_item(
 );
 wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(25838731923141980776)
-,p_list_item_display_sequence=>30
+,p_list_item_display_sequence=>40
 ,p_list_item_link_text=>'Restore Messages'
 ,p_list_item_link_target=>'f?p=&APP_ID.:8:&SESSION.::&DEBUG.::::'
 ,p_list_item_icon=>'fa-recycle'
@@ -203,7 +212,7 @@ wwv_flow_api.create_list_item(
 );
 wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(25838727501756282857)
-,p_list_item_display_sequence=>40
+,p_list_item_display_sequence=>50
 ,p_list_item_link_text=>'Languages'
 ,p_list_item_link_target=>'f?p=&APP_ID.:5:&SESSION.::&DEBUG.::::'
 ,p_list_item_icon=>'fa-globe'
@@ -212,7 +221,7 @@ wwv_flow_api.create_list_item(
 );
 wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(22448166065109756)
-,p_list_item_display_sequence=>50
+,p_list_item_display_sequence=>60
 ,p_list_item_link_text=>'Upload CSV'
 ,p_list_item_link_target=>'f?p=&APP_ID.:20:&SESSION.::&DEBUG.::::'
 ,p_list_item_icon=>'fa-upload'
@@ -682,35 +691,68 @@ wwv_flow_api.create_static_lov_data(
 ,p_lov_return_value=>'Y'
 );
 wwv_flow_api.create_list_of_values(
- p_id=>wwv_flow_api.id(25836133741094385094)
-,p_lov_name=>'LOV_APPS'
+ p_id=>wwv_flow_api.id(13584054746697379)
+,p_lov_name=>'LOV_APPS_PAGES_10'
 ,p_lov_query=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'  select application_id || '' - '' || application_name as d,',
-'         application_id as r',
-'  from apex_applications',
-'  where :P1_SHOW_APPS = ''ALL''',
-'union all',
-'  select application_id || '' - '' || application_name as d,',
-'         application_id as r',
-'  from apex_applications',
-'  where :P1_SHOW_APPS = ''NOTTRANSLED''',
-'    and application_id not in (select application_id',
-'                               from APEX_APPLICATION_TRANSLATIONS',
-'                               where (language_code = :P1_CODE or :P1_CODE is null))',
-'union all',
-'  select application_id || '' - '' || application_name as d,',
-'         application_id as r',
-'  from apex_applications ',
-'  where :P1_SHOW_APPS = ''TRANSLATED''',
-'    and application_id in (select application_id',
-'                           from APEX_APPLICATION_TRANSLATIONS',
-'                           where (language_code = :P1_CODE or :P1_CODE is null)) ',
-'order by',
-'  1',
-'  ',
-'  ',
-'  ',
+'  if :P10_SHOW_APPS = ''ALL'' then',
+'    return q''[select application_id || '' - '' || application_name as d,',
+'                     application_id as r',
+'            from apex_applications ',
+'            where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null)]'';  ',
+'  elsif :P10_SHOW_APPS = ''NOTTRANSLED'' then',
+'    return q''[select application_id || '' - '' || application_name as d,',
+'                     application_id as r',
+'              from apex_applications',
+'              where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null)',
+'                and application_id not in (select application_id',
+'                                           from APEX_APPLICATION_TRANSLATIONS',
+'                                           where (language_code = :P10_CODE or :P10_CODE is null))]'';',
+'  elsif :P10_SHOW_APPS = ''TRANSLATED'' then',
+'    return q''[select application_id || '' - '' || application_name as d,',
+'                     application_id as r',
+'              from apex_applications ',
+'              where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null)',
+'                and application_id in (select application_id',
+'                                       from APEX_APPLICATION_TRANSLATIONS',
+'                                       where (language_code = :P10_CODE or :P10_CODE is null))]'';',
+'  end if;',
 ''))
+);
+wwv_flow_api.create_list_of_values(
+ p_id=>wwv_flow_api.id(25836133741094385094)
+,p_lov_name=>'LOV_APPS_PAGE_1'
+,p_lov_query=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'  if :P1_SHOW_APPS = ''ALL'' then',
+'    return q''[select application_id || '' - '' || application_name as d,',
+'            application_id as r',
+'            from apex_applications]'';  ',
+'  elsif :P1_SHOW_APPS = ''NOTTRANSLED'' then',
+'    return q''[select application_id || '' - '' || application_name as d,',
+'                     application_id as r',
+'              from apex_applications',
+'              where application_id not in (select application_id',
+'                                           from APEX_APPLICATION_TRANSLATIONS',
+'                                           where (language_code = :P1_CODE or :P1_CODE is null))]'';',
+'  elsif :P1_SHOW_APPS = ''TRANSLATED'' then',
+'    return q''[select application_id || '' - '' || application_name as d,',
+'                     application_id as r',
+'              from apex_applications ',
+'              where application_id in (select application_id',
+'                                       from APEX_APPLICATION_TRANSLATIONS',
+'                                       where (language_code = :P1_CODE or :P1_CODE is null))]'';',
+'  end if;'))
+);
+wwv_flow_api.create_list_of_values(
+ p_id=>wwv_flow_api.id(13581821698647371)
+,p_lov_name=>'LOV_APPS_SOURCE'
+,p_lov_query=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select distinct',
+'  application_id || '' - '' || application_name as d,',
+'  application_id r',
+'from ',
+'  APEX_APPLICATION_TRANSLATIONS',
+'where ',
+'  language_code = :P10_CODE'))
 );
 wwv_flow_api.create_list_of_values(
  p_id=>wwv_flow_api.id(25838740072171356383)
@@ -729,19 +771,19 @@ wwv_flow_api.create_list_of_values(
 wwv_flow_api.create_static_lov_data(
  p_id=>wwv_flow_api.id(13470582972908343)
 ,p_lov_disp_sequence=>1
-,p_lov_disp_value=>'All applications'
+,p_lov_disp_value=>'All target applications'
 ,p_lov_return_value=>'ALL'
 );
 wwv_flow_api.create_static_lov_data(
  p_id=>wwv_flow_api.id(13470967142908343)
 ,p_lov_disp_sequence=>2
-,p_lov_disp_value=>'Applications with translations'
+,p_lov_disp_value=>'All target applications with translations'
 ,p_lov_return_value=>'TRANSLATED'
 );
 wwv_flow_api.create_static_lov_data(
  p_id=>wwv_flow_api.id(13471389921908344)
 ,p_lov_disp_sequence=>3
-,p_lov_disp_value=>'Applications with no translations'
+,p_lov_disp_value=>'All target applications with no translations'
 ,p_lov_return_value=>'NOTTRANSLED'
 );
 end;
@@ -766,6 +808,12 @@ begin
 wwv_flow_api.create_menu(
  p_id=>wwv_flow_api.id(34516269607304103879)
 ,p_name=>' Breadcrumb'
+);
+wwv_flow_api.create_menu_option(
+ p_id=>wwv_flow_api.id(13571587764529784)
+,p_short_name=>'Existing translations'
+,p_link=>'f?p=&APP_ID.:10:&SESSION.'
+,p_page_id=>10
 );
 wwv_flow_api.create_menu_option(
  p_id=>wwv_flow_api.id(22449132606109757)
@@ -9461,7 +9509,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160104143540'
+,p_last_upd_yyyymmddhh24miss=>'20160105175400'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(13154086268052418)
@@ -9987,34 +10035,27 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(25838038748063451999)
 ,p_prompt=>'Application'
 ,p_display_as=>'NATIVE_SELECT_LIST'
-,p_named_lov=>'LOV_APPS'
+,p_named_lov=>'LOV_APPS_PAGE_1'
 ,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'  select application_id || '' - '' || application_name as d,',
-'         application_id as r',
-'  from apex_applications',
-'  where :P1_SHOW_APPS = ''ALL''',
-'union all',
-'  select application_id || '' - '' || application_name as d,',
-'         application_id as r',
-'  from apex_applications',
-'  where :P1_SHOW_APPS = ''NOTTRANSLED''',
-'    and application_id not in (select application_id',
-'                               from APEX_APPLICATION_TRANSLATIONS',
-'                               where (language_code = :P1_CODE or :P1_CODE is null))',
-'union all',
-'  select application_id || '' - '' || application_name as d,',
-'         application_id as r',
-'  from apex_applications ',
-'  where :P1_SHOW_APPS = ''TRANSLATED''',
-'    and application_id in (select application_id',
-'                           from APEX_APPLICATION_TRANSLATIONS',
-'                           where (language_code = :P1_CODE or :P1_CODE is null)) ',
-'order by',
-'  1',
-'  ',
-'  ',
-'  ',
-''))
+'  if :P1_SHOW_APPS = ''ALL'' then',
+'    return q''[select application_id || '' - '' || application_name as d,',
+'            application_id as r',
+'            from apex_applications]'';  ',
+'  elsif :P1_SHOW_APPS = ''NOTTRANSLED'' then',
+'    return q''[select application_id || '' - '' || application_name as d,',
+'                     application_id as r',
+'              from apex_applications',
+'              where application_id not in (select application_id',
+'                                           from APEX_APPLICATION_TRANSLATIONS',
+'                                           where (language_code = :P1_CODE or :P1_CODE is null))]'';',
+'  elsif :P1_SHOW_APPS = ''TRANSLATED'' then',
+'    return q''[select application_id || '' - '' || application_name as d,',
+'                     application_id as r',
+'              from apex_applications ',
+'              where application_id in (select application_id',
+'                                       from APEX_APPLICATION_TRANSLATIONS',
+'                                       where (language_code = :P1_CODE or :P1_CODE is null))]'';',
+'  end if;'))
 ,p_lov_display_null=>'YES'
 ,p_lov_null_text=>'- choose application -'
 ,p_cHeight=>1
@@ -12102,6 +12143,410 @@ wwv_flow_api.create_page_process(
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_api.id(25380837543753738397)
 ,p_process_success_message=>'Text messages restored.'
+);
+end;
+/
+prompt --application/pages/page_00010
+begin
+wwv_flow_api.create_page(
+ p_id=>10
+,p_user_interface_id=>wwv_flow_api.id(34516268273398103864)
+,p_name=>'Copy translations'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'&SUB_APP_NAME.'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_page_template_options=>'#DEFAULT#'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_cache_mode=>'NOCACHE'
+,p_help_text=>'No help is available for this page.'
+,p_last_updated_by=>'ALJAZ'
+,p_last_upd_yyyymmddhh24miss=>'20160105191504'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(13571165667529782)
+,p_plug_name=>'Copy translations'
+,p_icon_css_classes=>'fa-copy'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(34709116413301900204)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(13576132226588574)
+,p_plug_name=>'Applications and languages'
+,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody:t-Form--leftLabels'
+,p_plug_template=>wwv_flow_api.id(34516242305405103807)
+,p_plug_display_sequence=>20
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_query_row_template=>1
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(13576400185588575)
+,p_button_sequence=>50
+,p_button_plug_id=>wwv_flow_api.id(13576132226588574)
+,p_button_name=>'BTN_IMPORT'
+,p_button_static_id=>'BTN_IMPORT'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#:t-Button--iconLeft'
+,p_button_template_id=>wwv_flow_api.id(34516263214649103840)
+,p_button_image_alt=>'Import Messages'
+,p_button_position=>'BODY'
+,p_icon_css_classes=>'fa-toggle-right'
+,p_button_cattributes=>'style="display:none"'
+,p_grid_column_attributes=>'style="padding-top:15px"'
+,p_grid_new_row=>'Y'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(13576852755588576)
+,p_button_sequence=>60
+,p_button_plug_id=>wwv_flow_api.id(13576132226588574)
+,p_button_name=>'BTN_APPEND'
+,p_button_static_id=>'BTN_APPEND'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#:t-Button--iconLeft'
+,p_button_template_id=>wwv_flow_api.id(34516263214649103840)
+,p_button_image_alt=>'Append Messages'
+,p_button_position=>'BODY'
+,p_icon_css_classes=>'fa-plus-square-o'
+,p_button_cattributes=>'style="display:none"'
+,p_grid_new_row=>'N'
+,p_grid_new_column=>'N'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(13577275787588576)
+,p_button_sequence=>70
+,p_button_plug_id=>wwv_flow_api.id(13576132226588574)
+,p_button_name=>'BTN_MERGE'
+,p_button_static_id=>'BTN_MERGE'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#:t-Button--iconLeft'
+,p_button_template_id=>wwv_flow_api.id(34516263214649103840)
+,p_button_image_alt=>'Merge Messages'
+,p_button_position=>'BODY'
+,p_icon_css_classes=>'fa-columns'
+,p_button_cattributes=>'style="display:none"'
+,p_grid_new_row=>'N'
+,p_grid_new_column=>'N'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(13577688276588577)
+,p_button_sequence=>80
+,p_button_plug_id=>wwv_flow_api.id(13576132226588574)
+,p_button_name=>'BTN_DELETE'
+,p_button_static_id=>'BTN_DELETE'
+,p_button_action=>'REDIRECT_URL'
+,p_button_template_options=>'#DEFAULT#:t-Button--iconLeft'
+,p_button_template_id=>wwv_flow_api.id(34516263214649103840)
+,p_button_image_alt=>'Delete Messages'
+,p_button_position=>'BODY'
+,p_button_redirect_url=>'javascript:apex.confirm(htmldb_delete_message,''DELETE'');'
+,p_icon_css_classes=>'fa-remove'
+,p_button_cattributes=>'style="display:none"'
+,p_grid_new_row=>'N'
+,p_grid_new_column=>'N'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(13154472039052422)
+,p_name=>'P10_APP_ID_TARGET'
+,p_item_sequence=>30
+,p_item_plug_id=>wwv_flow_api.id(13576132226588574)
+,p_prompt=>'Target application'
+,p_display_as=>'NATIVE_SELECT_LIST'
+,p_named_lov=>'LOV_APPS_PAGES_10'
+,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'  if :P10_SHOW_APPS = ''ALL'' then',
+'    return q''[select application_id || '' - '' || application_name as d,',
+'                     application_id as r',
+'            from apex_applications ',
+'            where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null)]'';  ',
+'  elsif :P10_SHOW_APPS = ''NOTTRANSLED'' then',
+'    return q''[select application_id || '' - '' || application_name as d,',
+'                     application_id as r',
+'              from apex_applications',
+'              where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null)',
+'                and application_id not in (select application_id',
+'                                           from APEX_APPLICATION_TRANSLATIONS',
+'                                           where (language_code = :P10_CODE or :P10_CODE is null))]'';',
+'  elsif :P10_SHOW_APPS = ''TRANSLATED'' then',
+'    return q''[select application_id || '' - '' || application_name as d,',
+'                     application_id as r',
+'              from apex_applications ',
+'              where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null)',
+'                and application_id in (select application_id',
+'                                       from APEX_APPLICATION_TRANSLATIONS',
+'                                       where (language_code = :P10_CODE or :P10_CODE is null))]'';',
+'  end if;',
+''))
+,p_lov_display_null=>'YES'
+,p_lov_null_text=>'- choose application -'
+,p_cHeight=>1
+,p_grid_label_column_span=>1
+,p_field_template=>wwv_flow_api.id(34516262555304103837)
+,p_item_template_options=>'#DEFAULT#'
+,p_lov_display_extra=>'NO'
+,p_attribute_01=>'NONE'
+,p_attribute_02=>'N'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(13156272044052440)
+,p_name=>'P10_SHOW_IMPORT'
+,p_item_sequence=>90
+,p_item_plug_id=>wwv_flow_api.id(13576132226588574)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(13578005514588578)
+,p_name=>'P10_CODE'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_api.id(13576132226588574)
+,p_prompt=>'Language'
+,p_display_as=>'NATIVE_SELECT_LIST'
+,p_named_lov=>'LOV_LANG'
+,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select language || '' ('' || code || '')'' as d,',
+'       code as r',
+'  from tm_languages',
+' order by 1'))
+,p_lov_display_null=>'YES'
+,p_lov_null_text=>'- choose language -'
+,p_cHeight=>1
+,p_grid_label_column_span=>1
+,p_field_template=>wwv_flow_api.id(34516262555304103837)
+,p_item_template_options=>'#DEFAULT#'
+,p_lov_display_extra=>'YES'
+,p_attribute_01=>'NONE'
+,p_attribute_02=>'N'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(13578481436588580)
+,p_name=>'P10_APP_ID_SOURCE'
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_api.id(13576132226588574)
+,p_prompt=>'Source application'
+,p_display_as=>'NATIVE_SELECT_LIST'
+,p_named_lov=>'LOV_APPS_SOURCE'
+,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select distinct',
+'  application_id || '' - '' || application_name as d,',
+'  application_id r',
+'from ',
+'  APEX_APPLICATION_TRANSLATIONS',
+'where ',
+'  language_code = :P10_CODE'))
+,p_lov_display_null=>'YES'
+,p_lov_null_text=>'- choose application -'
+,p_cHeight=>1
+,p_grid_label_column_span=>1
+,p_field_template=>wwv_flow_api.id(34516262555304103837)
+,p_item_template_options=>'#DEFAULT#'
+,p_lov_display_extra=>'NO'
+,p_attribute_01=>'NONE'
+,p_attribute_02=>'N'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(13578878597588580)
+,p_name=>'P10_SHOW_APPS'
+,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_api.id(13576132226588574)
+,p_item_default=>'ALL'
+,p_prompt=>'Show apps'
+,p_display_as=>'NATIVE_RADIOGROUP'
+,p_named_lov=>'LOV_SHOW'
+,p_lov=>'.'||wwv_flow_api.id(13470254431908343)||'.'
+,p_grid_label_column_span=>0
+,p_field_template=>wwv_flow_api.id(34516262555304103837)
+,p_item_template_options=>'#DEFAULT#'
+,p_lov_display_extra=>'NO'
+,p_attribute_01=>'3'
+,p_attribute_02=>'NONE'
+);
+wwv_flow_api.create_page_da_event(
+ p_id=>wwv_flow_api.id(13154740419052425)
+,p_name=>'On Change CODE'
+,p_event_sequence=>20
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P10_CODE'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(13154936067052427)
+,p_event_id=>wwv_flow_api.id(13154740419052425)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>'null;'
+,p_attribute_02=>'P10_CODE'
+,p_stop_execution_on_error=>'Y'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(13154832296052426)
+,p_event_id=>wwv_flow_api.id(13154740419052425)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'JQUERY_SELECTOR'
+,p_affected_elements=>'#P10_APP_ID_SOURCE, #P10_APP_ID_TARGET'
+);
+wwv_flow_api.create_page_da_event(
+ p_id=>wwv_flow_api.id(13155091791052428)
+,p_name=>'On Change SHOW APPS'
+,p_event_sequence=>30
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P10_SHOW_APPS'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(13155281942052430)
+,p_event_id=>wwv_flow_api.id(13155091791052428)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>'null;'
+,p_attribute_02=>'P10_SHOW_APPS'
+,p_stop_execution_on_error=>'Y'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(13155104027052429)
+,p_event_id=>wwv_flow_api.id(13155091791052428)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'JQUERY_SELECTOR'
+,p_affected_elements=>'#P10_APP_ID_TARGET'
+);
+wwv_flow_api.create_page_da_event(
+ p_id=>wwv_flow_api.id(13155699475052434)
+,p_name=>'On Change APP_ID_SOURCE'
+,p_event_sequence=>40
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P10_APP_ID_SOURCE'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(13155845310052436)
+,p_event_id=>wwv_flow_api.id(13155699475052434)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>'null;'
+,p_attribute_02=>'P10_APP_ID_SOURCE'
+,p_stop_execution_on_error=>'Y'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(13155745760052435)
+,p_event_id=>wwv_flow_api.id(13155699475052434)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'JQUERY_SELECTOR'
+,p_affected_elements=>'#P10_APP_ID_TARGET'
+);
+wwv_flow_api.create_page_da_event(
+ p_id=>wwv_flow_api.id(13155922106052437)
+,p_name=>'On Change APP_ID_TARGET'
+,p_event_sequence=>50
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P10_APP_ID_TARGET'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(13156304978052441)
+,p_event_id=>wwv_flow_api.id(13155922106052437)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_SET_VALUE'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P10_SHOW_IMPORT'
+,p_attribute_01=>'FUNCTION_BODY'
+,p_attribute_06=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'declare',
+'  l_cnt number;',
+'begin',
+' ',
+'  if :P10_CODE is null or :P10_APP_ID_SOURCE is null or :P10_APP_ID_TARGET is null then',
+'    return ''NO'';',
+'  end if;',
+'',
+'    ',
+'  --if translations for target application already exists then don''t show import',
+'  select',
+'    count(*)',
+'  into',
+'    l_cnt ',
+'  from ',
+'    APEX_APPLICATION_TRANSLATIONS ',
+'  where ',
+'    application_id = :P10_APP_ID_TARGET and ',
+'    language_code = :P10_CODE and',
+'    rownum < 2;',
+'',
+'  if l_cnt > 0 then',
+'    return ''NO'';',
+'  else',
+'    return ''YES'';',
+'  end if;',
+'',
+'',
+'',
+'end;'))
+,p_attribute_07=>'P10_APP_ID_TARGET'
+,p_attribute_08=>'Y'
+,p_attribute_09=>'N'
+,p_stop_execution_on_error=>'Y'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(13156077340052438)
+,p_event_id=>wwv_flow_api.id(13155922106052437)
+,p_event_result=>'TRUE'
+,p_action_sequence=>30
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'if ($v(''P10_SHOW_IMPORT'') == ''YES''){',
+'  $(''#BTN_IMPORT'').show();',
+'  $(''#BTN_APPEND'').hide();',
+'  $(''#BTN_MERGE'').hide();',
+'  $(''#BTN_DELETE'').hide();',
+'}  ',
+'else{',
+'  $(''#BTN_IMPORT'').hide(); ',
+'',
+'  if (!$v(''P10_CODE'') || !$v(''P10_APP_ID_SOURCE'') || !$v(''P10_APP_ID_TARGET'')){',
+'    $(''#BTN_APPEND'').hide();',
+'    $(''#BTN_MERGE'').hide();',
+'    $(''#BTN_DELETE'').hide();',
+'  }else{',
+'    $(''#BTN_APPEND'').show();',
+'    $(''#BTN_MERGE'').show();',
+'    $(''#BTN_DELETE'').show();     ',
+'  }',
+'}'))
 );
 end;
 /
