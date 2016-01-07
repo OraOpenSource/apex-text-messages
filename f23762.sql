@@ -27,7 +27,7 @@ prompt APPLICATION 23762 - Text Messages
 -- Application Export:
 --   Application:     23762
 --   Name:            Text Messages
---   Date and Time:   19:15 Tuesday January 5, 2016
+--   Date and Time:   19:48 Tuesday January 5, 2016
 --   Exported By:     ALJAZ
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -118,7 +118,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_value_02=>'<link rel="shortcut icon" href="#APP_IMAGES#fav-icon.png"><link rel="icon" sizes="16x16" href="#APP_IMAGES#fav-icon-16.png"><link rel="icon" sizes="32x32" href="#APP_IMAGES#fav-icon-32.png"><link rel="apple-touch-icon" sizes="180x180" href="#APP_IMAG'
 ||'ES#fav-icon-128.png">'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160105191504'
+,p_last_upd_yyyymmddhh24miss=>'20160105194626'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>5
 ,p_ui_type_name => null
@@ -694,28 +694,30 @@ wwv_flow_api.create_list_of_values(
  p_id=>wwv_flow_api.id(13584054746697379)
 ,p_lov_name=>'LOV_APPS_PAGES_10'
 ,p_lov_query=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'  if :P10_SHOW_APPS = ''ALL'' then',
-'    return q''[select application_id || '' - '' || application_name as d,',
-'                     application_id as r',
+'select application_id || '' - '' || application_name as d,',
+'                   application_id as r',
+'          from apex_applications ',
+'          where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null) ',
+'            and :P10_SHOW_APPS = ''ALL''',
+'union all',
+'select application_id || '' - '' || application_name as d,',
+'                   application_id as r',
+'            from apex_applications',
+'            where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null)',
+'              and :P10_SHOW_APPS = ''NOTTRANSLED''',
+'              and application_id not in (select application_id',
+'                                         from APEX_APPLICATION_TRANSLATIONS',
+'                                         where (language_code = :P10_CODE or :P10_CODE is null))',
+'union all                                         ',
+'select application_id || '' - '' || application_name as d,',
+'                   application_id as r',
 '            from apex_applications ',
-'            where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null)]'';  ',
-'  elsif :P10_SHOW_APPS = ''NOTTRANSLED'' then',
-'    return q''[select application_id || '' - '' || application_name as d,',
-'                     application_id as r',
-'              from apex_applications',
-'              where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null)',
-'                and application_id not in (select application_id',
-'                                           from APEX_APPLICATION_TRANSLATIONS',
-'                                           where (language_code = :P10_CODE or :P10_CODE is null))]'';',
-'  elsif :P10_SHOW_APPS = ''TRANSLATED'' then',
-'    return q''[select application_id || '' - '' || application_name as d,',
-'                     application_id as r',
-'              from apex_applications ',
-'              where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null)',
-'                and application_id in (select application_id',
-'                                       from APEX_APPLICATION_TRANSLATIONS',
-'                                       where (language_code = :P10_CODE or :P10_CODE is null))]'';',
-'  end if;',
+'            where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null)',
+'              and :P10_SHOW_APPS = ''TRANSLATED''',
+'              and application_id in (select application_id',
+'                                     from APEX_APPLICATION_TRANSLATIONS',
+'                                     where (language_code = :P10_CODE or :P10_CODE is null))',
+'order by 1',
 ''))
 );
 wwv_flow_api.create_list_of_values(
@@ -12162,7 +12164,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160105191504'
+,p_last_upd_yyyymmddhh24miss=>'20160105194626'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(13571165667529782)
@@ -12264,28 +12266,30 @@ wwv_flow_api.create_page_item(
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_APPS_PAGES_10'
 ,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'  if :P10_SHOW_APPS = ''ALL'' then',
-'    return q''[select application_id || '' - '' || application_name as d,',
-'                     application_id as r',
+'select application_id || '' - '' || application_name as d,',
+'                   application_id as r',
+'          from apex_applications ',
+'          where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null) ',
+'            and :P10_SHOW_APPS = ''ALL''',
+'union all',
+'select application_id || '' - '' || application_name as d,',
+'                   application_id as r',
+'            from apex_applications',
+'            where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null)',
+'              and :P10_SHOW_APPS = ''NOTTRANSLED''',
+'              and application_id not in (select application_id',
+'                                         from APEX_APPLICATION_TRANSLATIONS',
+'                                         where (language_code = :P10_CODE or :P10_CODE is null))',
+'union all                                         ',
+'select application_id || '' - '' || application_name as d,',
+'                   application_id as r',
 '            from apex_applications ',
-'            where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null)]'';  ',
-'  elsif :P10_SHOW_APPS = ''NOTTRANSLED'' then',
-'    return q''[select application_id || '' - '' || application_name as d,',
-'                     application_id as r',
-'              from apex_applications',
-'              where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null)',
-'                and application_id not in (select application_id',
-'                                           from APEX_APPLICATION_TRANSLATIONS',
-'                                           where (language_code = :P10_CODE or :P10_CODE is null))]'';',
-'  elsif :P10_SHOW_APPS = ''TRANSLATED'' then',
-'    return q''[select application_id || '' - '' || application_name as d,',
-'                     application_id as r',
-'              from apex_applications ',
-'              where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null)',
-'                and application_id in (select application_id',
-'                                       from APEX_APPLICATION_TRANSLATIONS',
-'                                       where (language_code = :P10_CODE or :P10_CODE is null))]'';',
-'  end if;',
+'            where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null)',
+'              and :P10_SHOW_APPS = ''TRANSLATED''',
+'              and application_id in (select application_id',
+'                                     from APEX_APPLICATION_TRANSLATIONS',
+'                                     where (language_code = :P10_CODE or :P10_CODE is null))',
+'order by 1',
 ''))
 ,p_lov_display_null=>'YES'
 ,p_lov_null_text=>'- choose application -'
@@ -12388,7 +12392,7 @@ wwv_flow_api.create_page_da_action(
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>'null;'
-,p_attribute_02=>'P10_CODE'
+,p_attribute_02=>'P10_CODE,P10_APP_ID_SOURCE,P10_APP_ID_TARGET,P10_SHOW_APPS'
 ,p_stop_execution_on_error=>'Y'
 ,p_wait_for_result=>'Y'
 );
