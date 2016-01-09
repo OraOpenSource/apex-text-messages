@@ -3,42 +3,14 @@ CREATE SEQUENCE   "TM_BACKUP_SEQ";
 CREATE SEQUENCE   "TM_DOC_MESSAGES_SEQ";
 CREATE SEQUENCE   "TM_PREP_MESSAGES_SEQ";
 
-CREATE TABLE  "TM_UPLOAD_TRANS_APEX_TAB" 
-   ("APEX_SESSION" VARCHAR2(50) NOT NULL ENABLE,
-    "MESSAGE_CODE" VARCHAR2(255) NOT NULL ENABLE, 
+CREATE GLOBAL TEMPORARY TABLE  "TM_UPLOAD_TRANSLATE_APEX" 
+   ("MESSAGE_CODE" VARCHAR2(255) NOT NULL ENABLE, 
     "ORIGINAL_TEXT" VARCHAR2(4000) NOT NULL ENABLE, 
     "TRANSLATED_TEXT" VARCHAR2(4000) NOT NULL ENABLE, 
-	CONSTRAINT "TM_UPLOAD_TRANS_APEX_TAB_PK" PRIMARY KEY ("MESSAGE_CODE","APEX_SESSION")
-   )
+	CONSTRAINT "TM_UPLOAD_TRANS_APEX_TAB_PK" PRIMARY KEY ("MESSAGE_CODE")
+   ) ON COMMIT PRESERVE ROWS
 /
 
-CREATE OR REPLACE TRIGGER  "TRG_BI_TM_UPLD_TRANS_APEX_TAB" 
-  before insert or update on "TM_UPLOAD_TRANS_APEX_TAB"              
-  for each row 
-begin  
-  --
-  if :new.APEX_SESSION is null then 
-    :new.APEX_SESSION := v('SESSION');
-  end if;
-  
-  :new.MESSAGE_CODE := upper(:new.MESSAGE_CODE);
-  --
-end;
-/
-
-CREATE OR REPLACE VIEW "TM_UPLOAD_TRANSLATE_APEX"
-AS
-  select 
-    message_code,
-    original_text,
-    translated_text
-  from 
-    tm_upload_trans_apex_tab
-  where
-    apex_session = v('SESSION')
-/
-
- 
 CREATE TABLE  "TM_LANGUAGES" 
    ("CODE" VARCHAR2(10) NOT NULL ENABLE, 
 	"LANGUAGE" VARCHAR2(200) NOT NULL ENABLE, 
@@ -188,6 +160,7 @@ CREATE TABLE  "TM_PREP_MESSAGES"
 	"TRANSLATABLE_MESSAGE" VARCHAR2(255) NOT NULL ENABLE, 
 	"MESSAGE_TEXT" VARCHAR2(4000) NOT NULL ENABLE, 
 	"LANGUAGE_CODE" VARCHAR2(50) NOT NULL ENABLE, 
+    "ORIGINAL_TEXT" VARCHAR2(4000),
 	"CREATED_BY" VARCHAR2(255), 
 	"CREATED_ON" DATE, 
 	"UPDATED_BY" VARCHAR2(255), 
@@ -203,7 +176,7 @@ ALTER TABLE  "TM_PREP_MESSAGES" ADD CONSTRAINT "CON_PREPM_FK_CODE" FOREIGN KEY (
 CREATE INDEX  "IDX_PREP_MESSAGES_1" ON  "TM_PREP_MESSAGES" ("LANGUAGE_CODE")
 /
 
-CREATE OR REPLACE TRIGGER  "TRG_BIU_TM_PREP_MESSAGE" 
+create or replace TRIGGER  "TRG_BIU_TM_PREP_MESSAGE" 
   before insert or update on "TM_PREP_MESSAGES"              
   for each row 
 begin  
@@ -216,6 +189,12 @@ begin
   if inserting then
     :new.CREATED_ON := sysdate;
     :new.CREATED_BY := nvl(v('APP_USER'), user);
+    
+    
+    if :new.language_code is null and v('APP_PAGE_ID') = 22 then
+      :new.language_code := v('P20_CODE');
+    end if;
+    
   end if;
   if updating then 
     :new.UPDATED_ON := sysdate;
@@ -227,6 +206,19 @@ end;
 
 ALTER TRIGGER  "TRG_BIU_TM_PREP_MESSAGE" ENABLE
 /
+
+CREATE OR REPLACE FORCE VIEW "TM_UPLOAD_TRANSLATE_APEX" ("MESSAGE_CODE", "ORIGINAL_TEXT", "TRANSLATED_TEXT") 
+AS 
+  select 
+    translatable_message message_code,
+    original_text original_text,
+    message_text translated_text
+  from 
+    tm_prep_messages
+  where 
+    language_code = v('P20_CODE')
+/
+
 
 
 
