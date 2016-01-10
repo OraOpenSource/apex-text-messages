@@ -27,7 +27,7 @@ prompt APPLICATION 23762 - Text Messages
 -- Application Export:
 --   Application:     23762
 --   Name:            Text Messages
---   Date and Time:   00:47 Sunday January 10, 2016
+--   Date and Time:   01:03 Sunday January 10, 2016
 --   Exported By:     ALJAZ
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -39,7 +39,7 @@ prompt APPLICATION 23762 - Text Messages
 --   Pages:                     16
 --     Items:                   51
 --     Validations:              4
---     Processes:               26
+--     Processes:               25
 --     Regions:                 42
 --     Buttons:                 31
 --     Dynamic Actions:         17
@@ -118,7 +118,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_value_02=>'<link rel="shortcut icon" href="#APP_IMAGES#fav-icon.png"><link rel="icon" sizes="16x16" href="#APP_IMAGES#fav-icon-16.png"><link rel="icon" sizes="32x32" href="#APP_IMAGES#fav-icon-32.png"><link rel="apple-touch-icon" sizes="180x180" href="#APP_IMAG'
 ||'ES#fav-icon-128.png">'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160110003650'
+,p_last_upd_yyyymmddhh24miss=>'20160110005909'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>5
 ,p_ui_type_name => null
@@ -14495,7 +14495,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160110003650'
+,p_last_upd_yyyymmddhh24miss=>'20160110005909'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(22491871285109788)
@@ -15347,6 +15347,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(22492946950109788)
 ,p_prompt=>'Inserted Row(s):'
 ,p_display_as=>'NATIVE_DISPLAY_ONLY'
+,p_display_when_type=>'NEVER'
 ,p_field_template=>wwv_flow_api.id(34516262555304103837)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_01=>'Y'
@@ -15360,6 +15361,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(22492946950109788)
 ,p_prompt=>'Updated Row(s):'
 ,p_display_as=>'NATIVE_DISPLAY_ONLY'
+,p_display_when_type=>'NEVER'
 ,p_field_template=>wwv_flow_api.id(34516262555304103837)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_01=>'Y'
@@ -15373,6 +15375,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(22492946950109788)
 ,p_prompt=>'Unchanged Row(s):'
 ,p_display_as=>'NATIVE_DISPLAY_ONLY'
+,p_display_when_type=>'NEVER'
 ,p_field_template=>wwv_flow_api.id(34516262555304103837)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_01=>'Y'
@@ -15387,7 +15390,6 @@ wwv_flow_api.create_page_item(
 ,p_prompt=>'Inserted Row(s):'
 ,p_display_as=>'NATIVE_DISPLAY_ONLY'
 ,p_tag_attributes=>'class="fielddata"'
-,p_display_when_type=>'NEVER'
 ,p_field_template=>wwv_flow_api.id(34516262555304103837)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_escape_on_http_input=>'Y'
@@ -15403,7 +15405,6 @@ wwv_flow_api.create_page_item(
 ,p_prompt=>'Updated Row(s):'
 ,p_display_as=>'NATIVE_DISPLAY_ONLY'
 ,p_tag_attributes=>'class="fielddata"'
-,p_display_when_type=>'NEVER'
 ,p_field_template=>wwv_flow_api.id(34516262555304103837)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_escape_on_http_input=>'Y'
@@ -15443,16 +15444,6 @@ wwv_flow_api.create_page_item(
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'VALUE'
 ,p_attribute_04=>'Y'
-);
-wwv_flow_api.create_page_process(
- p_id=>wwv_flow_api.id(19157797942852469)
-,p_process_sequence=>10
-,p_process_point=>'BEFORE_HEADER'
-,p_process_type=>'NATIVE_PLSQL'
-,p_process_name=>'Delete from TM_UPLOAD_TRANSLATE_APEX'
-,p_process_sql_clob=>'Delete from TM_UPLOAD_TRANSLATE_APEX;'
-,p_error_display_location=>'INLINE_IN_NOTIFICATION'
-,p_process_when_type=>'NEVER'
 );
 end;
 /
