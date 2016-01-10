@@ -27,7 +27,7 @@ prompt APPLICATION 23762 - Text Messages
 -- Application Export:
 --   Application:     23762
 --   Name:            Text Messages
---   Date and Time:   01:03 Sunday January 10, 2016
+--   Date and Time:   17:14 Sunday January 10, 2016
 --   Exported By:     ALJAZ
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -37,12 +37,12 @@ prompt APPLICATION 23762 - Text Messages
 
 -- Application Statistics:
 --   Pages:                     16
---     Items:                   51
+--     Items:                   54
 --     Validations:              4
---     Processes:               25
+--     Processes:               29
 --     Regions:                 42
---     Buttons:                 31
---     Dynamic Actions:         17
+--     Buttons:                 32
+--     Dynamic Actions:         19
 --   Shared Components:
 --     Logic:
 --       Data Loading:           1
@@ -64,7 +64,7 @@ prompt APPLICATION 23762 - Text Messages
 --         Breadcrumb:           1
 --         Button:               3
 --         Report:               8
---       LOVs:                   9
+--       LOVs:                  10
 --       Shortcuts:              1
 --     Globalization:
 --     Reports:
@@ -118,7 +118,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_value_02=>'<link rel="shortcut icon" href="#APP_IMAGES#fav-icon.png"><link rel="icon" sizes="16x16" href="#APP_IMAGES#fav-icon-16.png"><link rel="icon" sizes="32x32" href="#APP_IMAGES#fav-icon-32.png"><link rel="apple-touch-icon" sizes="180x180" href="#APP_IMAG'
 ||'ES#fav-icon-128.png">'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160110005909'
+,p_last_upd_yyyymmddhh24miss=>'20160110162351'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>5
 ,p_ui_type_name => null
@@ -767,25 +767,48 @@ wwv_flow_api.create_list_of_values(
 );
 wwv_flow_api.create_list_of_values(
  p_id=>wwv_flow_api.id(13470254431908343)
-,p_lov_name=>'LOV_SHOW'
+,p_lov_name=>'LOV_SHOW_1'
 ,p_lov_query=>'.'||wwv_flow_api.id(13470254431908343)||'.'
 );
 wwv_flow_api.create_static_lov_data(
  p_id=>wwv_flow_api.id(13470582972908343)
 ,p_lov_disp_sequence=>1
-,p_lov_disp_value=>'All target applications'
+,p_lov_disp_value=>'All applications'
 ,p_lov_return_value=>'ALL'
 );
 wwv_flow_api.create_static_lov_data(
  p_id=>wwv_flow_api.id(13470967142908343)
 ,p_lov_disp_sequence=>2
-,p_lov_disp_value=>'All target applications with translations'
+,p_lov_disp_value=>'All applications with translations'
 ,p_lov_return_value=>'TRANSLATED'
 );
 wwv_flow_api.create_static_lov_data(
  p_id=>wwv_flow_api.id(13471389921908344)
 ,p_lov_disp_sequence=>3
-,p_lov_disp_value=>'All target applications with no translations'
+,p_lov_disp_value=>'All applications without translations'
+,p_lov_return_value=>'NOTTRANSLED'
+);
+wwv_flow_api.create_list_of_values(
+ p_id=>wwv_flow_api.id(15968940280882081)
+,p_lov_name=>'LOV_SHOW_10'
+,p_lov_query=>'.'||wwv_flow_api.id(15968940280882081)||'.'
+);
+wwv_flow_api.create_static_lov_data(
+ p_id=>wwv_flow_api.id(15969259178882082)
+,p_lov_disp_sequence=>1
+,p_lov_disp_value=>'All target applications'
+,p_lov_return_value=>'ALL'
+);
+wwv_flow_api.create_static_lov_data(
+ p_id=>wwv_flow_api.id(15969688566882083)
+,p_lov_disp_sequence=>2
+,p_lov_disp_value=>'All target applications with translations'
+,p_lov_return_value=>'TRANSLATED'
+);
+wwv_flow_api.create_static_lov_data(
+ p_id=>wwv_flow_api.id(15970043074882083)
+,p_lov_disp_sequence=>3
+,p_lov_disp_value=>'All target applications without translations'
 ,p_lov_return_value=>'NOTTRANSLED'
 );
 end;
@@ -9511,7 +9534,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160105175400'
+,p_last_upd_yyyymmddhh24miss=>'20160110154303'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(13154086268052418)
@@ -9955,16 +9978,40 @@ wwv_flow_api.create_page_button(
 ,p_button_image_alt=>'Append Messages'
 ,p_button_position=>'BODY'
 ,p_button_condition=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select',
-'  1',
-'from ',
-'  APEX_APPLICATION_TRANSLATIONS ',
-'where ',
-'  application_id = :P1_APP_ID and ',
-'  language_code = :P1_CODE'))
-,p_button_condition_type=>'EXISTS'
+'declare',
+'  l_cnt number;',
+'begin',
+'  if :P1_CODE is null or :P1_APP_ID is null then',
+'    return false;',
+'  end if;',
+'',
+'  --do I have some new messages in prepared messages',
+'  select ',
+'    count(*)',
+'  into ',
+'    l_cnt ',
+'  from',
+'    tm_prep_messages ',
+'  where',
+'    language_code = :P1_CODE and',
+'    translatable_message not in (select ',
+'                                    target.translatable_message          ',
+'                                  from',
+'                                    apex_application_translations target',
+'                                  where',
+'                                    target.application_id = :P1_APP_ID  and ',
+'                                    target.language_code = :P1_CODE);',
+'    ',
+'    ',
+'  if l_cnt = 0 then',
+'    return false;',
+'  else',
+'    return true;',
+'  end if;',
+'',
+'end;'))
+,p_button_condition_type=>'FUNCTION_BODY'
 ,p_icon_css_classes=>'fa-plus-square-o'
-,p_grid_new_grid=>false
 ,p_grid_new_row=>'N'
 ,p_grid_new_column=>'N'
 );
@@ -9979,16 +10026,65 @@ wwv_flow_api.create_page_button(
 ,p_button_image_alt=>'Merge Messages'
 ,p_button_position=>'BODY'
 ,p_button_condition=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select',
-'  1',
-'from ',
-'  APEX_APPLICATION_TRANSLATIONS ',
-'where ',
-'  application_id = :P1_APP_ID and ',
-'  language_code = :P1_CODE'))
-,p_button_condition_type=>'EXISTS'
+'declare',
+'  l_cnt_1 number;',
+'  l_cnt_2 number;',
+'  l_cnt_3 number;',
+'begin',
+'  if :P1_CODE is null or :P1_APP_ID is null then',
+'    return false;',
+'  end if;',
+'',
+'  --number of prepared messages',
+'  select ',
+'    count(*)',
+'  into ',
+'    l_cnt_1 ',
+'  from',
+'    tm_prep_messages ',
+'  where',
+'    language_code = :P1_CODE;',
+'    ',
+'  --number of application messages  ',
+'  select',
+'    count(*)',
+'  into',
+'    l_cnt_2',
+'  from ',
+'    APEX_APPLICATION_TRANSLATIONS ',
+'  where ',
+'    application_id = :P1_APP_ID and ',
+'    language_code = :P1_CODE;  ',
+'    ',
+'  if l_cnt_1 != l_cnt_2 then',
+'    return true;',
+'  end if;  ',
+'    ',
+'  --join prepared and application messages and check count',
+'  select',
+'    count(*)',
+'  into',
+'    l_cnt_3',
+'  from ',
+'    tm_prep_messages prep,',
+'    APEX_APPLICATION_TRANSLATIONS app',
+'  where ',
+'    prep.language_code = :P1_CODE and',
+'    app.application_id = :P1_APP_ID and ',
+'    app.language_code = :P1_CODE and',
+'    prep.translatable_message = app.translatable_message and ',
+'    prep.message_text = app.message_text;',
+'    ',
+'',
+'  if (l_cnt_1 = l_cnt_3) and (l_cnt_2 = l_cnt_3) then',
+'    return false;',
+'  else',
+'    return true;',
+'  end if;  ',
+'',
+'end;'))
+,p_button_condition_type=>'FUNCTION_BODY'
 ,p_icon_css_classes=>'fa-columns'
-,p_grid_new_grid=>false
 ,p_grid_new_row=>'N'
 ,p_grid_new_column=>'N'
 );
@@ -10025,7 +10121,7 @@ wwv_flow_api.create_page_item(
 ,p_item_default=>'ALL'
 ,p_prompt=>'Show apps'
 ,p_display_as=>'NATIVE_RADIOGROUP'
-,p_named_lov=>'LOV_SHOW'
+,p_named_lov=>'LOV_SHOW_1'
 ,p_lov=>'.'||wwv_flow_api.id(13470254431908343)||'.'
 ,p_grid_label_column_span=>0
 ,p_field_template=>wwv_flow_api.id(34516262555304103837)
@@ -10034,6 +10130,81 @@ wwv_flow_api.create_page_item(
 ,p_attribute_01=>'3'
 ,p_attribute_02=>'SUBMIT'
 ,p_attribute_03=>'Y'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(17988413313464896)
+,p_name=>'P1_NO_DIFF_MSG'
+,p_item_sequence=>80
+,p_item_plug_id=>wwv_flow_api.id(25838038748063451999)
+,p_prompt=>'No diff msg'
+,p_source=>'No difference between prepared and application messages'
+,p_source_type=>'STATIC'
+,p_display_as=>'NATIVE_DISPLAY_ONLY'
+,p_grid_label_column_span=>0
+,p_display_when=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'declare',
+'  l_cnt_1 number;',
+'  l_cnt_2 number;',
+'  l_cnt_3 number;',
+'begin',
+'  if :P1_CODE is null or :P1_APP_ID is null then',
+'    return false;',
+'  end if;',
+'',
+'  --number of prepared messages',
+'  select ',
+'    count(*)',
+'  into ',
+'    l_cnt_1 ',
+'  from',
+'    tm_prep_messages ',
+'  where',
+'    language_code = :P1_CODE;',
+'    ',
+'  --number of application messages  ',
+'  select',
+'    count(*)',
+'  into',
+'    l_cnt_2',
+'  from ',
+'    APEX_APPLICATION_TRANSLATIONS ',
+'  where ',
+'    application_id = :P1_APP_ID and ',
+'    language_code = :P1_CODE;  ',
+'    ',
+'  if l_cnt_1 != l_cnt_2 then',
+'    return false;',
+'  end if;  ',
+'    ',
+'  --join prepared and application messages and check count',
+'  select',
+'    count(*)',
+'  into',
+'    l_cnt_3',
+'  from ',
+'    tm_prep_messages prep,',
+'    APEX_APPLICATION_TRANSLATIONS app',
+'  where ',
+'    prep.language_code = :P1_CODE and',
+'    app.application_id = :P1_APP_ID and ',
+'    app.language_code = :P1_CODE and',
+'    prep.translatable_message = app.translatable_message and ',
+'    prep.message_text = app.message_text;',
+'    ',
+'',
+'  if (l_cnt_1 = l_cnt_3) and (l_cnt_2 = l_cnt_3) then',
+'    return true;',
+'  else',
+'    return false;',
+'  end if;  ',
+'',
+'end;'))
+,p_display_when_type=>'FUNCTION_BODY'
+,p_field_template=>wwv_flow_api.id(34516262520095103836)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'Y'
+,p_attribute_02=>'VALUE'
+,p_attribute_04=>'Y'
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(25836054719541878608)
@@ -10125,7 +10296,7 @@ wwv_flow_api.create_page_da_event(
 ,p_name=>'Refresh report'
 ,p_event_sequence=>10
 ,p_triggering_element_type=>'JQUERY_SELECTOR'
-,p_triggering_element=>'#P1_APP_ID, #P1_CODE, #P1_SHOW_APPS'
+,p_triggering_element=>'#P1_APP_ID, #P1_CODE'
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'change'
 );
@@ -10140,6 +10311,39 @@ wwv_flow_api.create_page_da_action(
 ,p_attribute_02=>'Y'
 ,p_stop_execution_on_error=>'Y'
 );
+wwv_flow_api.create_page_da_event(
+ p_id=>wwv_flow_api.id(14536625537100330)
+,p_name=>'Refresh report on show apps change'
+,p_event_sequence=>20
+,p_triggering_element_type=>'JQUERY_SELECTOR'
+,p_triggering_element=>'#P1_SHOW_APPS'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(14536823250100332)
+,p_event_id=>wwv_flow_api.id(14536625537100330)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_SET_VALUE'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P1_APP_ID'
+,p_attribute_01=>'STATIC_ASSIGNMENT'
+,p_attribute_09=>'N'
+,p_stop_execution_on_error=>'Y'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(14536788692100331)
+,p_event_id=>wwv_flow_api.id(14536625537100330)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_SUBMIT_PAGE'
+,p_attribute_01=>'OSVEZI'
+,p_attribute_02=>'Y'
+);
 wwv_flow_api.create_page_process(
  p_id=>wwv_flow_api.id(25836155727578538969)
 ,p_process_sequence=>10
@@ -10147,12 +10351,7 @@ wwv_flow_api.create_page_process(
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'Import text messages'
 ,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'declare ',
-'',
-'  l_id number;',
-'  ',
 'begin',
-'',
 '    for cur in (select ',
 '                  translatable_message,',
 '                  message_text,',
@@ -10167,7 +10366,10 @@ wwv_flow_api.create_page_process(
 '                               p_language => cur.language_code,',
 '                               p_message_text => cur.message_text );',
 '    end loop;',
-'',
+'   ',
+'    if :P1_SHOW_APPS = ''NOTTRANSLED'' then',
+'      :P1_SHOW_APPS := ''TRANSLATED'';',
+'    end if;  ',
 'end;',
 ''))
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
@@ -10351,7 +10553,6 @@ wwv_flow_api.create_page_process(
 '      language_code = :P1_CODE;',
 '',
 '',
-'',
 '    for cur in (select translation_entry_id ',
 '                from APEX_APPLICATION_TRANSLATIONS ',
 '                where application_id = :P1_APP_ID',
@@ -10359,6 +10560,8 @@ wwv_flow_api.create_page_process(
 '    loop',
 '        apex_lang.delete_message(cur.translation_entry_id);',
 '    end loop;',
+'',
+'    :P1_SHOW_APPS := ''NOTTRANSLED'';',
 '',
 'end;'))
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
@@ -11792,7 +11995,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20150903021952'
+,p_last_upd_yyyymmddhh24miss=>'20160110144953'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(25838732388968980777)
@@ -11902,7 +12105,7 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>50
-,p_report_columns=>'ID:LANGUAGE_CODE:BACKUP_TIME:OPERATION_ID:APLIKACIJA'
+,p_report_columns=>'ID:LANGUAGE_CODE:APLIKACIJA:BACKUP_TIME:OPERATION:'
 ,p_flashback_enabled=>'N'
 );
 wwv_flow_api.create_page_plug(
@@ -12170,7 +12373,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160109225728'
+,p_last_upd_yyyymmddhh24miss=>'20160110162351'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(13571165667529782)
@@ -12573,6 +12776,22 @@ wwv_flow_api.create_page_button(
 ,p_grid_new_row=>'N'
 ,p_grid_new_column=>'N'
 );
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(14536900525100333)
+,p_button_sequence=>80
+,p_button_plug_id=>wwv_flow_api.id(13576132226588574)
+,p_button_name=>'BTN_IMPORT_TO_PREPARED'
+,p_button_static_id=>'BTN_IMPORT_TO_PREPARED'
+,p_button_action=>'DEFINED_BY_DA'
+,p_button_template_options=>'#DEFAULT#:t-Button--iconLeft'
+,p_button_template_id=>wwv_flow_api.id(34516263214649103840)
+,p_button_image_alt=>'Import to prepared messages'
+,p_button_position=>'BODY'
+,p_icon_css_classes=>'fa-edit'
+,p_button_cattributes=>'style="display:none"'
+,p_grid_new_row=>'N'
+,p_grid_new_column=>'N'
+);
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(13154472039052422)
 ,p_name=>'P10_APP_ID_TARGET'
@@ -12679,6 +12898,7 @@ wwv_flow_api.create_page_item(
 ,p_field_template=>wwv_flow_api.id(34516262555304103837)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'NO'
+,p_help_text=>'Only applications with translations are shown.'
 ,p_attribute_01=>'NONE'
 ,p_attribute_02=>'N'
 );
@@ -12690,14 +12910,39 @@ wwv_flow_api.create_page_item(
 ,p_item_default=>'ALL'
 ,p_prompt=>'Show apps'
 ,p_display_as=>'NATIVE_RADIOGROUP'
-,p_named_lov=>'LOV_SHOW'
-,p_lov=>'.'||wwv_flow_api.id(13470254431908343)||'.'
+,p_named_lov=>'LOV_SHOW_10'
+,p_lov=>'.'||wwv_flow_api.id(15968940280882081)||'.'
 ,p_grid_label_column_span=>0
 ,p_field_template=>wwv_flow_api.id(34516262555304103837)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'NO'
 ,p_attribute_01=>'3'
 ,p_attribute_02=>'NONE'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(14536135245100325)
+,p_name=>'P10_SHOW_MERGE'
+,p_item_sequence=>110
+,p_item_plug_id=>wwv_flow_api.id(13576132226588574)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(14536522186100329)
+,p_name=>'P10_NO_DIFF_MSG'
+,p_item_sequence=>120
+,p_item_plug_id=>wwv_flow_api.id(13576132226588574)
+,p_prompt=>'No diff msg'
+,p_source=>'No difference between target and source application messages'
+,p_source_type=>'STATIC'
+,p_display_as=>'NATIVE_DISPLAY_ONLY'
+,p_tag_attributes=>'style="display:none"'
+,p_grid_label_column_span=>0
+,p_field_template=>wwv_flow_api.id(34516262520095103836)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'Y'
+,p_attribute_02=>'VALUE'
+,p_attribute_04=>'Y'
 );
 wwv_flow_api.create_page_da_event(
  p_id=>wwv_flow_api.id(13154740419052425)
@@ -12807,37 +13052,47 @@ wwv_flow_api.create_page_da_action(
 ,p_wait_for_result=>'Y'
 );
 wwv_flow_api.create_page_da_action(
- p_id=>wwv_flow_api.id(13155745760052435)
+ p_id=>wwv_flow_api.id(14537013366100334)
 ,p_event_id=>wwv_flow_api.id(13155699475052434)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>20
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_REFRESH'
-,p_affected_elements_type=>'JQUERY_SELECTOR'
-,p_affected_elements=>'#P10_APP_ID_TARGET'
-,p_stop_execution_on_error=>'Y'
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'if (!$v(''P10_APP_ID_SOURCE''))',
+'  $(''#BTN_IMPORT_TO_PREPARED'').hide()',
+'else',
+'  $(''#BTN_IMPORT_TO_PREPARED'').show();'))
 );
 wwv_flow_api.create_page_da_action(
- p_id=>wwv_flow_api.id(13156514339052443)
+ p_id=>wwv_flow_api.id(13155745760052435)
 ,p_event_id=>wwv_flow_api.id(13155699475052434)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>30
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_REFRESH'
-,p_affected_elements_type=>'REGION'
-,p_affected_region_id=>wwv_flow_api.id(14513057191435571)
-,p_stop_execution_on_error=>'Y'
+,p_affected_elements_type=>'JQUERY_SELECTOR'
+,p_affected_elements=>'#P10_APP_ID_TARGET'
 );
 wwv_flow_api.create_page_da_action(
- p_id=>wwv_flow_api.id(13156770082052445)
+ p_id=>wwv_flow_api.id(13156514339052443)
 ,p_event_id=>wwv_flow_api.id(13155699475052434)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>40
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_REFRESH'
 ,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_api.id(14513057191435571)
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(13156770082052445)
+,p_event_id=>wwv_flow_api.id(13155699475052434)
+,p_event_result=>'TRUE'
+,p_action_sequence=>50
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
 ,p_affected_region_id=>wwv_flow_api.id(14510827969435562)
-,p_stop_execution_on_error=>'Y'
 );
 wwv_flow_api.create_page_da_event(
  p_id=>wwv_flow_api.id(13155922106052437)
@@ -12967,10 +13222,90 @@ wwv_flow_api.create_page_da_action(
 ,p_wait_for_result=>'Y'
 );
 wwv_flow_api.create_page_da_action(
- p_id=>wwv_flow_api.id(13156077340052438)
+ p_id=>wwv_flow_api.id(14536273934100326)
 ,p_event_id=>wwv_flow_api.id(13155922106052437)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>40
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_SET_VALUE'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P10_SHOW_MERGE'
+,p_attribute_01=>'FUNCTION_BODY'
+,p_attribute_06=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'declare',
+'  l_cnt_1 number;',
+'  l_cnt_2 number;',
+'  l_cnt_3 number;',
+'begin',
+' ',
+'  if :P10_CODE is null or :P10_APP_ID_SOURCE is null or :P10_APP_ID_TARGET is null then',
+'    return ''NO'';',
+'  end if;',
+'',
+'',
+'  --number of messages in target app',
+'  select',
+'    count(*)',
+'  into',
+'    l_cnt_1 ',
+'  from ',
+'    APEX_APPLICATION_TRANSLATIONS ',
+'  where ',
+'    application_id = :P10_APP_ID_TARGET and ',
+'    language_code = :P10_CODE;',
+'',
+'  --number of messages in souce app',
+'  select',
+'    count(*)',
+'  into',
+'    l_cnt_2',
+'  from ',
+'    APEX_APPLICATION_TRANSLATIONS ',
+'  where ',
+'    application_id = :P10_APP_ID_SOURCE and ',
+'    language_code = :P10_CODE;',
+'',
+'  if l_cnt_1 != l_cnt_2 then',
+'    return ''YES'';',
+'  end if;',
+'  ',
+'  --check for difference',
+'  ',
+'  select',
+'    count(*)',
+'  into',
+'    l_cnt_3',
+'  from ',
+'    APEX_APPLICATION_TRANSLATIONS source,',
+'    APEX_APPLICATION_TRANSLATIONS target',
+'  where ',
+'    source.application_id = :P10_APP_ID_SOURCE and ',
+'    source.language_code = :P10_CODE and',
+'    target.application_id = :P10_APP_ID_TARGET and ',
+'    target.language_code = :P10_CODE and',
+'    source.translatable_message = target.translatable_message and ',
+'    source.message_text = target.message_text;',
+'    ',
+'',
+'  if (l_cnt_1 = l_cnt_3) and (l_cnt_2 = l_cnt_3) then',
+'    return ''NO'';',
+'  else',
+'    return ''YES'';',
+'  end if;',
+'',
+'',
+'end;'))
+,p_attribute_07=>'P10_APP_ID_TARGET'
+,p_attribute_08=>'Y'
+,p_attribute_09=>'N'
+,p_stop_execution_on_error=>'Y'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(13156077340052438)
+,p_event_id=>wwv_flow_api.id(13155922106052437)
+,p_event_result=>'TRUE'
+,p_action_sequence=>50
 ,p_execute_on_page_init=>'Y'
 ,p_action=>'NATIVE_JAVASCRIPT_CODE'
 ,p_attribute_01=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
@@ -12985,6 +13320,7 @@ wwv_flow_api.create_page_da_action(
 '  if (!$v(''P10_CODE'') || !$v(''P10_APP_ID_SOURCE'') || !$v(''P10_APP_ID_TARGET'')){',
 '    $(''#BTN_APPEND'').hide();',
 '    $(''#BTN_MERGE'').hide();',
+'    $(''#P10_NO_DIFF_MSG_DISPLAY'').hide();',
 '  }else{',
 '',
 '    if ($v(''P10_SHOW_APPEND'') == ''YES'')   ',
@@ -12992,33 +13328,275 @@ wwv_flow_api.create_page_da_action(
 '    else',
 '      $(''#BTN_APPEND'').hide();  ',
 '    ',
+'    if ($v(''P10_SHOW_MERGE'') == ''YES'') ',
+'      $(''#BTN_MERGE'').show() ',
+'    else',
+'      $(''#BTN_MERGE'').hide();  ',
 '    ',
-'    $(''#BTN_MERGE'').show(); ',
+'    if  ($v(''P10_SHOW_APPEND'') == ''NO'' &&  $v(''P10_SHOW_MERGE'') == ''NO'')',
+'      $(''#P10_NO_DIFF_MSG_DISPLAY'').show()',
+'    else',
+'      $(''#P10_NO_DIFF_MSG_DISPLAY'').hide();    ',
+'    ',
 '  }',
 '}'))
-,p_stop_execution_on_error=>'Y'
 );
 wwv_flow_api.create_page_da_action(
  p_id=>wwv_flow_api.id(13156848182052446)
-,p_event_id=>wwv_flow_api.id(13155922106052437)
-,p_event_result=>'TRUE'
-,p_action_sequence=>50
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_REFRESH'
-,p_affected_elements_type=>'REGION'
-,p_affected_region_id=>wwv_flow_api.id(14513057191435571)
-,p_stop_execution_on_error=>'Y'
-);
-wwv_flow_api.create_page_da_action(
- p_id=>wwv_flow_api.id(13156952195052447)
 ,p_event_id=>wwv_flow_api.id(13155922106052437)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>60
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_REFRESH'
 ,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_api.id(14513057191435571)
+);
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(13156952195052447)
+,p_event_id=>wwv_flow_api.id(13155922106052437)
+,p_event_result=>'TRUE'
+,p_action_sequence=>70
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
 ,p_affected_region_id=>wwv_flow_api.id(14510827969435562)
-,p_stop_execution_on_error=>'Y'
+);
+wwv_flow_api.create_page_da_event(
+ p_id=>wwv_flow_api.id(14537116025100335)
+,p_name=>'Import into prepared messages'
+,p_event_sequence=>60
+,p_triggering_element_type=>'BUTTON'
+,p_triggering_button_id=>wwv_flow_api.id(14536900525100333)
+,p_bind_type=>'bind'
+,p_bind_event_type=>'click'
+);
+end;
+/
+begin
+wwv_flow_api.create_page_da_action(
+ p_id=>wwv_flow_api.id(14537229372100336)
+,p_event_id=>wwv_flow_api.id(14537116025100335)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'apex.confirm("This action will replace (delete/insert) current prepared messages with selected source application messages!", {',
+'  request:"BTN_IMPORT_TO_PREPARED",',
+'  showWait: true',
+'  });'))
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(14536081945100324)
+,p_process_sequence=>10
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Import text messages'
+,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'begin',
+'    for cur in (select',
+'                  translatable_message, ',
+'                  message_text,',
+'                  language_code',
+'                from ',
+'                  APEX_APPLICATION_TRANSLATIONS',
+'                where ',
+'                  application_id = :P10_APP_ID_SOURCE and',
+'                  language_code = :P10_CODE) ',
+'    loop',
+'      apex_lang.create_message(p_application_id => :P10_APP_ID_TARGET,',
+'                               p_name => cur.translatable_message,',
+'                               p_language => cur.language_code,',
+'                               p_message_text => cur.message_text );',
+'    end loop;',
+'    ',
+'    if :P10_SHOW_APPS = ''NOTTRANSLED'' then',
+'      :P10_SHOW_APPS := ''TRANSLATED'';',
+'    end if;  ',
+'end;',
+'',
+'',
+'',
+'',
+''))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(13576400185588575)
+,p_process_success_message=>'Import done!'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(15600983006741559)
+,p_process_sequence=>20
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Append text messages'
+,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'declare ',
+'  l_id number;',
+'begin',
+'',
+'    --perform backup in case we need this set of messages back',
+'    insert into tm_backup ',
+'      (app_id, language_code, backup_time, operation) ',
+'    values ',
+'      (:P10_APP_ID_TARGET, :P10_CODE, sysdate, ''APPEND'')',
+'    returning',
+'      id ',
+'    into ',
+'      l_id;',
+'',
+'    insert into tm_backup_messages ',
+'      (fk_tm_backup, translatable_message, message_text, language_code)',
+'    select',
+'      l_id, translatable_message, message_text, language_code',
+'    from ',
+'      APEX_APPLICATION_TRANSLATIONS ',
+'    where ',
+'      application_id = :P10_APP_ID_TARGET and ',
+'      language_code = :P10_CODE;',
+'',
+'',
+'    for cur in (select ',
+'                  translatable_message,',
+'                  message_text,',
+'                  language_code',
+'                from',
+'                  apex_application_translations',
+'                where',
+'                  language_code = :P10_CODE and ',
+'                  application_id = :P10_APP_ID_SOURCE and',
+'                  translatable_message not in (select ',
+'                                                  translatable_message',
+'                                                from',
+'                                                  apex_application_translations',
+'                                                where',
+'                                                  language_code = :P10_CODE and ',
+'                                                  application_id = :P10_APP_ID_TARGET))',
+'    loop',
+'      apex_lang.create_message(p_application_id => :P10_APP_ID_TARGET,',
+'                               p_name => cur.translatable_message,',
+'                               p_language => cur.language_code,',
+'                               p_message_text => cur.message_text );',
+'    end loop;',
+'',
+'end;',
+''))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(13576852755588576)
+,p_process_success_message=>'New messages appended!'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(15601262057742939)
+,p_process_sequence=>30
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Merge text messages'
+,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'declare ',
+'  l_id number;',
+'begin',
+'',
+'    --perform backup in case we need this set of messages back',
+'    insert into tm_backup ',
+'      (app_id, language_code, backup_time, operation) ',
+'    values ',
+'      (:P10_APP_ID_TARGET, :P10_CODE, sysdate, ''MERGE'')',
+'    returning',
+'      id ',
+'    into ',
+'      l_id;',
+'',
+'    insert into tm_backup_messages ',
+'      (fk_tm_backup, translatable_message, message_text, language_code)',
+'    select',
+'      l_id, translatable_message, message_text, language_code',
+'    from ',
+'      APEX_APPLICATION_TRANSLATIONS ',
+'    where ',
+'      application_id = :P10_APP_ID_TARGET and ',
+'      language_code = :P10_CODE;',
+'',
+'',
+'    --update existing messages',
+'    for cur in (select ',
+'                  translation_entry_id,',
+'                  message_text',
+'                from',
+'                  apex_application_translations',
+'                where',
+'                  language_code = :P10_CODE and ',
+'                  application_id = :P10_APP_ID_SOURCE and',
+'                  translatable_message in (select ',
+'                                             translatable_message',
+'                                           from',
+'                                             apex_application_translations',
+'                                           where',
+'                                             language_code = :P10_CODE and ',
+'                                             application_id = :P10_APP_ID_TARGET))',
+'    loop',
+'      apex_lang.update_message(cur.translation_entry_id, cur.message_text);',
+'    end loop;',
+'',
+'',
+'    --add new messages',
+'    for cur in (select ',
+'                  translatable_message,',
+'                  message_text,',
+'                  language_code',
+'                from',
+'                  apex_application_translations',
+'                where',
+'                  language_code = :P10_CODE and ',
+'                  application_id = :P10_APP_ID_SOURCE and',
+'                  translatable_message not in (select ',
+'                                                  translatable_message',
+'                                                from',
+'                                                  apex_application_translations',
+'                                                where',
+'                                                  language_code = :P10_CODE and ',
+'                                                  application_id = :P10_APP_ID_TARGET))',
+'    loop',
+'      apex_lang.create_message(p_application_id => :P10_APP_ID_TARGET,',
+'                               p_name => cur.translatable_message,',
+'                               p_language => cur.language_code,',
+'                               p_message_text => cur.message_text );',
+'    end loop;',
+'',
+'',
+'end;',
+''))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(13577275787588576)
+,p_process_success_message=>'Messages merged!'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(14537316328100337)
+,p_process_sequence=>40
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Import into prepared messages'
+,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'begin',
+'',
+'  delete from tm_prep_messages',
+'  where language_code = :P10_CODE;',
+'',
+'  ',
+'  insert into tm_prep_messages ',
+'    (translatable_message, message_text, language_code)',
+'  select',
+'    translatable_message, ',
+'    message_text,',
+'    language_code',
+'  from ',
+'    APEX_APPLICATION_TRANSLATIONS',
+'  where ',
+'    application_id = :P10_APP_ID_SOURCE and',
+'    language_code = :P10_CODE;',
+'    ',
+'end;',
+''))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_success_message=>'Messages imported into prepared messages.'
 );
 end;
 /
