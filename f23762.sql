@@ -27,7 +27,7 @@ prompt APPLICATION 23762 - Text Messages
 -- Application Export:
 --   Application:     23762
 --   Name:            Text Messages
---   Date and Time:   17:14 Sunday January 10, 2016
+--   Date and Time:   00:53 Monday January 11, 2016
 --   Exported By:     ALJAZ
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -39,12 +39,14 @@ prompt APPLICATION 23762 - Text Messages
 --   Pages:                     16
 --     Items:                   54
 --     Validations:              4
---     Processes:               29
+--     Processes:               30
 --     Regions:                 42
 --     Buttons:                 32
 --     Dynamic Actions:         19
 --   Shared Components:
 --     Logic:
+--       Items:                  1
+--       Computations:           1
 --       Data Loading:           1
 --     Navigation:
 --       Lists:                  5
@@ -118,7 +120,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_value_02=>'<link rel="shortcut icon" href="#APP_IMAGES#fav-icon.png"><link rel="icon" sizes="16x16" href="#APP_IMAGES#fav-icon-16.png"><link rel="icon" sizes="32x32" href="#APP_IMAGES#fav-icon-32.png"><link rel="apple-touch-icon" sizes="180x180" href="#APP_IMAG'
 ||'ES#fav-icon-128.png">'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160110162351'
+,p_last_upd_yyyymmddhh24miss=>'20160111004926'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>5
 ,p_ui_type_name => null
@@ -446,12 +448,27 @@ end;
 /
 prompt --application/shared_components/logic/application_items
 begin
-null;
+wwv_flow_api.create_flow_item(
+ p_id=>wwv_flow_api.id(18028533105851994)
+,p_name=>'TM_CURRENT_WORKSPACE'
+,p_protection_level=>'I'
+);
 end;
 /
 prompt --application/shared_components/logic/application_computations
 begin
-null;
+wwv_flow_api.create_flow_computation(
+ p_id=>wwv_flow_api.id(18028809605854551)
+,p_computation_sequence=>10
+,p_computation_item=>'TM_CURRENT_WORKSPACE'
+,p_computation_point=>'AFTER_LOGIN'
+,p_computation_type=>'QUERY'
+,p_computation_processed=>'REPLACE_EXISTING'
+,p_computation=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select workspace ',
+'from apex_applications',
+'where application_id = :APP_ID'))
+);
 end;
 /
 prompt --application/shared_components/navigation/tabs/standard
@@ -698,26 +715,31 @@ wwv_flow_api.create_list_of_values(
 '                   application_id as r',
 '          from apex_applications ',
 '          where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null) ',
+'            and workspace = :TM_CURRENT_WORKSPACE',
 '            and :P10_SHOW_APPS = ''ALL''',
 'union all',
 'select application_id || '' - '' || application_name as d,',
 '                   application_id as r',
 '            from apex_applications',
 '            where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null)',
+'              and workspace = :TM_CURRENT_WORKSPACE',
 '              and :P10_SHOW_APPS = ''NOTTRANSLED''',
 '              and application_id not in (select application_id',
 '                                         from APEX_APPLICATION_TRANSLATIONS',
-'                                         where (language_code = :P10_CODE or :P10_CODE is null))',
+'                                         where (language_code = :P10_CODE or :P10_CODE is null)',
+'                                           and workspace = :TM_CURRENT_WORKSPACE)',
 'union all                                         ',
 'select application_id || '' - '' || application_name as d,',
 '                   application_id as r',
 '            from apex_applications ',
 '            where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null)',
+'              and workspace = :TM_CURRENT_WORKSPACE',
 '              and :P10_SHOW_APPS = ''TRANSLATED''',
 '              and application_id in (select application_id',
 '                                     from APEX_APPLICATION_TRANSLATIONS',
-'                                     where (language_code = :P10_CODE or :P10_CODE is null))',
-'order by 1',
+'                                     where (language_code = :P10_CODE or :P10_CODE is null)',
+'                                       and workspace = :TM_CURRENT_WORKSPACE)',
+'order by 2',
 ''))
 );
 wwv_flow_api.create_list_of_values(
@@ -727,21 +749,29 @@ wwv_flow_api.create_list_of_values(
 '  if :P1_SHOW_APPS = ''ALL'' then',
 '    return q''[select application_id || '' - '' || application_name as d,',
 '            application_id as r',
-'            from apex_applications]'';  ',
+'            from apex_applications',
+'            where workspace = :TM_CURRENT_WORKSPACE',
+'            order by 2]'';  ',
 '  elsif :P1_SHOW_APPS = ''NOTTRANSLED'' then',
 '    return q''[select application_id || '' - '' || application_name as d,',
 '                     application_id as r',
 '              from apex_applications',
-'              where application_id not in (select application_id',
+'              where workspace = :TM_CURRENT_WORKSPACE',
+'                and application_id not in (select application_id',
 '                                           from APEX_APPLICATION_TRANSLATIONS',
-'                                           where (language_code = :P1_CODE or :P1_CODE is null))]'';',
+'                                           where (language_code = :P1_CODE or :P1_CODE is null)',
+'                                             and workspace = :TM_CURRENT_WORKSPACE)',
+'              order by 2]'';',
 '  elsif :P1_SHOW_APPS = ''TRANSLATED'' then',
 '    return q''[select application_id || '' - '' || application_name as d,',
 '                     application_id as r',
 '              from apex_applications ',
-'              where application_id in (select application_id',
+'              where workspace = :TM_CURRENT_WORKSPACE',
+'                and application_id in (select application_id',
 '                                       from APEX_APPLICATION_TRANSLATIONS',
-'                                       where (language_code = :P1_CODE or :P1_CODE is null))]'';',
+'                                       where (language_code = :P1_CODE or :P1_CODE is null)',
+'                                         and workspace = :TM_CURRENT_WORKSPACE)',
+'              order by 2]'';',
 '  end if;'))
 );
 wwv_flow_api.create_list_of_values(
@@ -754,7 +784,10 @@ wwv_flow_api.create_list_of_values(
 'from ',
 '  APEX_APPLICATION_TRANSLATIONS',
 'where ',
-'  language_code = :P10_CODE'))
+'  language_code = :P10_CODE and ',
+'  workspace = :TM_CURRENT_WORKSPACE',
+'order by ',
+'  application_id'))
 );
 wwv_flow_api.create_list_of_values(
  p_id=>wwv_flow_api.id(25838740072171356383)
@@ -9534,14 +9567,14 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160110154303'
+,p_last_upd_yyyymmddhh24miss=>'20160111004650'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(13154086268052418)
 ,p_plug_name=>'Info'
 ,p_region_template_options=>'#DEFAULT#:t-Alert--horizontal:t-Alert--defaultIcons:t-Alert--warning'
 ,p_plug_template=>wwv_flow_api.id(34516232722978103790)
-,p_plug_display_sequence=>20
+,p_plug_display_sequence=>30
 ,p_include_in_reg_disp_sel_yn=>'N'
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>'There are no prepared messages for this language.'
@@ -9581,7 +9614,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_name=>'Tabs'
 ,p_region_template_options=>'#DEFAULT#:t-TabsRegion-mod--simple'
 ,p_plug_template=>wwv_flow_api.id(34516244441205103809)
-,p_plug_display_sequence=>30
+,p_plug_display_sequence=>40
 ,p_include_in_reg_disp_sel_yn=>'Y'
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_row_template=>1
@@ -9899,7 +9932,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_name=>'Applications and languages'
 ,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody:t-Form--leftLabels'
 ,p_plug_template=>wwv_flow_api.id(34516242305405103807)
-,p_plug_display_sequence=>10
+,p_plug_display_sequence=>20
 ,p_include_in_reg_disp_sel_yn=>'Y'
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_row_template=>1
@@ -10218,21 +10251,29 @@ wwv_flow_api.create_page_item(
 '  if :P1_SHOW_APPS = ''ALL'' then',
 '    return q''[select application_id || '' - '' || application_name as d,',
 '            application_id as r',
-'            from apex_applications]'';  ',
+'            from apex_applications',
+'            where workspace = :TM_CURRENT_WORKSPACE',
+'            order by 2]'';  ',
 '  elsif :P1_SHOW_APPS = ''NOTTRANSLED'' then',
 '    return q''[select application_id || '' - '' || application_name as d,',
 '                     application_id as r',
 '              from apex_applications',
-'              where application_id not in (select application_id',
+'              where workspace = :TM_CURRENT_WORKSPACE',
+'                and application_id not in (select application_id',
 '                                           from APEX_APPLICATION_TRANSLATIONS',
-'                                           where (language_code = :P1_CODE or :P1_CODE is null))]'';',
+'                                           where (language_code = :P1_CODE or :P1_CODE is null)',
+'                                             and workspace = :TM_CURRENT_WORKSPACE)',
+'              order by 2]'';',
 '  elsif :P1_SHOW_APPS = ''TRANSLATED'' then',
 '    return q''[select application_id || '' - '' || application_name as d,',
 '                     application_id as r',
 '              from apex_applications ',
-'              where application_id in (select application_id',
+'              where workspace = :TM_CURRENT_WORKSPACE',
+'                and application_id in (select application_id',
 '                                       from APEX_APPLICATION_TRANSLATIONS',
-'                                       where (language_code = :P1_CODE or :P1_CODE is null))]'';',
+'                                       where (language_code = :P1_CODE or :P1_CODE is null)',
+'                                         and workspace = :TM_CURRENT_WORKSPACE)',
+'              order by 2]'';',
 '  end if;'))
 ,p_lov_display_null=>'YES'
 ,p_lov_null_text=>'- choose application -'
@@ -10519,6 +10560,9 @@ wwv_flow_api.create_page_process(
 ,p_process_when_button_id=>wwv_flow_api.id(25380834575842738367)
 ,p_process_success_message=>'Messages merged!'
 );
+end;
+/
+begin
 wwv_flow_api.create_page_process(
  p_id=>wwv_flow_api.id(25836157849355538990)
 ,p_process_sequence=>40
@@ -10569,6 +10613,7 @@ wwv_flow_api.create_page_process(
 ,p_process_when_type=>'REQUEST_EQUALS_CONDITION'
 ,p_process_success_message=>'Messages deleted.'
 );
+null;
 end;
 /
 prompt --application/pages/page_00002
@@ -11995,7 +12040,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160110144953'
+,p_last_upd_yyyymmddhh24miss=>'20160111004926'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(25838732388968980777)
@@ -12017,7 +12062,8 @@ wwv_flow_api.create_page_plug(
 '  TM_BACKUP,',
 '  APEX_APPLICATIONS',
 'where ',
-'  APP_ID = APPLICATION_ID',
+'  APP_ID = APPLICATION_ID AND ',
+'  WORKSPACE = :TM_CURRENT_WORKSPACE',
 'order by',
 '  backup_time desc'))
 ,p_plug_source_type=>'NATIVE_IR'
@@ -12086,7 +12132,7 @@ wwv_flow_api.create_worksheet_column(
 ,p_column_identifier=>'H'
 ,p_column_label=>'Application'
 ,p_column_type=>'STRING'
-,p_column_alignment=>'CENTER'
+,p_heading_alignment=>'LEFT'
 );
 wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(25380838266590738404)
@@ -12373,7 +12419,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160110162351'
+,p_last_upd_yyyymmddhh24miss=>'20160111004712'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(13571165667529782)
@@ -12805,26 +12851,31 @@ wwv_flow_api.create_page_item(
 '                   application_id as r',
 '          from apex_applications ',
 '          where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null) ',
+'            and workspace = :TM_CURRENT_WORKSPACE',
 '            and :P10_SHOW_APPS = ''ALL''',
 'union all',
 'select application_id || '' - '' || application_name as d,',
 '                   application_id as r',
 '            from apex_applications',
 '            where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null)',
+'              and workspace = :TM_CURRENT_WORKSPACE',
 '              and :P10_SHOW_APPS = ''NOTTRANSLED''',
 '              and application_id not in (select application_id',
 '                                         from APEX_APPLICATION_TRANSLATIONS',
-'                                         where (language_code = :P10_CODE or :P10_CODE is null))',
+'                                         where (language_code = :P10_CODE or :P10_CODE is null)',
+'                                           and workspace = :TM_CURRENT_WORKSPACE)',
 'union all                                         ',
 'select application_id || '' - '' || application_name as d,',
 '                   application_id as r',
 '            from apex_applications ',
 '            where (application_id != :P10_APP_ID_SOURCE or :P10_APP_ID_SOURCE is null)',
+'              and workspace = :TM_CURRENT_WORKSPACE',
 '              and :P10_SHOW_APPS = ''TRANSLATED''',
 '              and application_id in (select application_id',
 '                                     from APEX_APPLICATION_TRANSLATIONS',
-'                                     where (language_code = :P10_CODE or :P10_CODE is null))',
-'order by 1',
+'                                     where (language_code = :P10_CODE or :P10_CODE is null)',
+'                                       and workspace = :TM_CURRENT_WORKSPACE)',
+'order by 2',
 ''))
 ,p_lov_display_null=>'YES'
 ,p_lov_null_text=>'- choose application -'
@@ -12890,7 +12941,10 @@ wwv_flow_api.create_page_item(
 'from ',
 '  APEX_APPLICATION_TRANSLATIONS',
 'where ',
-'  language_code = :P10_CODE'))
+'  language_code = :P10_CODE and ',
+'  workspace = :TM_CURRENT_WORKSPACE',
+'order by ',
+'  application_id'))
 ,p_lov_display_null=>'YES'
 ,p_lov_null_text=>'- choose application -'
 ,p_cHeight=>1
@@ -13361,6 +13415,9 @@ wwv_flow_api.create_page_da_action(
 ,p_affected_elements_type=>'REGION'
 ,p_affected_region_id=>wwv_flow_api.id(14510827969435562)
 );
+end;
+/
+begin
 wwv_flow_api.create_page_da_event(
  p_id=>wwv_flow_api.id(14537116025100335)
 ,p_name=>'Import into prepared messages'
@@ -13370,9 +13427,6 @@ wwv_flow_api.create_page_da_event(
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'click'
 );
-end;
-/
-begin
 wwv_flow_api.create_page_da_action(
  p_id=>wwv_flow_api.id(14537229372100336)
 ,p_event_id=>wwv_flow_api.id(14537116025100335)
@@ -13721,7 +13775,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160110001058'
+,p_last_upd_yyyymmddhh24miss=>'20160111000427'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(22448739495109757)
@@ -14178,8 +14232,45 @@ wwv_flow_api.create_page_da_action(
 ,p_stop_execution_on_error=>'Y'
 );
 wwv_flow_api.create_page_process(
- p_id=>wwv_flow_api.id(22463938048109769)
+ p_id=>wwv_flow_api.id(14537988106100343)
 ,p_process_sequence=>10
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Remove if beginning with EFBBBF'
+,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'declare',
+'  l_blob blob;',
+'  l_blob_new blob;',
+'begin',
+'  select blob_content',
+'  into l_blob',
+'  from  wwv_flow_files ',
+'  where name = :P20_FILE_NAME;  ',
+'    ',
+'  DBMS_LOB.CREATETEMPORARY(l_blob_new, false);',
+'  ',
+'  if DBMS_LOB.SUBSTR(l_blob, 3, 1) = ''EFBBBF'' then',
+'    ',
+'    DBMS_LOB.COPY (',
+'      dest_lob    => l_blob_new,',
+'      src_lob     => l_blob,',
+'      amount      => DBMS_LOB.GETLENGTH(l_blob)-3,',
+'      dest_offset => 1,',
+'      src_offset  => 4);',
+' ',
+'    update wwv_flow_files ',
+'    set blob_content = l_blob_new',
+'    where name = :P20_FILE_NAME;',
+'    ',
+'  end if;',
+'',
+'end;'))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(22450466657109758)
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(22463938048109769)
+,p_process_sequence=>20
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_PARSE_UPLOADED_DATA'
 ,p_process_name=>'Parse Uploaded Data'
