@@ -1,6 +1,3 @@
---------------------------------------------------------
---  File created - Tuesday-November-03-2015   
---------------------------------------------------------
 REM INSERTING into TM_DOC_MESSAGES
 SET DEFINE OFF;
 Insert into TM_DOC_MESSAGES (TRANSLATABLE_MESSAGE,MESSAGE_TEXT,INTERNAL_IR) values ('APEXIR_EMAIL_NOT_CONFIGURED','Email has not been configured for this application. Please contact your administrator.','INTERACTIVEREPORT');
