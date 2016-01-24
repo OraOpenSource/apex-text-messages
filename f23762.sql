@@ -27,7 +27,7 @@ prompt APPLICATION 23762 - Text Messages
 -- Application Export:
 --   Application:     23762
 --   Name:            Text Messages
---   Date and Time:   10:30 Sunday January 24, 2016
+--   Date and Time:   10:45 Sunday January 24, 2016
 --   Exported By:     ALJAZ
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -40,7 +40,7 @@ prompt APPLICATION 23762 - Text Messages
 --     Items:                   40
 --     Validations:              4
 --     Processes:               29
---     Regions:                 37
+--     Regions:                 38
 --     Buttons:                 28
 --     Dynamic Actions:         18
 --   Shared Components:
@@ -119,7 +119,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_value_02=>'<link rel="shortcut icon" href="#APP_IMAGES#fav-icon.png"><link rel="icon" sizes="16x16" href="#APP_IMAGES#fav-icon-16.png"><link rel="icon" sizes="32x32" href="#APP_IMAGES#fav-icon-32.png"><link rel="apple-touch-icon" sizes="180x180" href="#APP_IMAG'
 ||'ES#fav-icon-128.png">'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160124103026'
+,p_last_upd_yyyymmddhh24miss=>'20160124104426'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>5
 ,p_ui_type_name => null
@@ -13881,7 +13881,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160124103026'
+,p_last_upd_yyyymmddhh24miss=>'20160124104426'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(18075742134587173)
@@ -13925,7 +13925,7 @@ wwv_flow_api.create_page_plug(
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(1681402688474303)
-,p_plug_name=>'Collection'
+,p_plug_name=>'TM_PARSE_CSV Collection'
 ,p_parent_plug_id=>wwv_flow_api.id(18080390359626507)
 ,p_region_template_options=>'#DEFAULT#'
 ,p_component_template_options=>'#DEFAULT#'
@@ -14069,6 +14069,8 @@ wwv_flow_api.create_page_process(
 '  l_failed   number := 0; ',
 'begin',
 '',
+'  APEX_COLLECTION.CREATE_OR_TRUNCATE_COLLECTION(p_collection_name => ''TM_PARSE_CSV_ERRORS'');',
+'',
 '  for cur in (SELECT ',
 '                decode(p.translatable_message, null, ''INSERT'', ''UPDATE'') action,',
 '                c.c001 message_code,',
@@ -14093,6 +14095,12 @@ wwv_flow_api.create_page_process(
 '        l_inserted := l_inserted + 1;    ',
 '      exception ',
 '        when others then',
+'          APEX_COLLECTION.ADD_MEMBER(',
+'                         p_collection_name => ''TM_PARSE_CSV_ERRORS'',',
+'                         p_c001            => cur.message_code,',
+'                         p_c002            => sqlerrm,',
+'                         p_c003            => ''INSERT'');    ',
+'                ',
 '          l_failed := l_failed + 1;',
 '      end;  ',
 '',
@@ -14111,6 +14119,12 @@ wwv_flow_api.create_page_process(
 '        l_updated := l_updated + 1;',
 '      exception ',
 '        when others then',
+'          APEX_COLLECTION.ADD_MEMBER(',
+'                         p_collection_name => ''TM_PARSE_CSV_ERRORS'',',
+'                         p_c001            => cur.message_code,',
+'                         p_c002            => sqlerrm,',
+'                         p_c003            => ''UPDATE'');',
+'                         ',
 '          l_failed := l_failed + 1;',
 '      end;   ',
 '      ',
@@ -14155,7 +14169,106 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160124102037'
+,p_last_upd_yyyymmddhh24miss=>'20160124104047'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(1684638825474335)
+,p_plug_name=>'Errors'
+,p_region_template_options=>'#DEFAULT#'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(34516241843487103806)
+,p_plug_display_sequence=>30
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'SELECT ',
+'  c.c003 action,',
+'  c.c002 translated_text,',
+'  c.c001 message_code',
+'FROM ',
+'  apex_collections c',
+'WHERE ',
+'  c.collection_name = ''TM_PARSE_CSV_ERRORS'''))
+,p_plug_source_type=>'NATIVE_IR'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_display_condition_type=>'PLSQL_EXPRESSION'
+,p_plug_display_when_condition=>'nvl(:P14_FAILED,0) > 0'
+,p_prn_content_disposition=>'ATTACHMENT'
+,p_prn_document_header=>'APEX'
+,p_prn_units=>'MILLIMETERS'
+,p_prn_paper_size=>'A4'
+,p_prn_width=>210
+,p_prn_height=>297
+,p_prn_orientation=>'HORIZONTAL'
+,p_prn_page_header_font_color=>'#000000'
+,p_prn_page_header_font_family=>'Helvetica'
+,p_prn_page_header_font_weight=>'normal'
+,p_prn_page_header_font_size=>'12'
+,p_prn_page_footer_font_color=>'#000000'
+,p_prn_page_footer_font_family=>'Helvetica'
+,p_prn_page_footer_font_weight=>'normal'
+,p_prn_page_footer_font_size=>'12'
+,p_prn_header_bg_color=>'#9bafde'
+,p_prn_header_font_color=>'#000000'
+,p_prn_header_font_family=>'Helvetica'
+,p_prn_header_font_weight=>'normal'
+,p_prn_header_font_size=>'10'
+,p_prn_body_bg_color=>'#efefef'
+,p_prn_body_font_color=>'#000000'
+,p_prn_body_font_family=>'Helvetica'
+,p_prn_body_font_weight=>'normal'
+,p_prn_body_font_size=>'10'
+,p_prn_border_width=>.5
+,p_prn_page_header_alignment=>'CENTER'
+,p_prn_page_footer_alignment=>'CENTER'
+);
+wwv_flow_api.create_worksheet(
+ p_id=>wwv_flow_api.id(1684760324474336)
+,p_max_row_count=>'1000000'
+,p_show_nulls_as=>'-'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_show_detail_link=>'N'
+,p_show_notify=>'Y'
+,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
+,p_owner=>'ALJAZ'
+,p_internal_uid=>1684760324474336
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(1684802440474337)
+,p_db_column_name=>'ACTION'
+,p_display_order=>10
+,p_column_identifier=>'A'
+,p_column_label=>'Action'
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(1684947447474338)
+,p_db_column_name=>'TRANSLATED_TEXT'
+,p_display_order=>20
+,p_column_identifier=>'B'
+,p_column_label=>'Translated text'
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(1685029899474339)
+,p_db_column_name=>'MESSAGE_CODE'
+,p_display_order=>30
+,p_column_identifier=>'C'
+,p_column_label=>'Message code'
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_rpt(
+ p_id=>wwv_flow_api.id(1920716498242512)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'19208'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_display_rows=>50
+,p_report_columns=>'ACTION:TRANSLATED_TEXT:MESSAGE_CODE'
+,p_flashback_enabled=>'N'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(1888060044817311)
