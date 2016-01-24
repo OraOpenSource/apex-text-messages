@@ -3,6 +3,7 @@ CREATE SEQUENCE   "TM_BACKUP_SEQ";
 CREATE SEQUENCE   "TM_DOC_MESSAGES_SEQ";
 CREATE SEQUENCE   "TM_PREP_MESSAGES_SEQ";
 
+
 CREATE TABLE  "TM_LANGUAGES" 
    ("CODE" VARCHAR2(10) NOT NULL ENABLE, 
 	"LANGUAGE" VARCHAR2(200) NOT NULL ENABLE, 
@@ -18,6 +19,9 @@ CREATE OR REPLACE TRIGGER  "TRG_BIU_TM_LANGUAGES"
   before insert or update on "TM_LANGUAGES"              
   for each row 
 begin  
+  
+  :new.code := upper(:new.code);
+
   if inserting then
     :new.CREATED_ON := sysdate;
     :new.CREATED_BY := nvl(v('APP_USER'), user);
@@ -174,6 +178,7 @@ create or replace TRIGGER  "TRG_BIU_TM_PREP_MESSAGE"
 begin  
   
   :new.translatable_message := upper(:new.translatable_message);
+  :new.language_code := upper(:new.language_code);
 
   if :NEW."ID" is null then
     select "TM_PREP_MESSAGES_SEQ".nextval into :NEW."ID" from sys.dual;
