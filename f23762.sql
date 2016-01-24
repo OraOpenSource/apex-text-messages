@@ -27,9 +27,9 @@ prompt APPLICATION 23762 - Text Messages
 -- Application Export:
 --   Application:     23762
 --   Name:            Text Messages
---   Date and Time:   15:00 Sunday January 24, 2016
+--   Date and Time:   15:12 Sunday January 24, 2016
 --   Exported By:     ALJAZ
---   Flashback:       10
+--   Flashback:       0
 --   Export Type:     Application Export
 --   Version:         5.0.3.00.03
 --   Instance ID:     102255169784830
@@ -119,7 +119,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_value_02=>'<link rel="shortcut icon" href="#APP_IMAGES#fav-icon.png"><link rel="icon" sizes="16x16" href="#APP_IMAGES#fav-icon-16.png"><link rel="icon" sizes="32x32" href="#APP_IMAGES#fav-icon-32.png"><link rel="apple-touch-icon" sizes="180x180" href="#APP_IMAG'
 ||'ES#fav-icon-128.png">'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160124144820'
+,p_last_upd_yyyymmddhh24miss=>'20160124151010'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>5
 ,p_ui_type_name => null
@@ -775,6 +775,7 @@ wwv_flow_api.create_list_of_values(
 'select language || '' ('' || code || '')'' as d,',
 '       code as r',
 '  from tm_languages',
+'  where code not in (select code from tm_iso_codes)',
 'order by 1'))
 );
 wwv_flow_api.create_list_of_values(
@@ -12319,6 +12320,21 @@ wwv_flow_api.create_page(
 ,p_step_sub_title=>'Backup Details'
 ,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
 ,p_first_item=>'NO_FIRST_ITEM'
+,p_javascript_code=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'function do_restore(){',
+'  apex.confirm("Restore messages?", {',
+'    request:"RESTORE",',
+'    showWait:true',
+'  });',
+'}',
+'',
+'',
+'function do_delete(){',
+'  apex.confirm("Delete this backup?", {',
+'    request:"DELETE",',
+'    showWait:true',
+'  });',
+'}'))
 ,p_page_template_options=>'#DEFAULT#'
 ,p_dialog_height=>'800'
 ,p_dialog_width=>'900'
@@ -12328,7 +12344,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160124144820'
+,p_last_upd_yyyymmddhh24miss=>'20160124145325'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(25838905486984082607)
@@ -12421,12 +12437,13 @@ wwv_flow_api.create_page_button(
 ,p_button_sequence=>10
 ,p_button_plug_id=>wwv_flow_api.id(25838905486984082607)
 ,p_button_name=>'RESTORE'
-,p_button_action=>'SUBMIT'
+,p_button_action=>'REDIRECT_URL'
 ,p_button_template_options=>'#DEFAULT#:t-Button--iconLeft'
 ,p_button_template_id=>wwv_flow_api.id(34516263214649103840)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Restore Messages'
 ,p_button_position=>'BODY'
+,p_button_redirect_url=>'javascript:do_restore();'
 ,p_button_condition=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'select 1 ',
 'from tm_backup',
@@ -12441,12 +12458,13 @@ wwv_flow_api.create_page_button(
 ,p_button_sequence=>20
 ,p_button_plug_id=>wwv_flow_api.id(25838905486984082607)
 ,p_button_name=>'DELETE'
-,p_button_action=>'SUBMIT'
+,p_button_action=>'REDIRECT_URL'
 ,p_button_template_options=>'#DEFAULT#:t-Button--iconLeft'
 ,p_button_template_id=>wwv_flow_api.id(34516263214649103840)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Delete backup'
 ,p_button_position=>'BODY'
+,p_button_redirect_url=>'javascript:do_delete();'
 ,p_button_condition=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'select 1 ',
 'from tm_backup',
@@ -14058,7 +14076,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160124123844'
+,p_last_upd_yyyymmddhh24miss=>'20160124151010'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(14538265836100346)
@@ -14169,6 +14187,7 @@ wwv_flow_api.create_page_item(
 'select language || '' ('' || code || '')'' as d,',
 '       code as r',
 '  from tm_languages',
+'  where code not in (select code from tm_iso_codes)',
 'order by 1'))
 ,p_lov_display_null=>'YES'
 ,p_lov_null_text=>'- choose language -'
