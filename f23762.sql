@@ -27,7 +27,7 @@ prompt APPLICATION 23762 - Text Messages
 -- Application Export:
 --   Application:     23762
 --   Name:            Text Messages
---   Date and Time:   15:12 Sunday January 24, 2016
+--   Date and Time:   15:37 Sunday January 24, 2016
 --   Exported By:     ALJAZ
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -39,7 +39,7 @@ prompt APPLICATION 23762 - Text Messages
 --   Pages:                     15
 --     Items:                   42
 --     Validations:              4
---     Processes:               33
+--     Processes:               35
 --     Regions:                 39
 --     Buttons:                 32
 --     Dynamic Actions:         20
@@ -68,6 +68,7 @@ prompt APPLICATION 23762 - Text Messages
 --       LOVs:                  11
 --       Shortcuts:              1
 --     Globalization:
+--       Messages:             457
 --     Reports:
 --   Supporting Objects:  Included
 
@@ -119,7 +120,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_value_02=>'<link rel="shortcut icon" href="#APP_IMAGES#fav-icon.png"><link rel="icon" sizes="16x16" href="#APP_IMAGES#fav-icon-16.png"><link rel="icon" sizes="32x32" href="#APP_IMAGES#fav-icon-32.png"><link rel="apple-touch-icon" sizes="180x180" href="#APP_IMAG'
 ||'ES#fav-icon-128.png">'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160124151010'
+,p_last_upd_yyyymmddhh24miss=>'20160124153520'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>5
 ,p_ui_type_name => null
@@ -9444,7 +9445,2873 @@ end;
 /
 prompt --application/shared_components/globalization/messages
 begin
-null;
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4304571666024599)
+,p_name=>'APEXIR_VIEW_ICONS'
+,p_message_language=>'sl'
+,p_message_text=>'Poglej ikone'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4304766472024599)
+,p_name=>'APEXIR_X_HOURS'
+,p_message_language=>'sl'
+,p_message_text=>'%0 ur'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4305007709024599)
+,p_name=>'APEXIR_YEAR'
+,p_message_language=>'sl'
+,p_message_text=>'Leto'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4305352310024600)
+,p_name=>'SINCE_DAYS_AGO'
+,p_message_language=>'sl'
+,p_message_text=>'Pred %0 dnevi'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4305686102024600)
+,p_name=>'SINCE_HOURS_AGO'
+,p_message_language=>'sl'
+,p_message_text=>'pred %0 urami'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4305925518024600)
+,p_name=>'SINCE_SECONDS_FROM_NOW'
+,p_message_language=>'sl'
+,p_message_text=>'%0 sekund od sedaj'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4306292301024600)
+,p_name=>'SINCE_WEEKS_FROM_NOW'
+,p_message_language=>'sl'
+,p_message_text=>'čez %0 tednov'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4306532369024600)
+,p_name=>'WWV_RENDER_REPORT3.SORT_BY_THIS_COLUMN'
+,p_message_language=>'sl'
+,p_message_text=>'Razvrščanje po stolpcu.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4306814054024600)
+,p_name=>'WWV_RENDER_REPORT3.UNSAVED_DATA'
+,p_message_language=>'sl'
+,p_message_text=>'Obrazec vsebuje neshranjene spremembe. Pritisnite OK za nadaljevanje brez shranjevanja sprememb.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4307156679024600)
+,p_name=>'WWV_RENDER_REPORT3.X_Y_OF_MORE_THAN_Z'
+,p_message_language=>'sl'
+,p_message_text=>'vrstica/e %0 - %1 od več kot %2'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4307415827024601)
+,p_name=>'APEX.DATEPICKER.ICON_TEXT'
+,p_message_language=>'sl'
+,p_message_text=>'Koledar v pojavnem oknu: %0'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4307719823024601)
+,p_name=>'APEX.ITEM_TYPE.SLIDER.VALUE_NOT_BETWEEN_MIN_MAX'
+,p_message_language=>'sl'
+,p_message_text=>'#LABEL# ni med vrednostjo od %0 do %1.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4308074438024601)
+,p_name=>'APEX.POPUP_LOV.ICON_TEXT'
+,p_message_language=>'sl'
+,p_message_text=>'Pojavna lista vrednosti: %0.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4308385185024601)
+,p_name=>'APEXIR_CONTROL_BREAK_COLUMNS'
+,p_message_language=>'sl'
+,p_message_text=>'Stolpci za prelom'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4308666015024601)
+,p_name=>'APEXIR_DELETE_DEFAULT_REPORT'
+,p_message_language=>'sl'
+,p_message_text=>'Pobriši privzeto poročilo'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4308938494024601)
+,p_name=>'APEXIR_GROUP_BY_SORT'
+,p_message_language=>'sl'
+,p_message_text=>'Grupiraj po razvrščanju'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4309259452024601)
+,p_name=>'APEXIR_GROUP_BY_SORT_ORDER'
+,p_message_language=>'sl'
+,p_message_text=>'Grupiraj po vrstnem redu razvrščanja'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4309541176024601)
+,p_name=>'APEXIR_HELP_SEARCH_BAR_ROWS'
+,p_message_language=>'sl'
+,p_message_text=>'<li><b>Vrstice</b> nastavi število zapisov za prikaz na strani.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4309815525024602)
+,p_name=>'APEXIR_INVALID_SETTINGS'
+,p_message_language=>'sl'
+,p_message_text=>'%0 neveljavnih nastavitev'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4310197827024602)
+,p_name=>'APEXIR_NOT_VALID_EMAIL'
+,p_message_language=>'sl'
+,p_message_text=>'Ni veljaven e-poštni naslov.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4310495279024602)
+,p_name=>'APEXIR_ROW_COL_DIFF_FROM_PIVOT_COL'
+,p_message_language=>'sl'
+,p_message_text=>'Vrstica kolona mora biti različna od stolpca za vrtilno tabelo.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4310780904024602)
+,p_name=>'APEXIR_SAVE_DEFAULT_REPORT'
+,p_message_language=>'sl'
+,p_message_text=>'Shrani privzeto poročilo'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4311016220024602)
+,p_name=>'APEXIR_SELECTED_COLUMNS'
+,p_message_language=>'sl'
+,p_message_text=>'Izbrani stolpci'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4311392200024602)
+,p_name=>'APEXIR_SELECT_PIVOT_COLUMN'
+,p_message_language=>'sl'
+,p_message_text=>'- Izberite vrtilni stolpec -'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4311635096024602)
+,p_name=>'APEXIR_VIEW_PIVOT'
+,p_message_language=>'sl'
+,p_message_text=>'Poglej pivot'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4311963728024603)
+,p_name=>'APEXIR_HELP_SELECT_COLUMNS'
+,p_message_language=>'sl'
+,p_message_text=>'Se uporablja za spreminjanje prikaza stolpcev. Stolpci na desni so prikazani. Stolpci na levi so skriti. Z uporabo puščic na skrajni desni lahko spremenite tudi vrstni red prikazanih stolpcev. Izračunljivi stolpci imajo predpono <b>**</b>.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4312233670024603)
+,p_name=>'APEXIR_HIGHLIGHTS'
+,p_message_language=>'sl'
+,p_message_text=>'Poudarki'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4312539532024603)
+,p_name=>'APEXIR_INTERACTIVE_REPORT_HELP'
+,p_message_language=>'sl'
+,p_message_text=>'Interaktivna poročila - pomoč'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4312838433024603)
+,p_name=>'APEXIR_IS_NOT_IN_THE_NEXT'
+,p_message_language=>'sl'
+,p_message_text=>'%0 ni vsebovano v naslednjem %1'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4313178361024603)
+,p_name=>'APEXIR_MAX_X'
+,p_message_language=>'sl'
+,p_message_text=>'Maksimalno %0'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4313402942024603)
+,p_name=>'APEXIR_SELECT_COLUMN'
+,p_message_language=>'sl'
+,p_message_text=>'- Izberi stolpec -'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4313798315024603)
+,p_name=>'APEX.DATA_HAS_CHANGED'
+,p_message_language=>'sl'
+,p_message_text=>'Trenutna verzija podatkov v bazi se je spremenila, od takrat ko je uporabnik sporočil proces ažuriranja. Trenutna kontrolna vsota = %0" aplikacijska kontrolna vsota = "%1"."'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4314093574024603)
+,p_name=>'APEX.DATEPICKER_VALUE_GREATER_MAX_DATE'
+,p_message_language=>'sl'
+,p_message_text=>'#LABEL# je večji od navedenega največjega datuma %0.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4314390348024604)
+,p_name=>'APEX.DATEPICKER_VALUE_INVALID'
+,p_message_language=>'sl'
+,p_message_text=>'#LABEL# napačen format datuma %0.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4314633700024604)
+,p_name=>'APEX.GO_TO_ERROR'
+,p_message_language=>'sl'
+,p_message_text=>'Pojdi na napako'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4314933427024604)
+,p_name=>'APEXIR_AGG_AVG'
+,p_message_language=>'sl'
+,p_message_text=>'Povprečje'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4315237324024604)
+,p_name=>'APEXIR_AGG_SUM'
+,p_message_language=>'sl'
+,p_message_text=>'Seštevek'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4315536747024604)
+,p_name=>'APEXIR_AS_OF'
+,p_message_language=>'sl'
+,p_message_text=>'Od %0'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4315812266024604)
+,p_name=>'APEXIR_BETWEEN'
+,p_message_language=>'sl'
+,p_message_text=>'med'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4316151596024604)
+,p_name=>'APEXIR_COLUMN_HEADING'
+,p_message_language=>'sl'
+,p_message_text=>'Naslov stolpca'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4316466544024604)
+,p_name=>'APEXIR_COLUMN_INFO'
+,p_message_language=>'sl'
+,p_message_text=>'Informacija o stolpcu'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4316712331024605)
+,p_name=>'APEXIR_COMPUTATION_FOOTER'
+,p_message_language=>'sl'
+,p_message_text=>'Kreirajte izračun z uporabo prestolničnega psevdonima.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4317070278024605)
+,p_name=>'APEXIR_COUNT_DISTINCT_X'
+,p_message_language=>'sl'
+,p_message_text=>'Število različnih'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4317357170024605)
+,p_name=>'APEXIR_DIRECTION'
+,p_message_language=>'sl'
+,p_message_text=>'Smre'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4317649229024605)
+,p_name=>'APEXIR_DISPLAYED_COLUMNS'
+,p_message_language=>'sl'
+,p_message_text=>'Prikaži stolpce'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4317901159024605)
+,p_name=>'APEXIR_DOWNLOAD'
+,p_message_language=>'sl'
+,p_message_text=>'Prenesi'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4318260828024605)
+,p_name=>'APEXIR_EDIT_HIGHLIGHT'
+,p_message_language=>'sl'
+,p_message_text=>'Urejanje izpostavljanja'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4318536199024605)
+,p_name=>'APEXIR_EMAIL'
+,p_message_language=>'sl'
+,p_message_text=>'E-naslov'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4318808596024606)
+,p_name=>'APEXIR_EMAIL_NOT_CONFIGURED'
+,p_message_language=>'sl'
+,p_message_text=>'Za to aplikacijo naslov elektronske pošte ni nastavljen. Prosimo kontrktirajte administratorja.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4319162685024606)
+,p_name=>'APEXIR_EMAIL_TO'
+,p_message_language=>'sl'
+,p_message_text=>'Za'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4319444836024606)
+,p_name=>'APEXIR_ENABLE'
+,p_message_language=>'sl'
+,p_message_text=>'Omogoči'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4319735212024606)
+,p_name=>'APEXIR_EXAMPLES_WITH_COLON'
+,p_message_language=>'sl'
+,p_message_text=>'Primeri:'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4320074563024606)
+,p_name=>'APEXIR_FUNCTIONS_OPERATORS'
+,p_message_language=>'sl'
+,p_message_text=>'Funkcije / Operatorji'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4320353828024606)
+,p_name=>'APEXIR_HELP_DOWNLOAD'
+,p_message_language=>'sl'
+,p_message_text=>'Dovoli prenos trenutnega nabora podatkov. Oblika datoteke prenosa je odvisna od načina postavitve. Definicija poročila je lahko oblike CSV, XLS, PDF n RTF.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4320696430024606)
+,p_name=>'APEXIR_SORT'
+,p_message_language=>'sl'
+,p_message_text=>'Razvrsti'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4320925107024606)
+,p_name=>'APEXIR_TOP'
+,p_message_language=>'sl'
+,p_message_text=>'Vrh'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4321235713024607)
+,p_name=>'APEXIR_UNAUTHORIZED'
+,p_message_language=>'sl'
+,p_message_text=>'Nepooblaščeno'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4321578867024607)
+,p_name=>'APEXIR_UNIQUE_HIGHLIGHT_NAME'
+,p_message_language=>'sl'
+,p_message_text=>'Naziv izpostavljanja mora biti enoznačno.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4321879421024607)
+,p_name=>'APEXIR_VALUE'
+,p_message_language=>'sl'
+,p_message_text=>'Vrednost'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4322126279024607)
+,p_name=>'APEXIR_VCOLUMN'
+,p_message_language=>'sl'
+,p_message_text=>'Vertikalni stolpec'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4322430599024607)
+,p_name=>'IR_AS_NAMED_REPORT'
+,p_message_language=>'sl'
+,p_message_text=>'Kot poimenovano poročilo'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4322759534024607)
+,p_name=>'LAYOUT.T_CONDITION_EXPR2'
+,p_message_language=>'sl'
+,p_message_text=>'Izraz 2'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4323079299024607)
+,p_name=>'PAGINATION.NEXT'
+,p_message_language=>'sl'
+,p_message_text=>'Naprej'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4323315273024608)
+,p_name=>'WWV_FLOW_UTILITIES.CAL'
+,p_message_language=>'sl'
+,p_message_text=>'Koledar'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4323601532024608)
+,p_name=>'APEX.AUTHENTICATION.LOGIN_THROTTLE.ERROR'
+,p_message_language=>'sl'
+,p_message_text=>'Poskus prijave je bil blokiran.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4323975995024608)
+,p_name=>'APEXIR_ALL_ROWS'
+,p_message_language=>'sl'
+,p_message_text=>'Vse vrstice'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4324261264024608)
+,p_name=>'APEXIR_DUPLICATE_PIVOT_COLUMN'
+,p_message_language=>'sl'
+,p_message_text=>'Podvojen stolpec za vrtilno tabelo. Stolpci morajo biti unikatni.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4324519037024608)
+,p_name=>'APEXIR_INVALID_FILTER'
+,p_message_language=>'sl'
+,p_message_text=>'Neveljaven filter izraz. %0'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4324824675024608)
+,p_name=>'APEXIR_INVALID_SETTING'
+,p_message_language=>'sl'
+,p_message_text=>'1 nepravilna nastavitev'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4325184549024608)
+,p_name=>'APEXIR_PIVOT_SORT'
+,p_message_language=>'sl'
+,p_message_text=>'Vrtilno razvrščanje'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4325450067024608)
+,p_name=>'APEXIR_REMOVE_CHART'
+,p_message_language=>'sl'
+,p_message_text=>'Odstrani grafikon'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4325703758024609)
+,p_name=>'APEXIR_REPORT_ALIAS_DOES_NOT_EXIST'
+,p_message_language=>'sl'
+,p_message_text=>'Shranjeno interaktivno poročilo s psevdonimom %0 ne obstaja.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4326046148024609)
+,p_name=>'APEXIR_REPORT_DISPLAY_COLUMN_LIMIT_REACHED'
+,p_message_language=>'sl'
+,p_message_text=>'Število prikazan stolpec v poročilu je doseglo limit. Prosim izberite Izberite Stolpce v akcijskem meniju, da tako zmanjšate število prikazanih stolpcev.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4326385534024609)
+,p_name=>'APEXIR_SEARCH_COLUMN'
+,p_message_language=>'sl'
+,p_message_text=>'Iskanje: %0'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4326669711024609)
+,p_name=>'APEXIR_SEND'
+,p_message_language=>'sl'
+,p_message_text=>'Pošlji'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4326971607024609)
+,p_name=>'APEXIR_NO_END_DATE'
+,p_message_language=>'sl'
+,p_message_text=>'- Ni datuma konca -'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4327252927024609)
+,p_name=>'APEXIR_NUMERIC_SEQUENCE'
+,p_message_language=>'sl'
+,p_message_text=>'Sekvenca mora biti numerična'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4327523269024609)
+,p_name=>'APEXIR_OTHER'
+,p_message_language=>'sl'
+,p_message_text=>'Drugo'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4327882016024609)
+,p_name=>'APEXIR_REMOVE_CONTROL_BREAK'
+,p_message_language=>'sl'
+,p_message_text=>'Odstrani prelom'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4328161543024610)
+,p_name=>'APEXIR_REMOVE_HIGHLIGHT'
+,p_message_language=>'sl'
+,p_message_text=>'Odstrani izpostavljanje'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4328444565024610)
+,p_name=>'APEXIR_REPORT_SETTINGS'
+,p_message_language=>'sl'
+,p_message_text=>'Nastavitve poročila'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4328779422024610)
+,p_name=>'APEXIR_RESET'
+,p_message_language=>'sl'
+,p_message_text=>'Ponastavi'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4329030516024610)
+,p_name=>'APEXIR_HIGHLIGHT_CONDITION'
+,p_message_language=>'sl'
+,p_message_text=>'Pogoj izpostavljanja'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4329374343024610)
+,p_name=>'APEXIR_INVALID_COMPUTATION'
+,p_message_language=>'sl'
+,p_message_text=>'Neveljaven izraz za izračun. %0'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4329683003024610)
+,p_name=>'APEXIR_LAST_X_HOURS'
+,p_message_language=>'sl'
+,p_message_text=>'Zadnjih %0 ur'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4329910230024610)
+,p_name=>'APEXIR_LINE'
+,p_message_language=>'sl'
+,p_message_text=>'Vrstica'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4330288943024611)
+,p_name=>'APEXIR_MIN_X'
+,p_message_language=>'sl'
+,p_message_text=>'Minimum %0'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4330552800024611)
+,p_name=>'APEXIR_ROW_TEXT_CONTAINS'
+,p_message_language=>'sl'
+,p_message_text=>'Vrstica vsebuje tekst'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4330818125024611)
+,p_name=>'APEXIR_SAVE_AS_DEFAULT'
+,p_message_language=>'sl'
+,p_message_text=>'Shrani kot privzeto'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4331138605024611)
+,p_name=>'APEXIR_SAVED_REPORT_MSG'
+,p_message_language=>'sl'
+,p_message_text=>'Shranjeno poročilo = %0""'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4331424663024611)
+,p_name=>'APEXIR_SELECT_CATEGORY'
+,p_message_language=>'sl'
+,p_message_text=>'- Izberi kategorijo -'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4331793776024611)
+,p_name=>'APEX.NUMBER_FIELD.VALUE_GREATER_MAX_VALUE'
+,p_message_language=>'sl'
+,p_message_text=>'#LABEL# je večji od navede največje vrednosti %0.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4332092560024611)
+,p_name=>'APEXIR_ACTIONS'
+,p_message_language=>'sl'
+,p_message_text=>'Akcije'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4332359653024611)
+,p_name=>'APEXIR_ADD'
+,p_message_language=>'sl'
+,p_message_text=>'Dodaj'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4332600710024612)
+,p_name=>'APEXIR_ADD_SUBSCRIPTION'
+,p_message_language=>'sl'
+,p_message_text=>'Dodaj naročanje'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4332954869024612)
+,p_name=>'APEXIR_AGG_MEDIAN'
+,p_message_language=>'sl'
+,p_message_text=>'Mediana'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4333216788024612)
+,p_name=>'APEXIR_APPLY'
+,p_message_language=>'sl'
+,p_message_text=>'Uveljavi'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4333588934024612)
+,p_name=>'APEXIR_COLUMN_HEADING_MENU'
+,p_message_language=>'sl'
+,p_message_text=>'Meni za naziv stolpca'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4333826181024612)
+,p_name=>'APEXIR_COMPARISON_IS_NULL'
+,p_message_language=>'sl'
+,p_message_text=>'prazna vrednost (null)'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4334194344024612)
+,p_name=>'APEXIR_COUNT_DISTINCT'
+,p_message_language=>'sl'
+,p_message_text=>'Število različnih'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4334424459024612)
+,p_name=>'APEXIR_DELETE_CHECKED'
+,p_message_language=>'sl'
+,p_message_text=>'Izbriši označene'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4334725243024612)
+,p_name=>'APEXIR_DELETE_REPORT'
+,p_message_language=>'sl'
+,p_message_text=>'Izbriši poročilo'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4335051966024613)
+,p_name=>'APEXIR_DESCENDING'
+,p_message_language=>'sl'
+,p_message_text=>'Padajoče'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4335302897024613)
+,p_name=>'APEXIR_DESCRIPTION'
+,p_message_language=>'sl'
+,p_message_text=>'Opis'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4335642115024613)
+,p_name=>'APEXIR_EXPRESSION'
+,p_message_language=>'sl'
+,p_message_text=>'Izraz'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4335954498024613)
+,p_name=>'APEXIR_FORMAT'
+,p_message_language=>'sl'
+,p_message_text=>'Oblika'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4336219358024613)
+,p_name=>'APEXIR_FUNCTION'
+,p_message_language=>'sl'
+,p_message_text=>'Funkcija'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4336520943024613)
+,p_name=>'APEXIR_GO'
+,p_message_language=>'sl'
+,p_message_text=>'Potrdi'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4336867812024613)
+,p_name=>'APEXIR_HCOLUMN'
+,p_message_language=>'sl'
+,p_message_text=>'Horizontalni stolpec'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4337109218024613)
+,p_name=>'APEXIR_HELP_DETAIL_VIEW'
+,p_message_language=>'sl'
+,p_message_text=>'Za vpogled podrobnosti enega zapisa, pritisnite na ikono v vrstici, ki jo želite pogledati. Če je pogled omogočen, je ikona vedno v prvem stolpcu. Glede na nastavitve interaktivnega poročila, je lahko vpogled v en zapis prikazan kot standardni vpogle'
+||'d ali pa se prikaže kot prilagojena stran, ki omogoča urejanje.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4337441106024614)
+,p_name=>'APEXIR_HELP_HIGHLIGHT'
+,p_message_language=>'sl'
+,p_message_text=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'Osvetljevanje vam omogoča definiranje filtra. Vrstice, ki ustrezajo kriterijem v filtru so osvetljene z lastnostmi, ki so povezane s tem filtrom. ',
+'<p/> ',
+'<ul><li><b>Ime</b> se uporablja samo za prikaz.</li> ',
+'<li><b>Sekvenca</b> vrstni red v katerem se upoštevajo pravila.</li> ',
+'<li><b>Omogočeno</b> ali je pravilo omogočeno ali onemogočeno.</li> ',
+'<li><b>Tip osvetljevanja</b> določa ali naj bo vrstica oz. celica osvetljena. Če je izbrana celica, potem se osvetli vrstica, ki se jo naslavlja v pogoju osvetljevanja.</li> ',
+'<li><b>Barva ozadja</b> je nova barva ozadja področja, ki se ga osvetljuje.</li> ',
+'<li><b>Barva teksta</b> je nova barva teksta v področju, ki se ga osvetljuje.</li> ',
+'<li><b>Pogoj osvetljevanja</b> določi pogoj filtriranja.</li></ul>'))
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4337751846024614)
+,p_name=>'APEXIR_SPACE_AS_IN_ONE_EMPTY_STRING'
+,p_message_language=>'sl'
+,p_message_text=>'presledek'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4338028759024614)
+,p_name=>'APEXIR_STATUS'
+,p_message_language=>'sl'
+,p_message_text=>'Status'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4338360271024614)
+,p_name=>'APEXIR_TIME_DAYS'
+,p_message_language=>'sl'
+,p_message_text=>'dni'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4338691790024614)
+,p_name=>'APEXIR_X_WEEKS'
+,p_message_language=>'sl'
+,p_message_text=>'%0 tednov'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4338995804024614)
+,p_name=>'APEXIR_YELLOW'
+,p_message_language=>'sl'
+,p_message_text=>'rumeno'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4339299269024614)
+,p_name=>'FLOW.VALIDATION_ERROR'
+,p_message_language=>'sl'
+,p_message_text=>'Prišlo je do %0 napak.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4339500102024614)
+,p_name=>'OUT_OF_RANGE'
+,p_message_language=>'sl'
+,p_message_text=>'Zahtevan sklop podatkov je napačen, izvorni podatki poročila so bili spremenjeni.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4339834054024615)
+,p_name=>'REPORT_TOTAL'
+,p_message_language=>'sl'
+,p_message_text=>'vsota poročila'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4340116157024615)
+,p_name=>'REPORTING_PERIOD'
+,p_message_language=>'sl'
+,p_message_text=>'Obdobje poročanja'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4340448456024615)
+,p_name=>'SINCE_HOURS_FROM_NOW'
+,p_message_language=>'sl'
+,p_message_text=>'%0 ur od sedaj'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4340709384024615)
+,p_name=>'SINCE_MONTHS_AGO'
+,p_message_language=>'sl'
+,p_message_text=>'pred %0 meseci'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4341056639024615)
+,p_name=>'SINCE_WEEKS_AGO'
+,p_message_language=>'sl'
+,p_message_text=>'pred %0 tedni'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4341396017024615)
+,p_name=>'APEX.ITEM_TYPE.YES_NO.YES_LABEL'
+,p_message_language=>'sl'
+,p_message_text=>'Da'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4341609735024615)
+,p_name=>'APEXIR_COMPUTATION_EXPRESSION'
+,p_message_language=>'sl'
+,p_message_text=>'Izraz za izračun.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4341995375024616)
+,p_name=>'APEXIR_HELP_PIVOT'
+,p_message_language=>'sl'
+,p_message_text=>'Določite lahko en pogled za vrtilno tabelo na shranjeno poročilo. Ko je enkrat določen, lahko preklapljate med pogledom za vrtilno tabelo in klasično obliko s pritiskom na ikono za vpogled v iskalni vrstici. Za kreiranje pogleda za vrtilno tabelo izb'
+||'erite: <p></p><ul> <li>stolpce, kij potrebujete za vrtilno tabelo</li> <li>stolpce na katerih se dela agregacija skupaj z želeno fukcijo (average, sum, count, itd.)</li> </ul>'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4342231095024616)
+,p_name=>'APEXIR_HELP_SEARCH_BAR_TEXTBOX'
+,p_message_language=>'sl'
+,p_message_text=>'<li><b>Tekstovno področje</b> omogoča vnos (neobčutljiv na velike in male črke) iskalnega kriterija (lahko se uporabi tudi nadomestne znake).</li> <li><b>Gumb Pojdi</b> Izvrši iskanje. Tipka Enter bo prav tako izvršila iskanje, vendar le v primeru da'
+||' je kurzor v področju za iskanje.</li>'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4342578148024616)
+,p_name=>'APEXIR_HELP_SEARCH_BAR_VIEW'
+,p_message_language=>'sl'
+,p_message_text=>'<li><b>Pogled Ikone</b> preklop med različni pogledi, če so definirani (ikona, poročilo, podrobno, graf, grupiranje in vrtilni pogled)</li>'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4342849359024616)
+,p_name=>'APEXIR_PIVOT_COLUMN_NOT_NULL'
+,p_message_language=>'sl'
+,p_message_text=>'Določiti je potrebno stolpce za vrtilno tabelo.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4343125480024616)
+,p_name=>'APEXIR_RENAME_DEFAULT_REPORT'
+,p_message_language=>'sl'
+,p_message_text=>'Preimenuj privzeto poročilo'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4343479164024616)
+,p_name=>'APEXIR_HELP_RESET'
+,p_message_language=>'sl'
+,p_message_text=>'Po nastavi poročilo nazaj na privzete nastavitve. Odstrani tudi vse prilagoditve, ki so bile narejene.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4343708161024616)
+,p_name=>'APEXIR_NEXT_YEAR'
+,p_message_language=>'sl'
+,p_message_text=>'Naslednje leto'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4344031636024616)
+,p_name=>'APEXIR_NO_COMPUTATION_DEFINED'
+,p_message_language=>'sl'
+,p_message_text=>'Izračun ni določen.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4344316527024617)
+,p_name=>'APEXIR_PERCENT_OF_TOTAL_COUNT_X'
+,p_message_language=>'sl'
+,p_message_text=>'Odstotek od skupnega seštevka %0 (%)'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4344695699024617)
+,p_name=>'APEXIR_PERCENT_TOTAL_COUNT'
+,p_message_language=>'sl'
+,p_message_text=>'Odstotek od skupne vsote'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4344955966024617)
+,p_name=>'APEXIR_PREVIOUS'
+,p_message_language=>'sl'
+,p_message_text=>'&lt;'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4345224783024617)
+,p_name=>'APEXIR_REMOVE_AGGREGATE'
+,p_message_language=>'sl'
+,p_message_text=>'Odstrani agregacijo'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4345532943024617)
+,p_name=>'APEXIR_REPORT_DOES_NOT_EXIST'
+,p_message_language=>'sl'
+,p_message_text=>'Poročilo ne obstaja.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4345800267024617)
+,p_name=>'APEXIR_REPORTS'
+,p_message_language=>'sl'
+,p_message_text=>'Poročila'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4346133057024617)
+,p_name=>'APEXIR_RESET_CONFIRM'
+,p_message_language=>'sl'
+,p_message_text=>'Obnovi poročilo na privzete nastavitve.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4346478729024617)
+,p_name=>'APEXIR_ROW_OF'
+,p_message_language=>'sl'
+,p_message_text=>'Vrstica %0 od %1'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4346799555024618)
+,p_name=>'APEXIR_HIGHLIGHT'
+,p_message_language=>'sl'
+,p_message_text=>'Poudarek'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4347015176024618)
+,p_name=>'APEXIR_IS_NOT_IN_THE_LAST'
+,p_message_language=>'sl'
+,p_message_text=>'%0 ni v zadnjem %1'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4347309445024618)
+,p_name=>'APEXIR_LABEL_AXIS_TITLE'
+,p_message_language=>'sl'
+,p_message_text=>'Naslov osi za Naziv'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4347607339024618)
+,p_name=>'APEXIR_MAX_QUERY_COST'
+,p_message_language=>'sl'
+,p_message_text=>'Poizvedba je ocenjena, kot da bo prekoračila vse dovoljene vire. Prosimo spremenite nastavitve vašega poročila in poskusite znova.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4347901616024618)
+,p_name=>'APEXIR_MEDIAN_X'
+,p_message_language=>'sl'
+,p_message_text=>'Mediana %0'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4348267801024618)
+,p_name=>'APEXIR_MIN_AGO'
+,p_message_language=>'sl'
+,p_message_text=>'%0 minut nazaj'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4348567861024618)
+,p_name=>'APEXIR_NEW_AGGREGATION'
+,p_message_language=>'sl'
+,p_message_text=>'Nova agregacija'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4348820541024618)
+,p_name=>'APEXIR_NEW_CATEGORY'
+,p_message_language=>'sl'
+,p_message_text=>'- Nova kategorija -'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4349101737024619)
+,p_name=>'APEXIR_SELECT_COLUMNS'
+,p_message_language=>'sl'
+,p_message_text=>'Izberi Stolpce'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4349453481024619)
+,p_name=>'APEXIR_SELECT_COLUMNS_FOOTER'
+,p_message_language=>'sl'
+,p_message_text=>'Stolpci za izračun imajo predpono *'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4349796389024619)
+,p_name=>'4150_COLUMN_NUMBER'
+,p_message_language=>'sl'
+,p_message_text=>'Stolpec %0'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4350056997024619)
+,p_name=>'APEX.DATEPICKER_VALUE_NOT_IN_YEAR_RANGE'
+,p_message_language=>'sl'
+,p_message_text=>'#LABEL# ni med dovoljeno vrednostjo leta od %0 do %1.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4350355533024619)
+,p_name=>'APEXIR_AGG_COUNT'
+,p_message_language=>'sl'
+,p_message_text=>'Število'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4350647208024619)
+,p_name=>'APEXIR_ALTERNATIVE'
+,p_message_language=>'sl'
+,p_message_text=>'Alternativa'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4350970297024619)
+,p_name=>'APEXIR_CANCEL'
+,p_message_language=>'sl'
+,p_message_text=>'Prekliči'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4351276284024620)
+,p_name=>'APEXIR_CHART_INITIALIZING'
+,p_message_language=>'sl'
+,p_message_text=>'Inicializiram...'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4351599932024620)
+,p_name=>'APEXIR_CHOOSE_DOWNLOAD_FORMAT'
+,p_message_language=>'sl'
+,p_message_text=>'Izberite obliko prenosa'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4351817319024620)
+,p_name=>'APEXIR_COMPARISON_CONTAINS'
+,p_message_language=>'sl'
+,p_message_text=>'vsebuje'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4352149890024620)
+,p_name=>'APEXIR_DETAIL_VIEW'
+,p_message_language=>'sl'
+,p_message_text=>'Poglej eno vrstico'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4352427422024620)
+,p_name=>'APEXIR_DISABLE'
+,p_message_language=>'sl'
+,p_message_text=>'Onemogoči'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4352757536024620)
+,p_name=>'APEXIR_DISPLAYED'
+,p_message_language=>'sl'
+,p_message_text=>'Prikazano'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4353057924024620)
+,p_name=>'APEXIR_EMAIL_SUBJECT'
+,p_message_language=>'sl'
+,p_message_text=>'Predmet'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4353324419024620)
+,p_name=>'APEXIR_ERROR'
+,p_message_language=>'sl'
+,p_message_text=>'Napaka'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4353615185024621)
+,p_name=>'APEXIR_EXPAND_COLLAPSE_ALT'
+,p_message_language=>'sl'
+,p_message_text=>'Razširi/Skrči'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4353914314024621)
+,p_name=>'APEXIR_FINDER_ALT'
+,p_message_language=>'sl'
+,p_message_text=>'Izberi stolpce za iskanje.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4354291603024621)
+,p_name=>'APEXIR_HELP_AGGREGATE'
+,p_message_language=>'sl'
+,p_message_text=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'Agregacije so matematični izračuni, ki se lahko izvedejo nad posameznim stolpcem. Agregacija se prikaže za vsakim prelomom ter na koncu poročila pod stolpcem za katerega je definiran.  ',
+'<p/> ',
+'<ul><li><b>Agregacija</b> omogoča urejanje predhodno definiranih agregacij.</li> ',
+'<li><b>Funkcija</b> je funkcija, ki bo izvedena (npr. SUM, MIN).</li> ',
+'<li><b>Stolpec</b> se uporablja za izbiro stolpca nad katerim bo narejena matematična funkcija. Prikazani so samo numerični stolpci.</li></ul>'))
+);
+end;
+/
+begin
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4354564328024621)
+,p_name=>'APEXIR_TEXT_COLOR'
+,p_message_language=>'sl'
+,p_message_text=>'Barva besedila'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4354808110024621)
+,p_name=>'APEXIR_VALID_COLOR'
+,p_message_language=>'sl'
+,p_message_text=>'Prosim vnesite veljavno barvo.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4355179039024621)
+,p_name=>'APEXIR_X_DAYS'
+,p_message_language=>'sl'
+,p_message_text=>'%0 dni'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4355429000024621)
+,p_name=>'APEXIR_YES'
+,p_message_language=>'sl'
+,p_message_text=>'Da'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4355737861024621)
+,p_name=>'IR_AS_DEFAULT_REPORT_SETTING'
+,p_message_language=>'sl'
+,p_message_text=>'Kot privzete nastavitve poročila'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4356025605024622)
+,p_name=>'IR_STAR'
+,p_message_language=>'sl'
+,p_message_text=>'Prikaže se samo razvijalcem'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4356382867024622)
+,p_name=>'PAGINATION.PREVIOUS_SET'
+,p_message_language=>'sl'
+,p_message_text=>'Prejšnji set'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4356666086024622)
+,p_name=>'SINCE_MINUTES_FROM_NOW'
+,p_message_language=>'sl'
+,p_message_text=>'%0 minut od sedaj'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4356939207024622)
+,p_name=>'SINCE_MONTHS_FROM_NOW'
+,p_message_language=>'sl'
+,p_message_text=>'%0 mesecev od sedaj'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4357270484024622)
+,p_name=>'WWV_FLOW_UTILITIES.OK'
+,p_message_language=>'sl'
+,p_message_text=>'V redu'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4357525557024622)
+,p_name=>'APEX.AUTHENTICATION.LOGIN_THROTTLE.COUNTER'
+,p_message_language=>'sl'
+,p_message_text=>'Prosimo počakajte <span id=apex_login_throttle_sec">%0</span> sekund za ponovno prijavo."'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4357877690024622)
+,p_name=>'APEX.ITEM_TYPE.YES_NO.INVALID_VALUE'
+,p_message_language=>'sl'
+,p_message_text=>'#LABEL# se mora ujemati z vrednostjo %0 in %1.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4358103239024623)
+,p_name=>'APEXIR_ADD_FUNCTION'
+,p_message_language=>'sl'
+,p_message_text=>'Dodaj funkcijo'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4358408751024623)
+,p_name=>'APEXIR_CHECK_ALL'
+,p_message_language=>'sl'
+,p_message_text=>'Označi vse'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4358792061024623)
+,p_name=>'APEXIR_COLUMN_N'
+,p_message_language=>'sl'
+,p_message_text=>'Stolpec %0'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4359096956024623)
+,p_name=>'APEXIR_EMAIL_REQUIRED'
+,p_message_language=>'sl'
+,p_message_text=>'Vpisati morate naslov elektronske pošte.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4359386410024623)
+,p_name=>'APEXIR_EMAIL_SUBJECT_REQUIRED'
+,p_message_language=>'sl'
+,p_message_text=>'E-pošta: Zadeva mora biti določena.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4359685679024623)
+,p_name=>'APEXIR_FUNCTION_N'
+,p_message_language=>'sl'
+,p_message_text=>'Funkcija %0'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4359918083024623)
+,p_name=>'APEXIR_GROUP_BY_MAX_ROW_CNT'
+,p_message_language=>'sl'
+,p_message_text=>'Največje število vrstic za grupacijo omejuje število vrstic v osnovi poizvedbi in ne število vrstic, ki so prikazane. Vaša osnovna poizvedba presega največje dovoljeno število vrstic (%0) za prikaz. Prosimo prilagoditev pogoje iskanja in s tem zmanjš'
+||'ajte število zapisov v osnovi poizvedbi.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4360244165024623)
+,p_name=>'APEXIR_INACTIVE_SETTINGS'
+,p_message_language=>'sl'
+,p_message_text=>'%0 neaktivnih nastavitev'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4360579774024624)
+,p_name=>'APEXIR_PIVOT_COLUMNS'
+,p_message_language=>'sl'
+,p_message_text=>'Vrtilni stolpci'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4360874066024624)
+,p_name=>'APEXIR_REPORT_ID_DOES_NOT_EXIST'
+,p_message_language=>'sl'
+,p_message_text=>'Shranjeno interaktivno poročilo št. %0 ne obstaja.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4361114617024624)
+,p_name=>'APEXIR_HELP_REPORT_SETTINGS'
+,p_message_language=>'sl'
+,p_message_text=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'Če prilagajte vaše interaktivno poročilo, bodo nastavitve prikazane pod iskalno vrstico in nad samim poročilom. Če shranite prirejena poročila, bodo le-ta prikazana v zavihkih. Do vaših alternativnih poročil lahko dostopate s klikom na zavihke. Pod z'
+||'avihki so prikazane nastavitve za trenutno poročilo. To področje lahko skrčite ali razširite s klikom na ikono na levi strani. ',
+'<p/> ',
+'Za vsako nastavitev poročila lahko: ',
+'<ul><li><b>Uredite</b> s klikom na ime.</li> ',
+'<li><b>Onemogočite/Omogočite</b> z nastavljanjem Omogoči/Onemogoči nastavitvenega polja . S tem lahko začasno izključite posamezno nastavitev.</li> ',
+'<li><b>Odstrani</b> s klikom na ikono odstrani. S tem permanetno odstranite nastavitev.</li></ul> ',
+'<p/> ',
+'Če ste narediti graf, lahko prekljapljate med poročilom in grafom tako da uporabite povezavi Pogled poročila in Pogled grafa na desni strani. Če pregledujete graf, potem lahko uporabite tudi možnost Urejanje grafa.'))
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4361413039024624)
+,p_name=>'APEXIR_NEXT_HOUR'
+,p_message_language=>'sl'
+,p_message_text=>'Naslednja ura'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4361745631024624)
+,p_name=>'APEXIR_NEXT_MONTH'
+,p_message_language=>'sl'
+,p_message_text=>'Naslednji mesec'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4362005700024624)
+,p_name=>'APEXIR_PERCENT_OF_TOTAL_SUM_X'
+,p_message_language=>'sl'
+,p_message_text=>'Odstotek od skupne vsote %0 (%)'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4362395199024624)
+,p_name=>'APEXIR_PIE'
+,p_message_language=>'sl'
+,p_message_text=>'Pita'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4362688364024624)
+,p_name=>'APEXIR_PRIMARY_REPORT'
+,p_message_language=>'sl'
+,p_message_text=>'Primarno poročilo'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4362971115024625)
+,p_name=>'APEXIR_REPORT'
+,p_message_language=>'sl'
+,p_message_text=>'Poročilo'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4363244869024625)
+,p_name=>'APEXIR_HELP_SORT'
+,p_message_language=>'sl'
+,p_message_text=>'Se uporablja za izbiro stolpcev po katerih se izvaja razvrščanje in za nastavljanje smeri razvrščanja(naraščajoče ali padajoče). Določite lahko tudi kje bodo prikazane prazne vrednosti - null (uporabite privzete nastavitve, jih prikazujte vedno na za'
+||'četku ali pa vedno na koncu razvrščanja). Izbrano razvrščanje je prikazano v poročilu desno od imen stolpcev.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4363537955024625)
+,p_name=>'APEXIR_HIGHLIGHT_WHEN'
+,p_message_language=>'sl'
+,p_message_text=>'Izpostavljanje ko'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4363819428024625)
+,p_name=>'APEXIR_LAST_X_YEARS'
+,p_message_language=>'sl'
+,p_message_text=>'Prejšnjih %0 let'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4364195061024625)
+,p_name=>'APEXIR_LAST_YEAR'
+,p_message_language=>'sl'
+,p_message_text=>'Prejšnje leto'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4364461667024625)
+,p_name=>'APEXIR_MOVE_ALL'
+,p_message_language=>'sl'
+,p_message_text=>'Premakni vse'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4364727623024625)
+,p_name=>'APEXIR_NEW_COMPUTATION'
+,p_message_language=>'sl'
+,p_message_text=>'Nov izračun'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4365055500024625)
+,p_name=>'APEXIR_SAVE_REPORT'
+,p_message_language=>'sl'
+,p_message_text=>'Shrani poročilo'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4365396044024626)
+,p_name=>'APEXIR_SAVED_REPORT'
+,p_message_language=>'sl'
+,p_message_text=>'Shranjena poročila'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4365690798024626)
+,p_name=>'APEXIR_SEARCH_REPORT'
+,p_message_language=>'sl'
+,p_message_text=>'Išči'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4365966878024626)
+,p_name=>'APEX.FILE_BROWSE.DOWNLOAD_LINK_TEXT'
+,p_message_language=>'sl'
+,p_message_text=>'Prenesi'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4366244112024626)
+,p_name=>'APEX.PAGE_ITEM_IS_REQUIRED'
+,p_message_language=>'sl'
+,p_message_text=>'Obvezen vnos'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4366567293024626)
+,p_name=>'APEXIR_AGG_MIN'
+,p_message_language=>'sl'
+,p_message_text=>'Minimum'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4366871422024626)
+,p_name=>'APEXIR_AGGREGATION'
+,p_message_language=>'sl'
+,p_message_text=>'Združevanje'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4367128349024626)
+,p_name=>'APEXIR_AND'
+,p_message_language=>'sl'
+,p_message_text=>'in'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4367430926024627)
+,p_name=>'APEXIR_BGCOLOR'
+,p_message_language=>'sl'
+,p_message_text=>'Barva ozadja'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4367704972024627)
+,p_name=>'APEXIR_BOTTOM'
+,p_message_language=>'sl'
+,p_message_text=>'Dno'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4368051491024627)
+,p_name=>'APEXIR_CALENDAR'
+,p_message_language=>'sl'
+,p_message_text=>'Koledar'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4368300413024627)
+,p_name=>'APEXIR_CHART'
+,p_message_language=>'sl'
+,p_message_text=>'Graf'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4368625896024627)
+,p_name=>'APEXIR_CHART_TYPE'
+,p_message_language=>'sl'
+,p_message_text=>'Tip grafikona'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4368972778024627)
+,p_name=>'APEXIR_COMPARISON_IS_IN_NEXT'
+,p_message_language=>'sl'
+,p_message_text=>'je vsebovan v naslednjem'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4369219206024627)
+,p_name=>'APEXIR_COMPUTATION_FOOTER_E1'
+,p_message_language=>'sl'
+,p_message_text=>'(B+C)*100'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4369532234024627)
+,p_name=>'APEXIR_COMPUTATION_FOOTER_E3'
+,p_message_language=>'sl'
+,p_message_text=>'CASE WHEN A = 10 THEN B + C ELSE B END'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4369832351024628)
+,p_name=>'APEXIR_CONTROL_BREAKS'
+,p_message_language=>'sl'
+,p_message_text=>'Prelomi'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4370166494024628)
+,p_name=>'APEXIR_COUNT_X'
+,p_message_language=>'sl'
+,p_message_text=>'Število %0'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4370423063024628)
+,p_name=>'APEXIR_DAILY'
+,p_message_language=>'sl'
+,p_message_text=>'Dnevno'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4370768362024628)
+,p_name=>'APEXIR_DATA_AS_OF'
+,p_message_language=>'sl'
+,p_message_text=>'Podatki poročila od %0 minut nazaj.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4371055907024628)
+,p_name=>'APEXIR_DATE'
+,p_message_language=>'sl'
+,p_message_text=>'Datum'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4371387674024628)
+,p_name=>'APEXIR_DISPLAY'
+,p_message_language=>'sl'
+,p_message_text=>'Prikaži'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4371680364024628)
+,p_name=>'APEXIR_DOWN'
+,p_message_language=>'sl'
+,p_message_text=>'Dol'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4371912931024629)
+,p_name=>'APEXIR_EDIT_FILTER'
+,p_message_language=>'sl'
+,p_message_text=>'Uredi filter'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4372210068024629)
+,p_name=>'APEXIR_EMAIL_BCC'
+,p_message_language=>'sl'
+,p_message_text=>'Skp'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4372532846024629)
+,p_name=>'APEXIR_EMAIL_BODY'
+,p_message_language=>'sl'
+,p_message_text=>'Telo'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4372863365024629)
+,p_name=>'APEXIR_GREEN'
+,p_message_language=>'sl'
+,p_message_text=>'zelena'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4373157190024629)
+,p_name=>'APEXIR_GROUP_BY_COLUMN'
+,p_message_language=>'sl'
+,p_message_text=>'Grupiraj po stolpcu'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4373477318024629)
+,p_name=>'APEXIR_HELP'
+,p_message_language=>'sl'
+,p_message_text=>'Pomoč'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4373703233024629)
+,p_name=>'APEXIR_HELP_CONTROL_BREAK'
+,p_message_language=>'sl'
+,p_message_text=>'Uporablja se za kreiranje prelomnih skupin nad enim ali večimi stolpci. To prestavi stolpce iz Interaktivnega Poročila in jih prikaže kot nadrejen zapis.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4374032186024629)
+,p_name=>'APEXIR_SUBSCRIPTION_ENDING'
+,p_message_language=>'sl'
+,p_message_text=>'Zaključek'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4374365422024630)
+,p_name=>'APEXIR_SUBSCRIPTION_STARTING_FROM'
+,p_message_language=>'sl'
+,p_message_text=>'Začni z'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4374690860024630)
+,p_name=>'APEXIR_UNSUPPORTED_DATA_TYPE'
+,p_message_language=>'sl'
+,p_message_text=>'nepodprt podatkovni tip'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4374947863024630)
+,p_name=>'APEXIR_VIEW_REPORT'
+,p_message_language=>'sl'
+,p_message_text=>'Poglej poročilo'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4375203003024630)
+,p_name=>'FLOW.SINGLE_VALIDATION_ERROR'
+,p_message_language=>'sl'
+,p_message_text=>'Prišlo je do 1 napake.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4375553699024630)
+,p_name=>'PAGINATION.NEXT_SET'
+,p_message_language=>'sl'
+,p_message_text=>'Naslednji set'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4375837600024630)
+,p_name=>'PAGINATION.PREVIOUS'
+,p_message_language=>'sl'
+,p_message_text=>'Predhodni'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4376168179024630)
+,p_name=>'RESET'
+,p_message_language=>'sl'
+,p_message_text=>'ponastavi paginacijo'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4376455398024630)
+,p_name=>'SAVED_REPORTS.PRIMARY.DEFAULT'
+,p_message_language=>'sl'
+,p_message_text=>'Primarno privzeto'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4376788752024631)
+,p_name=>'SINCE_YEARS_AGO'
+,p_message_language=>'sl'
+,p_message_text=>'pred %0 leti'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4377041627024631)
+,p_name=>'TOTAL'
+,p_message_language=>'sl'
+,p_message_text=>'Skupaj'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4377387065024631)
+,p_name=>'APEX.ITEM_TYPE.SLIDER.VALUE_NOT_MULTIPLE_OF_STEP'
+,p_message_language=>'sl'
+,p_message_text=>'#LABEL# ni večkratnik od %0.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4377666343024631)
+,p_name=>'APEX.ITEM_TYPE.YES_NO.NO_LABEL'
+,p_message_language=>'sl'
+,p_message_text=>'Ne'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4377903597024631)
+,p_name=>'APEXIR_ADD_ROW_COLUMN'
+,p_message_language=>'sl'
+,p_message_text=>'Dodaj vrstico stolpec'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4378207085024631)
+,p_name=>'APEXIR_CHART_MAX_ROW_CNT'
+,p_message_language=>'sl'
+,p_message_text=>'Največje število vrstic za graf omejuje število vrstic v osnovi poizvedbi in ne število vrstic, ki so prikazane. Vaša osnovna poizvedba presega največje dovoljeno število vrstic (%0) za prikaz. Prosimo prilagoditev pogoje iskanja in s tem zmanjšajte '
+||'število zapisov v osnovi poizvedbi.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4378583282024632)
+,p_name=>'APEXIR_HELP_FORMAT'
+,p_message_language=>'sl'
+,p_message_text=>'<p>Oblika (format) vam omogoča prilagoditev prikaza poročila</p> <ul><li>Razvrščanje</li> <li>Prelom</li> <li>Osvetljevanje</li> <li>Izračun</li> <li>Agregacija</li> <li>Graf</li> <li>Grupacija</li> <li>Vrtilna tabela</li> </ul>'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4378844500024632)
+,p_name=>'APEXIR_ROW_COLUMN_N'
+,p_message_language=>'sl'
+,p_message_text=>'Vrstica stolpec %0'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4379126192024632)
+,p_name=>'APEXIR_ROW_FILTER'
+,p_message_language=>'sl'
+,p_message_text=>'Filter vrstic'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4379495626024632)
+,p_name=>'APEXIR_SAVE_REPORT_DEFAULT'
+,p_message_language=>'sl'
+,p_message_text=>'Shrani poročilo *'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4379768690024632)
+,p_name=>'APEXIR_SUBSCRIPTION'
+,p_message_language=>'sl'
+,p_message_text=>'Naroči se'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4380060443024632)
+,p_name=>'APEXIR_UNGROUPED_COLUMN'
+,p_message_language=>'sl'
+,p_message_text=>'Stolpec z odstranjeno grupacijo'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4380370934024632)
+,p_name=>'APEXIR_NULL_SORTING'
+,p_message_language=>'sl'
+,p_message_text=>'Razvrščanje praznih vrednosti'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4380664329024632)
+,p_name=>'APEXIR_OPERATOR'
+,p_message_language=>'sl'
+,p_message_text=>'Operator'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4380921755024633)
+,p_name=>'APEXIR_REMOVE_FLASHBACK'
+,p_message_language=>'sl'
+,p_message_text=>'Odstrani nastavitev za vrnitev v preteklost (Flashback)'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4381206260024633)
+,p_name=>'APEXIR_REPORT_VIEW'
+,p_message_language=>'sl'
+,p_message_text=>'&lt; Pogled poročila'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4381554123024633)
+,p_name=>'APEXIR_HIGHLIGHT_TYPE'
+,p_message_language=>'sl'
+,p_message_text=>'Tip izpostavljanja'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4381805340024633)
+,p_name=>'APEXIR_LABEL'
+,p_message_language=>'sl'
+,p_message_text=>'Oznaka'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4382172494024633)
+,p_name=>'APEXIR_LAST_DAY'
+,p_message_language=>'sl'
+,p_message_text=>'Zadnji dan'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4382462710024633)
+,p_name=>'APEXIR_LAST_X_DAYS'
+,p_message_language=>'sl'
+,p_message_text=>'Zadnjih %0 dni'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4382706094024633)
+,p_name=>'APEXIR_NEXT'
+,p_message_language=>'sl'
+,p_message_text=>'&gt;'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4383097832024633)
+,p_name=>'APEXIR_SEARCH'
+,p_message_language=>'sl'
+,p_message_text=>'Iskanje'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4383309376024634)
+,p_name=>'APEX.DATEPICKER_VALUE_LESS_MIN_DATE'
+,p_message_language=>'sl'
+,p_message_text=>'#LABEL# je manjši od navedenega najmanjšega datuma %0.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4383676790024634)
+,p_name=>'APEX.NUMBER_FIELD.VALUE_INVALID2'
+,p_message_language=>'sl'
+,p_message_text=>'#LABEL# ni pravilne numerične oblike %0 (Npr, %1).'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4383934648024634)
+,p_name=>'APEXIR_3D'
+,p_message_language=>'sl'
+,p_message_text=>'3D'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4384265219024634)
+,p_name=>'APEXIR_ACTIONS_MENU'
+,p_message_language=>'sl'
+,p_message_text=>'Meni akcij'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4384558756024634)
+,p_name=>'APEXIR_AGGREGATE_DESCRIPTION'
+,p_message_language=>'sl'
+,p_message_text=>'Agregacije so prikazane po vsakem kontrolnem prelomu in na koncu poročila.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4384810498024634)
+,p_name=>'APEXIR_ALL'
+,p_message_language=>'sl'
+,p_message_text=>'Vse'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4385172964024634)
+,p_name=>'APEXIR_ASCENDING'
+,p_message_language=>'sl'
+,p_message_text=>'Naraščajoče'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4385432463024634)
+,p_name=>'APEXIR_AVERAGE_X'
+,p_message_language=>'sl'
+,p_message_text=>'Povprečje %0'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4385758325024635)
+,p_name=>'APEXIR_BLUE'
+,p_message_language=>'sl'
+,p_message_text=>'modra'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4386016188024635)
+,p_name=>'APEXIR_CATEGORY'
+,p_message_language=>'sl'
+,p_message_text=>'Kategorija'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4386393090024635)
+,p_name=>'APEXIR_CELL'
+,p_message_language=>'sl'
+,p_message_text=>'Polje'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4386616280024635)
+,p_name=>'APEXIR_COMPARISON_IS_IN_LAST'
+,p_message_language=>'sl'
+,p_message_text=>'je v zadnjem'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4386921494024635)
+,p_name=>'APEXIR_COMPARISON_ISNOT_IN_LAST'
+,p_message_language=>'sl'
+,p_message_text=>'ni v zadnjem'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4387233644024635)
+,p_name=>'APEXIR_COMPARISON_LIKE'
+,p_message_language=>'sl'
+,p_message_text=>'kot (like)'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4387566866024635)
+,p_name=>'APEXIR_COMPARISON_NOT_IN'
+,p_message_language=>'sl'
+,p_message_text=>'ne vsebuje'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4387880579024635)
+,p_name=>'APEXIR_COMPUTE'
+,p_message_language=>'sl'
+,p_message_text=>'Izračunaj'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4388115806024636)
+,p_name=>'APEXIR_DEFAULT'
+,p_message_language=>'sl'
+,p_message_text=>'Privzeto'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4388492550024636)
+,p_name=>'APEXIR_DISABLED'
+,p_message_language=>'sl'
+,p_message_text=>'Onemogočeno'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4388735249024636)
+,p_name=>'APEXIR_DISPLAY_IN_REPORT'
+,p_message_language=>'sl'
+,p_message_text=>'Prikaži v poročilu'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4389001727024636)
+,p_name=>'APEXIR_DO_NOT_AGGREGATE'
+,p_message_language=>'sl'
+,p_message_text=>'- Ne agregiraj -'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4389331897024636)
+,p_name=>'APEXIR_EDIT_ALTERNATIVE_DEFAULT'
+,p_message_language=>'sl'
+,p_message_text=>'Uredi Privzeto Alternativo'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4389611563024636)
+,p_name=>'APEXIR_EDIT_CHART2'
+,p_message_language=>'sl'
+,p_message_text=>'Uredi grafikon'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4389983112024636)
+,p_name=>'APEXIR_EMAIL_ADDRESS'
+,p_message_language=>'sl'
+,p_message_text=>'E-pošta'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4390258172024636)
+,p_name=>'APEXIR_FLASHBACK'
+,p_message_language=>'sl'
+,p_message_text=>'Zavrti nazaj'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4390553086024637)
+,p_name=>'APEXIR_GROUP_BY'
+,p_message_language=>'sl'
+,p_message_text=>'Grupiraj po'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4390877761024637)
+,p_name=>'APEXIR_SORT_DESCENDING'
+,p_message_language=>'sl'
+,p_message_text=>'Razvrsti padajoče'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4391175519024637)
+,p_name=>'APEXIR_TIME_HOURS'
+,p_message_language=>'sl'
+,p_message_text=>'ure'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4391484804024637)
+,p_name=>'APEXIR_TIME_MINS'
+,p_message_language=>'sl'
+,p_message_text=>'minut'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4391776822024637)
+,p_name=>'APEXIR_VALID_FORMAT_MASK'
+,p_message_language=>'sl'
+,p_message_text=>'Prosimo vnesite veljavno obliko.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4392075144024637)
+,p_name=>'APEXIR_VALUE_AXIS_TITLE'
+,p_message_language=>'sl'
+,p_message_text=>'Naslov osi za Vrednost'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4392341648024637)
+,p_name=>'APEXIR_WEEK'
+,p_message_language=>'sl'
+,p_message_text=>'Teden'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4392648506024637)
+,p_name=>'APEXIR_WEEKLY'
+,p_message_language=>'sl'
+,p_message_text=>'Tedensko'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4392935327024638)
+,p_name=>'APEXIR_X_MONTHS'
+,p_message_language=>'sl'
+,p_message_text=>'%0 mesecev'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4393209258024638)
+,p_name=>'APEXIR_X_YEARS'
+,p_message_language=>'sl'
+,p_message_text=>'%0 let'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4393516612024638)
+,p_name=>'SINCE_NOW'
+,p_message_language=>'sl'
+,p_message_text=>'Sedaj'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4393846007024638)
+,p_name=>'APEXIR_ADD_GROUP_BY_COLUMN'
+,p_message_language=>'sl'
+,p_message_text=>'Dodaj stolpec za grupacijo'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4394132085024638)
+,p_name=>'APEXIR_ADD_PIVOT_COLUMN'
+,p_message_language=>'sl'
+,p_message_text=>'Dodaj Pivot Stolpec'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4394428739024638)
+,p_name=>'APEXIR_CHART_LABEL_NOT_NULL'
+,p_message_language=>'sl'
+,p_message_text=>'Oznaka grafa mora biti določena'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4394771271024638)
+,p_name=>'APEXIR_COLUMN_FILTER'
+,p_message_language=>'sl'
+,p_message_text=>'Filter...'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4395018957024638)
+,p_name=>'APEXIR_EDIT_PIVOT'
+,p_message_language=>'sl'
+,p_message_text=>'Uredi pivot'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4395367350024639)
+,p_name=>'APEXIR_GROUP_BY_COL_NOT_NULL'
+,p_message_language=>'sl'
+,p_message_text=>'Stolpec za grupacijo mora biti opredeljen'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4395611261024639)
+,p_name=>'APEXIR_HELP_GROUP_BY'
+,p_message_language=>'sl'
+,p_message_text=>'Določite lahko en pogleg za grupacijo na shranjeno poročilo. Ko je enkrat določen, lahko preklapljate med pogledom z grupacijo in klasično obliko s pritiskom na ikono za vpogled v iskalni vrstici. Za kreiranje pogleda z grupacijo izberite:  <p></p><u'
+||'l> <li>stolpce na katerih se dela grupacija</li> <li>stolpce na katerih se dela agregacija skupaj z želeno fukcijo (average, sum, count, itd.)</li> </ul>'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4395904551024639)
+,p_name=>'APEXIR_HELP_SEARCH_BAR_REPORTS'
+,p_message_language=>'sl'
+,p_message_text=>'<li><b>Poročila</b> prikazujejo privzete alternative in shranjena privatna in javna poročila.</li>'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4396200351024639)
+,p_name=>'APEXIR_PIVOT'
+,p_message_language=>'sl'
+,p_message_text=>'Dodaj vrtilni stolpec'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4396557553024639)
+,p_name=>'APEXIR_PIVOT_AGG_NOT_ON_ROW_COL'
+,p_message_language=>'sl'
+,p_message_text=>'Ne morete narediti agregacije na stolpcu, ki je izbran kot vrstica stolpec.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4396885741024639)
+,p_name=>'APEXIR_PIVOT_COLUMN_N'
+,p_message_language=>'sl'
+,p_message_text=>'Vrtilni stolpec %0'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4397133904024639)
+,p_name=>'APEXIR_ROW_COLUMNS'
+,p_message_language=>'sl'
+,p_message_text=>'Vrstica stolpcev'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4397432198024640)
+,p_name=>'APEXIR_SELECT_ROW'
+,p_message_language=>'sl'
+,p_message_text=>'Izberi vrstico'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4397786345024640)
+,p_name=>'APEXIR_SELECT_ROW_COLUMN'
+,p_message_language=>'sl'
+,p_message_text=>'- Izberi Vrstica Stolpec -'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4398033977024640)
+,p_name=>'APEXIR_TABLE_SUMMARY'
+,p_message_language=>'sl'
+,p_message_text=>'Regija = %0, Poročilo = %1, Pogled = %2, Prikazano vrstic začetek = %3, Prikazano vrstic konec = %4, Skupno vrstic = %5'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4398396253024640)
+,p_name=>'APEXIR_TOGGLE'
+,p_message_language=>'sl'
+,p_message_text=>'Preklop'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4398682603024640)
+,p_name=>'APEXIR_HELP_SEARCH_BAR'
+,p_message_language=>'sl'
+,p_message_text=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'Na vrhu vsake strani s poročilom je iskalno področje. To področje omogoča: ',
+'<p/> ',
+'<ul><li><b>Izbor ikone stolpcev</b> omogoča določitev po katerem stolpcu se išče ( lahko tudi po vseh).</li> ',
+'<li><b>Tekstovno področje</b> omogoča vnos iskalnih kriterijev (iskanje ni občutljivo na velike in male črke, prav tako ni potrebno uporabljati nadomestnih znakov).</li> ',
+'<li><b>Vrstice</b> izbor števila vrstic, ki bodo prikazane na posamezno stran.</li> ',
+'<li><b>[Pojdi] gumb</b> izvede iskanje.</li> ',
+'<li><b>Ikona meni akcij</b> prikaže akcijski meni (opisan kasneje).</li></ul> ',
+'Vse možnosti niso na voljo za vsako poročilo.'))
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4398937688024640)
+,p_name=>'APEXIR_NEXT_X_DAYS'
+,p_message_language=>'sl'
+,p_message_text=>'Naslednjih %0 dni'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4399228093024640)
+,p_name=>'APEXIR_NEXT_X_HOURS'
+,p_message_language=>'sl'
+,p_message_text=>'Naslednje %0 ur'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4399528962024640)
+,p_name=>'APEXIR_NO'
+,p_message_language=>'sl'
+,p_message_text=>'Ne'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4399814191024641)
+,p_name=>'APEXIR_NO_COLUMN_INFO'
+,p_message_language=>'sl'
+,p_message_text=>'Ni informacij o stolpcu.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4400132477024641)
+,p_name=>'APEXIR_NONE'
+,p_message_language=>'sl'
+,p_message_text=>'- Brez -'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4400460991024641)
+,p_name=>'APEXIR_NULLS_ALWAYS_LAST'
+,p_message_language=>'sl'
+,p_message_text=>'Prazne vrednosti na koncu'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4400708814024641)
+,p_name=>'APEXIR_REMOVE_ALL'
+,p_message_language=>'sl'
+,p_message_text=>'Odstrani vse'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4401002706024641)
+,p_name=>'APEXIR_ROW'
+,p_message_language=>'sl'
+,p_message_text=>'Vrstica'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4401375109024641)
+,p_name=>'APEXIR_KEYPAD'
+,p_message_language=>'sl'
+,p_message_text=>'Tipkovnica'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4401615673024641)
+,p_name=>'APEXIR_LAST_HOUR'
+,p_message_language=>'sl'
+,p_message_text=>'Zadnja ura'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4401982596024641)
+,p_name=>'APEXIR_MOVE'
+,p_message_language=>'sl'
+,p_message_text=>'Premakni'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4402228856024642)
+,p_name=>'APEXIR_ROWS'
+,p_message_language=>'sl'
+,p_message_text=>'Vrstice'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4402570559024642)
+,p_name=>'APEXIR_SAVE'
+,p_message_language=>'sl'
+,p_message_text=>'Shrani'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4402868011024642)
+,p_name=>'APEX.NUMBER_FIELD.VALUE_NOT_BETWEEN_MIN_MAX'
+,p_message_language=>'sl'
+,p_message_text=>'#LABEL# ni med vrednostjo od %0 do %1.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4403138773024642)
+,p_name=>'APEXIR_COMPARISON_IN'
+,p_message_language=>'sl'
+,p_message_text=>'v'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4403405900024642)
+,p_name=>'APEXIR_COMPARISON_IS_NOT_NULL'
+,p_message_language=>'sl'
+,p_message_text=>'ni prazna vrednost (not null)'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4403799380024642)
+,p_name=>'APEXIR_COMPUTATION'
+,p_message_language=>'sl'
+,p_message_text=>'Izračun'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4404095977024642)
+,p_name=>'APEXIR_DEFAULT_REPORT_TYPE'
+,p_message_language=>'sl'
+,p_message_text=>'Privzeti tip poročila'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4404325664024642)
+,p_name=>'APEXIR_DELETE_CONFIRM'
+,p_message_language=>'sl'
+,p_message_text=>'Želite izbrisati nastavitve za poročilo?'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4404642620024643)
+,p_name=>'APEXIR_DELETE_CONFIRM_JS_DIALOG'
+,p_message_language=>'sl'
+,p_message_text=>'Želite nadaljevati z operacijo brisanja?'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4404939240024643)
+,p_name=>'APEXIR_EDIT_CHART'
+,p_message_language=>'sl'
+,p_message_text=>'Uredi nastavitve grafa'
+);
+end;
+/
+begin
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4405237143024643)
+,p_name=>'APEXIR_EMAIL_FREQUENCY'
+,p_message_language=>'sl'
+,p_message_text=>'Frekvenca'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4405514377024643)
+,p_name=>'APEXIR_EMAIL_SEE_ATTACHED'
+,p_message_language=>'sl'
+,p_message_text=>'Glej prilogo.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4405861244024643)
+,p_name=>'APEXIR_FILTER'
+,p_message_language=>'sl'
+,p_message_text=>'Filter'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4406131927024643)
+,p_name=>'APEXIR_FILTERS'
+,p_message_language=>'sl'
+,p_message_text=>'Filtri'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4406492824024643)
+,p_name=>'APEXIR_HELP_ACTIONS_MENU'
+,p_message_language=>'sl'
+,p_message_text=>'Akcijski meni se uporablja za prilagajanje prikaza vašega interaktivnega poročila.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4406708390024643)
+,p_name=>'APEXIR_HELP_CHART'
+,p_message_language=>'sl'
+,p_message_text=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'V interaktivno poročilo lahko vključite en graf. Ko je graf definiran, lahko preklapljate med grafom in poročilom, tako da uporabite povezave pod iskalno vrstico. ',
+'<p/> ',
+'<ul><li><b>Tip grafa</b> določa tip grafa, ki ga vključujete. Izberite med horizontalnimi stolpci, vertikalnimi stolpci, pito ali linijami</li> ',
+'<li><b>Oznaka</b> omogoča izbiro stolpca, ki bo uporabljen kot Oznaka.</li> ',
+'<li><b>Naziv osi za Oznako</b> je naslov, ki bo prikazan na osi povezani s stolpcem izbranim za Oznako. Pri tipu grafa pita, ta nastavitev ni možna.</li> ',
+'<li><b>Vrednost</b> omogoča izbiro stolpca, ki se uporablja za Vrednost. Če je vaša funkcija COUNT, potem ni potrebno da izberete vrednost.</li> ',
+'<li><b>Naziv osi za Vrednost</b> je naslov, ki bo prikazan na osi povezani s stolpcem izbranim za Vrednost. Pri tipu grafa pita, ta nastavitev ni možna.</li> ',
+'<li><b>Funkcija</b> je opcijska funkcija, ki se lahko uporabi na stolpcu izbranim za Vrednost.</li></ul>'))
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4407069236024644)
+,p_name=>'APEXIR_HELP_COMPUTE'
+,p_message_language=>'sl'
+,p_message_text=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'Izračuni omogočajo dodajanje izračunljivih stolpcev. Izračun je lahko matematičen (npr. NBR_HOURS/24) ali standardna Oracle funkcija, ki se jo aplicira na obstoječe stolpce (npr. TO_DATE) ',
+'<p/> ',
+'<ul><li><b>Izračun</b> omogoča urejanje predhodno definiranih izračunov.</li> ',
+'<li><b>Naslov stolpca</b> je naslov novega stolpca.</li> ',
+'<li><b>Oblika maske</b> je Oracle oblika maske, ki se jo določi za stolpec (npr. S9999).</li> ',
+'<li><b>Izračun</b> je izračun, ki se bo naredil. Znotraj izračuna se stolpci naslavljajo po psevdonimu, ki se uporablja za prikaz.</li> ',
+'</ul> ',
+'<p/> ',
+'Pod izračunom se nahaja seznam stolpcev, ki so prikazani z njihovimi psevdonimi. Pritisk na ime stolpca, bo prenesel stolpec v izračun. Poleg izračuna se nahaja tipkovnica. To so bližnjice do pogosto uporabljenih tipk. Na skrajni desni se nahajajo fu'
+||'nkcije. ',
+'<p/> ',
+'Primer izračuna za prikaz skupne kompenzacije: ',
+'<p/> ',
+'<pre>CASE WHEN A = ''SALES'' THEN B + C ELSE B END</pre> ',
+'(kjer je A ORGANIZACIJA, B PLAČA in C PROVIZIJA)'))
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4407302755024644)
+,p_name=>'APEXIR_HELP_FLASHBACK'
+,p_message_language=>'sl'
+,p_message_text=>'Poizvedba v preteklost (Flashback Query) omogoča vpogled v podatke, kot so obstajali v določeni točki v preteklosti. Privzeta nastavitev je 3 ure, dejanska nastavitev pa je odvisna od vsake posamezne baze.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4407636808024644)
+,p_name=>'APEXIR_SELECT_SORT_COLUMN'
+,p_message_language=>'sl'
+,p_message_text=>'- Izberite stolpec za razvrščanje -'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4407963579024644)
+,p_name=>'APEXIR_SELECT_VALUE'
+,p_message_language=>'sl'
+,p_message_text=>'Izberi vrednost'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4408286391024644)
+,p_name=>'APEXIR_TIME_WEEKS'
+,p_message_language=>'sl'
+,p_message_text=>'tedni'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4408591906024644)
+,p_name=>'APEXIR_UP'
+,p_message_language=>'sl'
+,p_message_text=>'Gor'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4408834120024644)
+,p_name=>'APEXIR_VALUE_REQUIRED'
+,p_message_language=>'sl'
+,p_message_text=>'Obvezna vrednost'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4409178930024645)
+,p_name=>'APEXIR_WORKING_REPORT'
+,p_message_language=>'sl'
+,p_message_text=>'Delovno poročilo'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4409484867024645)
+,p_name=>'INVALID_CREDENTIALS'
+,p_message_language=>'sl'
+,p_message_text=>'Napačno uporabniško ime ali geslo.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4409794610024645)
+,p_name=>'REPORT'
+,p_message_language=>'sl'
+,p_message_text=>'Poročilo'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4410056444024645)
+,p_name=>'SINCE_DAYS_FROM_NOW'
+,p_message_language=>'sl'
+,p_message_text=>'%0 dni od sedaj'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4410351297024645)
+,p_name=>'SINCE_MINUTES_AGO'
+,p_message_language=>'sl'
+,p_message_text=>'%0 minut nazaj'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4410615278024645)
+,p_name=>'SINCE_YEARS_FROM_NOW'
+,p_message_language=>'sl'
+,p_message_text=>'čez %0 let'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4410916524024645)
+,p_name=>'WWV_FLOW_UTILITIES.CLOSE'
+,p_message_language=>'sl'
+,p_message_text=>'Zapri'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4411266845024646)
+,p_name=>'WWV_RENDER_REPORT3.FOUND_BUT_NOT_DISPLAYED'
+,p_message_language=>'sl'
+,p_message_text=>'Zahtevana minimalna vrstica: %0, najdene a ne prikazene vrstice: %1'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4411593958024646)
+,p_name=>'WWV_RENDER_REPORT3.X_Y_OF_Z'
+,p_message_language=>'sl'
+,p_message_text=>'vrstica/e %0 - %1 od %2'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4411806303024646)
+,p_name=>'WWV_RENDER_REPORT3.X_Y_OF_Z_2'
+,p_message_language=>'sl'
+,p_message_text=>'%0 - %1 od %2'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4412197096024646)
+,p_name=>'APEXIR_EDIT'
+,p_message_language=>'sl'
+,p_message_text=>'Uredi'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4412451944024646)
+,p_name=>'APEXIR_HELP_ROWS_PER_PAGE'
+,p_message_language=>'sl'
+,p_message_text=>'Nastavi število zapisov za prikaz na strani.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4412765413024646)
+,p_name=>'APEXIR_HELP_SEARCH_BAR_ACTIONS_MENU'
+,p_message_language=>'sl'
+,p_message_text=>'<li><b>Akcijski meni</b> omogoča prilagajanje poročila. Za podrobnosti poglejte spodnja navodila.</li>'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4413068984024646)
+,p_name=>'APEXIR_HELP_SEARCH_BAR_FINDER'
+,p_message_language=>'sl'
+,p_message_text=>'<li><b>Izbor ikone za stolpce</b> vam omogoča identifikacijo stolpec po katerih se išče (ali vseh).</li>'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4413328838024646)
+,p_name=>'APEXIR_HELP_SUBSCRIPTION'
+,p_message_language=>'sl'
+,p_message_text=>'Ko naredite naročanje, določite e-poštni naslov (ali več, ki so ločeni z vejico), zadevo, frekvenco ter začetni in končni datum. E-pošta bo vsebovala HTML različico interaktivnega poročila s trenutni podatki in nastavitvami, ki so bile aktivne ob čas'
+||'u ko se je naredilo naročanje.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4413696015024647)
+,p_name=>'APEXIR_INVALID_END_DATE'
+,p_message_language=>'sl'
+,p_message_text=>'Datum konca mora biti večji od datum začetka.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4413959925024647)
+,p_name=>'APEXIR_INVALID_FILTER_QUERY'
+,p_message_language=>'sl'
+,p_message_text=>'Neveljavna poizvedba za filter'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4414205667024647)
+,p_name=>'APEXIR_LABEL_PREFIX'
+,p_message_language=>'sl'
+,p_message_text=>'Predpona oznake'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4414566694024647)
+,p_name=>'APEXIR_PIVOT_MAX_ROW_CNT'
+,p_message_language=>'sl'
+,p_message_text=>'Največje število vrstic za vrtilno poizvedbo omejuje število vrstic v osnovi poizvedbi in ne število vrstic, ki so prikazane. Vaša osnovna poizvedba presega največje dovoljeno število vrstic (%0) za prikaz. Prosimo prilagoditev pogoje iskanja in s te'
+||'m zmanjšajte število zapisov v osnovi poizvedbi.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4414876267024647)
+,p_name=>'APEXIR_REMOVE_PIVOT'
+,p_message_language=>'sl'
+,p_message_text=>'Odstrani pivot'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4415199451024647)
+,p_name=>'APEXIR_ROW_COLUMN_NOT_NULL'
+,p_message_language=>'sl'
+,p_message_text=>'Vrstica stolpca mora biti določena.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4415409492024647)
+,p_name=>'APEXIR_SELECT_GROUP_BY_COLUMN'
+,p_message_language=>'sl'
+,p_message_text=>'- Izberite stolpec za grupacijo -'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4415721027024647)
+,p_name=>'APEXIR_SORT_ORDER'
+,p_message_language=>'sl'
+,p_message_text=>'Zaporedje razvrščanja'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4416020372024648)
+,p_name=>'APEXIR_HELP_SAVE_REPORT'
+,p_message_language=>'sl'
+,p_message_text=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'Shrani prirejeno poročilo tudi za prihodnjo uporabo. Navedete ime in po želji tudi opis. Poročilo se lahko naredi, da je vidno tudi javno (vsi uporabniki, ki lahko dostopajo do osnovne oblike poročila). Shranite lahko štiri tipe interaktivnih poročil'
+||': ',
+'Primarno privzeto (samo razvijalec). Primarno privzeto poročilo je poročilo, ki se prikaže prvotno. Primarna privzeta poročila se ne morejo preimenovati ali brisati. ',
+'Alternativno poročilo (samo razvijalec). Omogoča razvijalcu kreiranje večih oblik poročila. Samo razvijalec lahko shrani, preimenuje oz. briše alternativna poročila. ',
+'Javno poročilo (končni uporabnik). Končni uporabnik lahko shrani, spremeni oz. briše poročilo, če ga je sam naredil. Ostali končni uporabniki lahko poročilo gledajo ali shranijo poročilo pod drugim imenom. ',
+'Privatno poročilo (končni uporabnik). Samo uporabnik, ki je poročilo kreiral, lahko poročilo vidi, shrani, preimenuje oz. briše.  ',
+'Če shranite prirejena poročila, potem se vam v iskalni vrstici prikaže seznam vseh shranjenih poročil (če je ta možnost seveda omogočena).'))
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4416302114024648)
+,p_name=>'APEXIR_NEXT_WEEK'
+,p_message_language=>'sl'
+,p_message_text=>'Naslednji teden'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4416666116024648)
+,p_name=>'APEXIR_PRIVATE'
+,p_message_language=>'sl'
+,p_message_text=>'Zasebno'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4416939818024648)
+,p_name=>'APEXIR_PUBLIC'
+,p_message_language=>'sl'
+,p_message_text=>'Javno'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4417209665024648)
+,p_name=>'APEXIR_RED'
+,p_message_language=>'sl'
+,p_message_text=>'rdeče'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4417517613024648)
+,p_name=>'APEXIR_REMOVE'
+,p_message_language=>'sl'
+,p_message_text=>'Odstrani'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4417867015024648)
+,p_name=>'APEXIR_HIDE_COLUMN'
+,p_message_language=>'sl'
+,p_message_text=>'Skrij stolpec'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4418195834024648)
+,p_name=>'APEXIR_MAX_ROW_CNT'
+,p_message_language=>'sl'
+,p_message_text=>'Poizvedba vrne več kot %0 vrstic, prosim prilagodite pogoje iskanje, da bi zagotovili prikaz vseh podatkov.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4418478559024649)
+,p_name=>'APEXIR_MONTH'
+,p_message_language=>'sl'
+,p_message_text=>'Mesec'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4418759143024649)
+,p_name=>'APEXIR_NAME'
+,p_message_language=>'sl'
+,p_message_text=>'Ime'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4419042959024649)
+,p_name=>'APEXIR_NEXT_DAY'
+,p_message_language=>'sl'
+,p_message_text=>'Naslednji dan'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4419328343024649)
+,p_name=>'APEXIR_SAVE_DEFAULT_CONFIRM'
+,p_message_language=>'sl'
+,p_message_text=>'Trenutne nastavitve poročila so uporabljene privzeto za vse uporabnike.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4419618734024649)
+,p_name=>'APEXIR_SEARCH_BAR'
+,p_message_language=>'sl'
+,p_message_text=>'Iskalna vrstica'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4419962707024649)
+,p_name=>'APEX.DATEPICKER_VALUE_NOT_BETWEEN_MIN_MAX'
+,p_message_language=>'sl'
+,p_message_text=>'#LABEL# ni med vrednostjo od %0 do %1.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4420235109024649)
+,p_name=>'APEXIR_AGG_MAX'
+,p_message_language=>'sl'
+,p_message_text=>'Maksimum'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4420527444024649)
+,p_name=>'APEXIR_AGG_MODE'
+,p_message_language=>'sl'
+,p_message_text=>'Način'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4420876190024650)
+,p_name=>'APEXIR_AGGREGATE'
+,p_message_language=>'sl'
+,p_message_text=>'Agregiraj'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4421196520024650)
+,p_name=>'APEXIR_ALL_COLUMNS'
+,p_message_language=>'sl'
+,p_message_text=>'Vsi stolpci'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4421405954024650)
+,p_name=>'APEXIR_ALTERNATIVE_DEFAULT_NAME'
+,p_message_language=>'sl'
+,p_message_text=>'Privzeta Alternativa: %0'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4421740675024650)
+,p_name=>'APEXIR_COMPARISON_ISNOT_IN_NEXT'
+,p_message_language=>'sl'
+,p_message_text=>'ni vsebovano v naslednjem'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4422021692024650)
+,p_name=>'APEXIR_COMPARISON_NOT_LIKE'
+,p_message_language=>'sl'
+,p_message_text=>'ni kot (not like)'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4422310010024650)
+,p_name=>'APEXIR_COMPARISON_REGEXP_LIKE'
+,p_message_language=>'sl'
+,p_message_text=>'se ujame z regularnim izrazom'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4422611363024650)
+,p_name=>'APEXIR_COMPUTATION_FOOTER_E2'
+,p_message_language=>'sl'
+,p_message_text=>'INITCAP(B)||'', ''||INITCAP(C)'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4422925953024651)
+,p_name=>'APEXIR_CONTROL_BREAK'
+,p_message_language=>'sl'
+,p_message_text=>'Prelom'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4423240004024651)
+,p_name=>'APEXIR_DO_NOT_DISPLAY'
+,p_message_language=>'sl'
+,p_message_text=>'Ne prikaži'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4423578025024651)
+,p_name=>'APEXIR_EDIT_GROUP_BY'
+,p_message_language=>'sl'
+,p_message_text=>'Uredi grupacijo'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4423801297024651)
+,p_name=>'APEXIR_EMAIL_CC'
+,p_message_language=>'sl'
+,p_message_text=>'Kp'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4424118848024651)
+,p_name=>'APEXIR_ENABLED'
+,p_message_language=>'sl'
+,p_message_text=>'Omogočeno'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4424451799024651)
+,p_name=>'APEXIR_EXAMPLES'
+,p_message_language=>'sl'
+,p_message_text=>'Primeri'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4424723250024651)
+,p_name=>'APEXIR_EXCLUDE_NULL'
+,p_message_language=>'sl'
+,p_message_text=>'Izloči prazne vrednosti'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4425010287024651)
+,p_name=>'APEXIR_FILTER_EXPRESSION'
+,p_message_language=>'sl'
+,p_message_text=>'Filter izraz'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4425358643024651)
+,p_name=>'APEXIR_FILTER_TYPE'
+,p_message_language=>'sl'
+,p_message_text=>'Tip filtra'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4425698972024652)
+,p_name=>'APEXIR_FORMAT_MASK'
+,p_message_language=>'sl'
+,p_message_text=>'Oblika maske'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4425945969024652)
+,p_name=>'APEXIR_HELP_01'
+,p_message_language=>'sl'
+,p_message_text=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'Interaktivno poročilo prikaže v naprej določeno množico stolpcev. Poročilo se lahko nadaljnje prilagodi z začetnim filtrom, privzetim razvrščanjem, prelomom, osvetljevanjem, izračunom, agregatom in grafom.  Vsako interaktivno poročilo se lahko še nad'
+||'aljnje prilagaja. Rezultati se lahko pregledujejo, prenesejo k sebi, sama definicija pa se lahko shrani za kasnejšo uporabo. ',
+'<p/> ',
+'Interaktivno poročilo se lahko prilagaja v treh smereh: iskalna vrstica, akcijski meni in v meniju naslova stolpca.'))
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4426218821024652)
+,p_name=>'APEXIR_HELP_COLUMN_HEADING_MENU'
+,p_message_language=>'sl'
+,p_message_text=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'S pritiskom na katerikoli naslov stolpca se vam prikaže dodatni meni za ta stolpec. ',
+'<p/> ',
+'<ul><li><b>Ikona razvrsti naraščajoče</b> razvrsti poročilo v naraščajočem vrstnem redu tega stolpca.</li> ',
+'<li><b>Ikona razvrsti padajoče</b> razvrsti poročilo v padajočem vrstnem redu tega stolpca.</li> ',
+'<li><b>Skrij stolpec</b> skrije stolpec.</li> ',
+'<li><b>Prelom stolpca</b> naredim prelom na tem stolpcu. S tem se stolpec umakne iz samega poročila kot glavni zapis.</li> ',
+'<li><b>Informacija o stolpcu</b> pokaže dodatne informacije o stolpcu, če so na voljo.</li> ',
+'<li><b>Tekstovno področje</b> se uporablja za vnos iskalnega kriterija, ki ni občutljiv na velike in male črke (tudi ni potrebno uporabljati nadomestnih znakov). Ob vnašanju vrednosti se hkrati zmanjšuje seznam vrednosti na dnu menija. Lahko izberete'
+||' tudi vrednost iz spodnjega seznama. Izbrana vrednost bo naredila filter z uporabo ''='' (npr. stolpec = ''ABC''). Namesto tega, lahko pritisnete na ikono baterijske svetilke, kar vam bo naredilo filter z uporabo ''LIKE'' izraza (npr. stolpec LIKE ''%ABC%'')'
+||'.</li> ',
+'<li><b>Seznam unikatnih vrednosti</b> vsebuje prvih 500 unikatnih vrednosti, ki ustrezajo vašim filtrom. Če je stolpec datumskega tipa, se prikaže lista vrednosti z datumskimi razredi. Če izberete vrednost, se naredi filter z uporabo operatorja ''='' ('
+||'npr. stolpect = ''ABC'').</li></ul>'))
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4426549347024652)
+,p_name=>'APEXIR_SEQUENCE'
+,p_message_language=>'sl'
+,p_message_text=>'Zaporedje'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4426889245024652)
+,p_name=>'APEXIR_SORT_ASCENDING'
+,p_message_language=>'sl'
+,p_message_text=>'Razvrsti naraščajoče'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4427138689024652)
+,p_name=>'APEXIR_SORT_COLUMN'
+,p_message_language=>'sl'
+,p_message_text=>'Stolpec razvrščanja'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4427491431024652)
+,p_name=>'APEXIR_TIME_YEARS'
+,p_message_language=>'sl'
+,p_message_text=>'leta'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4427716186024653)
+,p_name=>'APEXIR_UNIQUE_COLUMN_HEADING'
+,p_message_language=>'sl'
+,p_message_text=>'Naziv stolpca mora biti unikaten.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4428007771024653)
+,p_name=>'APEXIR_VIEW_CHART'
+,p_message_language=>'sl'
+,p_message_text=>'Poglej grafikon'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4428383190024653)
+,p_name=>'APEXIR_VIEW_GROUP_BY'
+,p_message_language=>'sl'
+,p_message_text=>'Poglej grupacijo'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4428699431024653)
+,p_name=>'APEXIR_X_MINS'
+,p_message_language=>'sl'
+,p_message_text=>'%0 minut'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4428980596024653)
+,p_name=>'SINCE_SECONDS_AGO'
+,p_message_language=>'sl'
+,p_message_text=>'Pred %0 sekundami'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4429236034024653)
+,p_name=>'APEX.REGION.JQM_LIST_VIEW.LOAD_MORE'
+,p_message_language=>'sl'
+,p_message_text=>'Naloži več'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4429550476024653)
+,p_name=>'APEX.REGION.JQM_LIST_VIEW.SEARCH'
+,p_message_language=>'sl'
+,p_message_text=>'Išči'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4429834025024653)
+,p_name=>'APEXIR_INACTIVE_SETTING'
+,p_message_language=>'sl'
+,p_message_text=>'1 neaktivna nastavitev'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4430197936024653)
+,p_name=>'APEXIR_PIVOT_AGG_NOT_NULL'
+,p_message_language=>'sl'
+,p_message_text=>'Agregat mora biti določen.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4430429415024654)
+,p_name=>'APEXIR_REMOVE_GROUP_BY'
+,p_message_language=>'sl'
+,p_message_text=>'Odstrani grupacijo'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4430720469024654)
+,p_name=>'APEXIR_RPT_DISP_COL_EXCEED'
+,p_message_language=>'sl'
+,p_message_text=>'Število prikazan stolpec v poročilu je doseglo limit. Prosim izberite Izberite Stolpce v akcijskem meniju, da tako zmanjšate število prikazanih stolpcev.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4431004666024654)
+,p_name=>'APEXIR_NEXT_X_YEARS'
+,p_message_language=>'sl'
+,p_message_text=>'Naslednje %0 let'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4431349960024654)
+,p_name=>'APEXIR_NO_AGGREGATION_DEFINED'
+,p_message_language=>'sl'
+,p_message_text=>'Agregacije niso definirane.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4431555840024654)
+,p_name=>'APEXIR_NULLS_ALWAYS_FIRST'
+,p_message_language=>'sl'
+,p_message_text=>'Prazne vrednosti na začetku'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4431829604024654)
+,p_name=>'APEXIR_NUMERIC_FLASHBACK_TIME'
+,p_message_language=>'sl'
+,p_message_text=>'Čas vrnitve v preteklost mora biti numeričen.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4432121978024654)
+,p_name=>'APEXIR_ORANGE'
+,p_message_language=>'sl'
+,p_message_text=>'oranžna'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4432456480024654)
+,p_name=>'APEXIR_PERCENT_TOTAL_SUM'
+,p_message_language=>'sl'
+,p_message_text=>'Odstotek od skupne vsote'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4432777671024655)
+,p_name=>'APEXIR_PRIMARY'
+,p_message_language=>'sl'
+,p_message_text=>'Primarno'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4433056310024655)
+,p_name=>'APEXIR_REMOVE_FILTER'
+,p_message_language=>'sl'
+,p_message_text=>'Odstrani filter'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4433343476024655)
+,p_name=>'APEXIR_RENAME_REPORT'
+,p_message_language=>'sl'
+,p_message_text=>'Preimenuj poročilo'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4433615102024655)
+,p_name=>'APEXIR_INVALID'
+,p_message_language=>'sl'
+,p_message_text=>'Napačen'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4433944319024655)
+,p_name=>'APEXIR_IS_IN_THE_LAST'
+,p_message_language=>'sl'
+,p_message_text=>'%0 je v zadnjem %1'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4434221876024655)
+,p_name=>'APEXIR_IS_IN_THE_NEXT'
+,p_message_language=>'sl'
+,p_message_text=>'%0 je v naslednjem %1'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4434513748024655)
+,p_name=>'APEXIR_LAST_MONTH'
+,p_message_language=>'sl'
+,p_message_text=>'Prejšnji mesec'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4434831840024655)
+,p_name=>'APEXIR_LAST_WEEK'
+,p_message_language=>'sl'
+,p_message_text=>'Zadnji teden'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4435118529024656)
+,p_name=>'APEXIR_MONTHLY'
+,p_message_language=>'sl'
+,p_message_text=>'Mesečno'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4435492732024656)
+,p_name=>'APEXIR_MORE_DATA'
+,p_message_language=>'sl'
+,p_message_text=>'Več podatkov'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4435768435024656)
+,p_name=>'APEXIR_ROW_ORDER'
+,p_message_language=>'sl'
+,p_message_text=>'Zaporedje vrstic'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4436062627024656)
+,p_name=>'APEXIR_ROWS_PER_PAGE'
+,p_message_language=>'sl'
+,p_message_text=>'Zapisov na stran'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4436335971024656)
+,p_name=>'APEXIR_COLUMN'
+,p_message_language=>'sl'
+,p_message_text=>'Stolpec'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4436613360024656)
+,p_name=>'APEX.NUMBER_FIELD.VALUE_INVALID'
+,p_message_language=>'sl'
+,p_message_text=>'#LABEL# mora biti numerična.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4436936000024656)
+,p_name=>'APEX.NUMBER_FIELD.VALUE_LESS_MIN_VALUE'
+,p_message_language=>'sl'
+,p_message_text=>'#LABEL# je manjši od navedene najmanjše vrednosti %0.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4437249056024656)
+,p_name=>'APEXIR_CLEAR'
+,p_message_language=>'sl'
+,p_message_text=>'počisti'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4437590926024657)
+,p_name=>'APEXIR_COLUMNS'
+,p_message_language=>'sl'
+,p_message_text=>'Stolpci'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4437820062024657)
+,p_name=>'APEXIR_COMPARISON_DOESNOT_CONTAIN'
+,p_message_language=>'sl'
+,p_message_text=>'ne vsebuje'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4438111236024657)
+,p_name=>'APEXIR_DAY'
+,p_message_language=>'sl'
+,p_message_text=>'Dan'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4438423505024657)
+,p_name=>'APEXIR_DELETE'
+,p_message_language=>'sl'
+,p_message_text=>'Briši'
+,p_is_js_message=>true
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4438737070024657)
+,p_name=>'APEXIR_ENABLE_DISABLE_ALT'
+,p_message_language=>'sl'
+,p_message_text=>'Omogoči/Onemogoči'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4439055829024657)
+,p_name=>'APEXIR_FLASHBACK_DESCRIPTION'
+,p_message_language=>'sl'
+,p_message_text=>'Poizvedba v preteklost (Flashback Query) omogoča vpogled v podatke, kot so obstajali v določeni točki v preteklosti.'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4439355302024657)
+,p_name=>'APEXIR_FLASHBACK_ERROR_MSG'
+,p_message_language=>'sl'
+,p_message_text=>'Napaka pri izvedbi ukaza za vrnitev v preteklost (Flashback).'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4439663666024657)
+,p_name=>'APEXIR_FUNCTIONS'
+,p_message_language=>'sl'
+,p_message_text=>'Funkcije'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4439940805024658)
+,p_name=>'APEXIR_HELP_FILTER'
+,p_message_language=>'sl'
+,p_message_text=>'Se uporablja za dodajanje in spreminjaje pogojev (where clause) v poizvedbi. Naprej izberete stolpec (ni potrebno da je tudi prikazan), izberete iz liste standardnih Oracle operatorjev (=, !=, not in, between), in vnesete izraz za primerjanje. Izraz '
+||'je občutljiv na velike in male črke, pri tem pa lahko uporabljate tudi nadomestni znak ( npr. NAZIV like ''A%'').'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4440222995024658)
+,p_name=>'APEXIR_SELECT_FUNCTION'
+,p_message_language=>'sl'
+,p_message_text=>'- Izberi funkcijo -'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4440564621024658)
+,p_name=>'APEXIR_SUM_X'
+,p_message_language=>'sl'
+,p_message_text=>'Vsota %0'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4440882189024658)
+,p_name=>'APEXIR_TIME_MONTHS'
+,p_message_language=>'sl'
+,p_message_text=>'mesecev'
+);
+wwv_flow_api.create_message(
+ p_id=>wwv_flow_api.id(4441152481024658)
+,p_name=>'APEXIR_VIEW_DETAIL'
+,p_message_language=>'sl'
+,p_message_text=>'Poglej podrobnost'
+);
 end;
 /
 prompt --application/shared_components/globalization/dyntranslations
@@ -12051,7 +14918,7 @@ wwv_flow_api.create_page(
 ,p_first_item=>'NO_FIRST_ITEM'
 ,p_javascript_code=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'function backup_app(){',
-'  apex.confirm("This operation will create a backup of all translations (all languages) for select application.", {',
+'  apex.confirm("This operation will create a backup of all translations (all languages) for selected application.", {',
 '    request:"BACKUP_APP",',
 '    showWait:true',
 '  });',
@@ -12070,7 +14937,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160124144018'
+,p_last_upd_yyyymmddhh24miss=>'20160124153520'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(1685143686474340)
@@ -12306,6 +15173,104 @@ wwv_flow_api.create_page_da_action(
 ,p_action=>'NATIVE_REFRESH'
 ,p_affected_elements_type=>'REGION'
 ,p_affected_region_id=>wwv_flow_api.id(25838732388968980777)
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(2221302687168316)
+,p_process_sequence=>10
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Backup application''s translations'
+,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'declare ',
+'',
+'  l_id number;',
+'  ',
+'begin',
+'',
+'  for cur_app in (select',
+'                    distinct language_code',
+'                  from ',
+'                    APEX_APPLICATION_TRANSLATIONS ',
+'                  where ',
+'                    application_id = :P8_APP)',
+'  loop',
+'  ',
+'    --perform backup ',
+'    insert into tm_backup ',
+'      (app_id, language_code, backup_time, operation) ',
+'    values ',
+'      (:P8_APP, cur_app.language_code, sysdate, ''BACKUP - MANUAL'')',
+'    returning',
+'      id ',
+'    into ',
+'      l_id;',
+'',
+'    insert into tm_backup_messages ',
+'      (fk_tm_backup, translatable_message, message_text, language_code)',
+'    select',
+'      l_id, translatable_message, message_text, language_code',
+'    from ',
+'      APEX_APPLICATION_TRANSLATIONS ',
+'    where ',
+'      application_id = :P8_APP and ',
+'      language_code = cur_app.language_code;  ',
+'  ',
+'  end loop;',
+'  ',
+'end;'))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when=>'BACKUP_APP'
+,p_process_when_type=>'REQUEST_EQUALS_CONDITION'
+,p_process_success_message=>'Backup done.'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(2221459758168317)
+,p_process_sequence=>20
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Backup all applications translations'
+,p_process_sql_clob=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'declare ',
+'',
+'  l_id number;',
+'  ',
+'begin',
+'',
+'  for cur_app in (select',
+'                    distinct language_code, application_id',
+'                  from ',
+'                    APEX_APPLICATION_TRANSLATIONS ',
+'                  where ',
+'                    workspace = :TM_CURRENT_WORKSPACE)',
+'  loop',
+'  ',
+'    --perform backup ',
+'    insert into tm_backup ',
+'      (app_id, language_code, backup_time, operation) ',
+'    values ',
+'      (cur_app.application_id, cur_app.language_code, sysdate, ''BACKUP - MANUAL ALL'')',
+'    returning',
+'      id ',
+'    into ',
+'      l_id;',
+'',
+'    insert into tm_backup_messages ',
+'      (fk_tm_backup, translatable_message, message_text, language_code)',
+'    select',
+'      l_id, translatable_message, message_text, language_code',
+'    from ',
+'      APEX_APPLICATION_TRANSLATIONS ',
+'    where ',
+'      application_id = cur_app.application_id and ',
+'      language_code = cur_app.language_code;  ',
+'  ',
+'  end loop;',
+'  ',
+'end;'))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when=>'BACKUP_APP_ALL'
+,p_process_when_type=>'REQUEST_EQUALS_CONDITION'
+,p_process_success_message=>'Backup done.'
 );
 end;
 /
