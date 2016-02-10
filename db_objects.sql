@@ -4,36 +4,6 @@ CREATE SEQUENCE   "TM_DOC_MESSAGES_SEQ";
 CREATE SEQUENCE   "TM_PREP_MESSAGES_SEQ";
 CREATE SEQUENCE   "TM_LANGUAGES_SEQ";
 
-
-CREATE TABLE  "TM_ISO_CODES" 
-   ("CODE" VARCHAR2(10) NOT NULL ENABLE, 
-	"LANGUAGE" VARCHAR2(200) NOT NULL ENABLE, 
-	"CREATED_BY" VARCHAR2(255), 
-	"CREATED_ON" DATE, 
-	"UPDATED_BY" VARCHAR2(255), 
-	"UPDATED_ON" DATE, 
-	 CONSTRAINT "TM_ISO_CODES_PK" PRIMARY KEY ("CODE")
-   )
-/
-
-CREATE OR REPLACE TRIGGER  "TRG_BIU_TM_ISO_CODES" 
-  before insert or update on "TM_ISO_CODES"              
-  for each row 
-begin  
-
-  :new.code := lower(:new.code);
-
-  if inserting then
-    :new.CREATED_ON := sysdate;
-    :new.CREATED_BY := nvl(v('APP_USER'), user);
-  end if;
-  if updating then 
-    :new.UPDATED_ON := sysdate;
-    :new.UPDATED_BY := nvl(v('APP_USER'), user);
-  end if;
-end;
-/
-
 CREATE TABLE  "TM_LANGUAGES" 
    ("ID" NUMBER NOT NULL ENABLE,
     "CODE" VARCHAR2(10) NOT NULL ENABLE, 
@@ -240,6 +210,7 @@ end;
 ALTER TRIGGER  "TRG_BIU_TM_PREP_MESSAGE" ENABLE
 /
 
+/*
 CREATE OR REPLACE FORCE VIEW "TM_UPLOAD_TRANSLATE_APEX" ("MESSAGE_CODE", "ORIGINAL_TEXT", "TRANSLATED_TEXT") 
 AS 
   select 
@@ -251,9 +222,39 @@ AS
   where 
     language_code = v('P20_CODE')
 /
+*/
 
 
+/*
+CREATE TABLE  "TM_ISO_CODES" 
+   ("CODE" VARCHAR2(10) NOT NULL ENABLE, 
+	"LANGUAGE" VARCHAR2(200) NOT NULL ENABLE, 
+	"CREATED_BY" VARCHAR2(255), 
+	"CREATED_ON" DATE, 
+	"UPDATED_BY" VARCHAR2(255), 
+	"UPDATED_ON" DATE, 
+	 CONSTRAINT "TM_ISO_CODES_PK" PRIMARY KEY ("CODE")
+   )
+/
 
+CREATE OR REPLACE TRIGGER  "TRG_BIU_TM_ISO_CODES" 
+  before insert or update on "TM_ISO_CODES"              
+  for each row 
+begin  
+
+  :new.code := lower(:new.code);
+
+  if inserting then
+    :new.CREATED_ON := sysdate;
+    :new.CREATED_BY := nvl(v('APP_USER'), user);
+  end if;
+  if updating then 
+    :new.UPDATED_ON := sysdate;
+    :new.UPDATED_BY := nvl(v('APP_USER'), user);
+  end if;
+end;
+/
+*/
 
 
 
