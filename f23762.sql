@@ -27,7 +27,7 @@ prompt APPLICATION 23762 - Text Messages
 -- Application Export:
 --   Application:     23762
 --   Name:            Text Messages
---   Date and Time:   22:08 Monday January 25, 2016
+--   Date and Time:   20:48 Sunday February 14, 2016
 --   Exported By:     ALJAZ
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -119,7 +119,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_value_02=>'<link rel="shortcut icon" href="#APP_IMAGES#fav-icon.png"><link rel="icon" sizes="16x16" href="#APP_IMAGES#fav-icon-16.png"><link rel="icon" sizes="32x32" href="#APP_IMAGES#fav-icon-32.png"><link rel="apple-touch-icon" sizes="180x180" href="#APP_IMAG'
 ||'ES#fav-icon-128.png">'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160125220727'
+,p_last_upd_yyyymmddhh24miss=>'20160214204729'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>5
 ,p_ui_type_name => null
@@ -515,18 +515,20 @@ wwv_flow_api.create_list_of_values(
  p_id=>wwv_flow_api.id(7418637659601093)
 ,p_lov_name=>'LOV_APPS_PAGE_1'
 ,p_lov_query=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select ',
-'  distinct ',
-'    decode (t.language_code,null,''1-fa-none'',''2-fa-language'') || ',
-'    a.application_id || '' - '' || a.application_name  as d,',
-'    a.application_id r',
-'from ',
-'  apex_applications a,',
-'  apex_application_translations t',
-'where ',
-'  a.application_id = t.application_id(+) and',
-'  t.language_code(+) = :P1_CODE and   ',
-'  a.workspace = :TM_CURRENT_WORKSPACE',
+'  select ',
+'    distinct ',
+'      decode (t.language_code,null,''2-fa-none'',''1-fa-language'') || ',
+'      a.application_id || '' - '' || a.application_name  as d,',
+'      a.application_id r',
+'  from ',
+'    apex_applications a,',
+'    apex_application_translations t',
+'  where ',
+'    a.application_id = t.application_id(+) and',
+'    t.language_code(+) = :P1_CODE and   ',
+'    a.workspace = :TM_CURRENT_WORKSPACE',
+'union all',
+'  select ''11-fa-splitter'', -1 from dual',
 'order by ',
 '  1'))
 );
@@ -815,32 +817,34 @@ wwv_flow_api.create_list_of_values(
  p_id=>wwv_flow_api.id(6903744440003129)
 ,p_lov_name=>'LOV_LANG_PREPARED_1'
 ,p_lov_query=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select ',
-'  distinct ',
-'    decode(t.language_code,null,''1-fa-none'',''2-fa-language'') || language || '' ('' || code || '')'' as d,',
-'    code as r',
-'from ',
-'  tm_languages l,',
-'  tm_prep_messages p,',
-'  apex_application_translations t',
-'where ',
-'  l.code = p.language_code and ',
-'  l.code = t.language_code(+) and',
-'  t.application_id(+) = :P1_APP_ID',
+'  select ',
+'    distinct ',
+'      decode(t.language_code,null,''2-fa-none'',''1-fa-language'') || language || '' ('' || code || '')'' as d,',
+'      code as r',
+'  from ',
+'    tm_languages l,',
+'    tm_prep_messages p,',
+'    apex_application_translations t',
+'  where ',
+'    l.code = p.language_code and ',
+'    l.code = t.language_code(+) and',
+'    t.application_id(+) = :P1_APP_ID ',
 'union all',
-'select ',
-'  distinct',
-'    decode(:P1_APP_ID,null,''1-fa-none'',''2-fa-language'') || l.language || '' ('' || l.code || '')'' as d,',
-'    t.language_code r',
-'from',
-'  apex_application_translations t,',
-'  tm_languages l',
-'where ',
-'  (t.application_id = :P1_APP_ID or :P1_APP_ID is null) and',
-'  workspace = :TM_CURRENT_WORKSPACE and',
-'  l.code(+) = t.language_code and',
-'  t.language_code not in (select language_code',
-'                          from tm_prep_messages)',
+'  select ''11-fa-splitter'', ''-1'' from dual',
+'union all',
+'  select ',
+'    distinct',
+'      decode(:P1_APP_ID,null,''2-fa-none'',''1-fa-language'') || l.language || '' ('' || l.code || '')'' as d,',
+'      t.language_code r',
+'  from',
+'    apex_application_translations t,',
+'    tm_languages l',
+'  where ',
+'    (t.application_id = :P1_APP_ID or :P1_APP_ID is null) and',
+'    workspace = :TM_CURRENT_WORKSPACE and',
+'    l.code(+) = t.language_code and',
+'    t.language_code not in (select language_code',
+'                            from tm_prep_messages)',
 'order by ',
 '  1'))
 );
@@ -9555,7 +9559,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160125220727'
+,p_last_upd_yyyymmddhh24miss=>'20160214204729'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(13154086268052418)
@@ -10526,18 +10530,20 @@ wwv_flow_api.create_page_item(
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_APPS_PAGE_1'
 ,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select ',
-'  distinct ',
-'    decode (t.language_code,null,''1-fa-none'',''2-fa-language'') || ',
-'    a.application_id || '' - '' || a.application_name  as d,',
-'    a.application_id r',
-'from ',
-'  apex_applications a,',
-'  apex_application_translations t',
-'where ',
-'  a.application_id = t.application_id(+) and',
-'  t.language_code(+) = :P1_CODE and   ',
-'  a.workspace = :TM_CURRENT_WORKSPACE',
+'  select ',
+'    distinct ',
+'      decode (t.language_code,null,''2-fa-none'',''1-fa-language'') || ',
+'      a.application_id || '' - '' || a.application_name  as d,',
+'      a.application_id r',
+'  from ',
+'    apex_applications a,',
+'    apex_application_translations t',
+'  where ',
+'    a.application_id = t.application_id(+) and',
+'    t.language_code(+) = :P1_CODE and   ',
+'    a.workspace = :TM_CURRENT_WORKSPACE',
+'union all',
+'  select ''11-fa-splitter'', -1 from dual',
 'order by ',
 '  1'))
 ,p_lov_display_null=>'YES'
@@ -10560,32 +10566,34 @@ wwv_flow_api.create_page_item(
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_LANG_PREPARED_1'
 ,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select ',
-'  distinct ',
-'    decode(t.language_code,null,''1-fa-none'',''2-fa-language'') || language || '' ('' || code || '')'' as d,',
-'    code as r',
-'from ',
-'  tm_languages l,',
-'  tm_prep_messages p,',
-'  apex_application_translations t',
-'where ',
-'  l.code = p.language_code and ',
-'  l.code = t.language_code(+) and',
-'  t.application_id(+) = :P1_APP_ID',
+'  select ',
+'    distinct ',
+'      decode(t.language_code,null,''2-fa-none'',''1-fa-language'') || language || '' ('' || code || '')'' as d,',
+'      code as r',
+'  from ',
+'    tm_languages l,',
+'    tm_prep_messages p,',
+'    apex_application_translations t',
+'  where ',
+'    l.code = p.language_code and ',
+'    l.code = t.language_code(+) and',
+'    t.application_id(+) = :P1_APP_ID ',
 'union all',
-'select ',
-'  distinct',
-'    decode(:P1_APP_ID,null,''1-fa-none'',''2-fa-language'') || l.language || '' ('' || l.code || '')'' as d,',
-'    t.language_code r',
-'from',
-'  apex_application_translations t,',
-'  tm_languages l',
-'where ',
-'  (t.application_id = :P1_APP_ID or :P1_APP_ID is null) and',
-'  workspace = :TM_CURRENT_WORKSPACE and',
-'  l.code(+) = t.language_code and',
-'  t.language_code not in (select language_code',
-'                          from tm_prep_messages)',
+'  select ''11-fa-splitter'', ''-1'' from dual',
+'union all',
+'  select ',
+'    distinct',
+'      decode(:P1_APP_ID,null,''2-fa-none'',''1-fa-language'') || l.language || '' ('' || l.code || '')'' as d,',
+'      t.language_code r',
+'  from',
+'    apex_application_translations t,',
+'    tm_languages l',
+'  where ',
+'    (t.application_id = :P1_APP_ID or :P1_APP_ID is null) and',
+'    workspace = :TM_CURRENT_WORKSPACE and',
+'    l.code(+) = t.language_code and',
+'    t.language_code not in (select language_code',
+'                            from tm_prep_messages)',
 'order by ',
 '  1'))
 ,p_lov_display_null=>'YES'
@@ -10733,16 +10741,34 @@ wwv_flow_api.create_page_da_action(
 ,p_execute_on_page_init=>'Y'
 ,p_action=>'NATIVE_JAVASCRIPT_CODE'
 ,p_attribute_01=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'if ($x("P1_CODE")[1].innerHTML == ''11-fa-splitter'')',
+'  $x("P1_CODE")[1].remove();',
+'',
+'if ($x("P1_APP_ID")[1].innerHTML == ''11-fa-splitter'')',
+'  $x("P1_APP_ID")[1].remove();',
+'',
+'',
 '$(''#P1_CODE'').find(''option'').each(function(index,element){',
-'  $x("P1_CODE")[index].innerHTML = $x("P1_CODE")[index].innerHTML.replace("2-fa-language","&#xf1ab;\u00A0\u00A0\u00A0").replace("1-fa-none",""); ',
+'  ',
+'  $x("P1_CODE")[index].innerHTML = $x("P1_CODE")[index].innerHTML.replace("1-fa-language","&#xf1ab;\u00A0\u00A0\u00A0").replace("2-fa-none","");',
+'  ',
+'  if ($x("P1_CODE")[index].innerHTML == ''11-fa-splitter''){',
+'    $x("P1_CODE")[index].innerHTML = ''──────────────'';',
+'    $(''#P1_CODE option:eq(''+index+'')'').attr("disabled","disabled");',
+'  }',
+'     ',
 '});',
 '',
 '$(''#P1_APP_ID'').find(''option'').each(function(index,element){',
-'  $x("P1_APP_ID")[index].innerHTML = $x("P1_APP_ID")[index].innerHTML.replace("2-fa-language","&#xf1ab;\u00A0\u00A0\u00A0").replace("1-fa-none",""); ',
+'  ',
+'  $x("P1_APP_ID")[index].innerHTML = $x("P1_APP_ID")[index].innerHTML.replace("1-fa-language","&#xf1ab;\u00A0\u00A0\u00A0").replace("2-fa-none",""); ',
+'  ',
+'  if ($x("P1_APP_ID")[index].innerHTML == ''11-fa-splitter''){',
+'    $x("P1_APP_ID")[index].innerHTML = ''──────────────'';',
+'    $(''#P1_APP_ID option:eq(''+index+'')'').attr("disabled","disabled");',
+'  }',
+'  ',
 '});',
-'',
-'',
-'',
 ''))
 );
 wwv_flow_api.create_page_process(
