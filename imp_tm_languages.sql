@@ -1,5 +1,5 @@
-insert into tm_languages (code, language, text_direction) values ('af', 'Afrikaans');
-insert into tm_languages (code, language, text_direction) values ('sq', 'Albanian');
+insert into tm_languages (code, language, text_direction) values ('af', 'Afrikaans', 'LTR');
+insert into tm_languages (code, language, text_direction) values ('sq', 'Albanian', 'LTR');
 insert into tm_languages (code, language, text_direction) values ('ar-dz', 'Arabic (Algeria)', 'RTL');
 insert into tm_languages (code, language, text_direction) values ('ar-bh', 'Arabic (Bahrain)', 'RTL');
 insert into tm_languages (code, language, text_direction) values ('ar-eg', 'Arabic (Egypt)', 'RTL');
