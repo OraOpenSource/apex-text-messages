@@ -27,7 +27,7 @@ prompt APPLICATION 23762 - Text Messages
 -- Application Export:
 --   Application:     23762
 --   Name:            Text Messages
---   Date and Time:   14:30 Monday February 15, 2016
+--   Date and Time:   14:48 Monday February 15, 2016
 --   Exported By:     ALJAZ
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -95,10 +95,8 @@ wwv_flow_api.create_flow(
 ,p_checksum_salt=>'30BBCEA5CBA222E7D6BA3D6B7703AC3C626058D39E05005E4667724CBA199BE6'
 ,p_bookmark_checksum_function=>'SH512'
 ,p_compatibility_mode=>'5.0'
-,p_flow_language=>'sl'
+,p_flow_language=>'en'
 ,p_flow_language_derived_from=>'FLOW_PRIMARY_LANGUAGE'
-,p_date_format=>'dd.mm.yyyy'
-,p_date_time_format=>'dd.mm.yyyy hh24:mi'
 ,p_flow_image_prefix => nvl(wwv_flow_application_install.get_image_prefix,'')
 ,p_authentication=>'PLUGIN'
 ,p_authentication_id=>wwv_flow_api.id(34516268490824103868)
@@ -120,7 +118,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_value_02=>'<link rel="shortcut icon" href="#APP_IMAGES#fav-icon.png"><link rel="icon" sizes="16x16" href="#APP_IMAGES#fav-icon-16.png"><link rel="icon" sizes="32x32" href="#APP_IMAGES#fav-icon-32.png"><link rel="apple-touch-icon" sizes="180x180" href="#APP_IMAG'
 ||'ES#fav-icon-128.png">'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160215142914'
+,p_last_upd_yyyymmddhh24miss=>'20160215144725'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>5
 ,p_ui_type_name => null
@@ -17839,7 +17837,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160215131058'
+,p_last_upd_yyyymmddhh24miss=>'20160215144725'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(1685143686474340)
@@ -17868,7 +17866,7 @@ wwv_flow_api.create_page_plug(
 '  DECODE(APP.APPLICATION_ID,NULL,''***Application does not exists'',APP.APPLICATION_NAME) APLIKACIJA,  ',
 '  APP.APPLICATION_ID APLIKACIJA_ID,',
 '  BCK.LANGUAGE_CODE,',
-'  BCK.BACKUP_TIME,',
+'  to_char(BCK.BACKUP_TIME, :APP_DATE_TIME_FORMAT) BACKUP_TIME,',
 '  BCK.OPERATION,',
 '  LANG.LANGUAGE',
 'from ',
@@ -17914,17 +17912,6 @@ wwv_flow_api.create_worksheet_column(
 ,p_column_alignment=>'CENTER'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(25838734020482980782)
-,p_db_column_name=>'BACKUP_TIME'
-,p_display_order=>4
-,p_column_identifier=>'D'
-,p_column_label=>'Backup time'
-,p_column_type=>'DATE'
-,p_column_alignment=>'CENTER'
-,p_format_mask=>'dd.mm.yyyy hh24:mi:ss'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(25838734400509980783)
 ,p_db_column_name=>'OPERATION'
 ,p_display_order=>5
@@ -17968,6 +17955,15 @@ wwv_flow_api.create_worksheet_column(
 ,p_column_label=>'Language'
 ,p_column_type=>'STRING'
 );
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(12023935512491030)
+,p_db_column_name=>'BACKUP_TIME'
+,p_display_order=>55
+,p_column_identifier=>'L'
+,p_column_label=>'Backup time'
+,p_column_type=>'STRING'
+,p_column_alignment=>'CENTER'
+);
 wwv_flow_api.create_worksheet_rpt(
  p_id=>wwv_flow_api.id(25838742166251815625)
 ,p_application_user=>'APXWS_DEFAULT'
@@ -17976,7 +17972,7 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>50
-,p_report_columns=>'BACKUP_TIME:OPERATION:APLIKACIJA_ID:APLIKACIJA:LANGUAGE_CODE:LANGUAGE:'
+,p_report_columns=>'OPERATION:APLIKACIJA_ID:APLIKACIJA:LANGUAGE_CODE:LANGUAGE'
 ,p_sort_column_1=>'BACKUP_TIME'
 ,p_sort_direction_1=>'DESC'
 ,p_sort_column_2=>'0'
