@@ -1,5 +1,678 @@
-REM INSERTING into TM_DOC_MESSAGES
+spool tm_db_install.log
+
 SET DEFINE OFF;
+
+declare 
+
+  type arr_install_objects is table of varchar2(30) index by pls_integer;
+  
+  l_inst_seq arr_install_objects;
+  l_inst_tab arr_install_objects;
+  l_inst_con arr_install_objects;
+  
+  l_cnt number;
+  
+begin
+  l_inst_seq(1) := 'TM_BACKUP_MESSAGES_SEQ';
+  l_inst_seq(2) := 'TM_BACKUP_SEQ';
+  l_inst_seq(3) := 'TM_DOC_MESSAGES_SEQ';
+  l_inst_seq(4) := 'TM_PREP_MESSAGES_SEQ';
+  l_inst_seq(5) := 'TM_LANGUAGES_SEQ';
+ 
+  l_inst_tab(1) := 'TM_PREP_MESSAGES';
+  l_inst_tab(2) := 'TM_DOC_MESSAGES';
+  l_inst_tab(3) := 'TM_BACKUP_MESSAGES';
+  l_inst_tab(4) := 'TM_BACKUP';
+  l_inst_tab(5) := 'TM_LANGUAGES';
+
+  l_inst_con(1) := 'CON_BACKUP_FK_CODE';
+  l_inst_con(2) := 'CON_BACKUPMESS_FK_CODE';
+  l_inst_con(3) := 'CON_PREPM_FK_CODE';
+  
+  for i in l_inst_seq.first..l_inst_seq.last loop
+  
+    select count(*)
+    into l_cnt
+    from user_objects
+    where object_name = l_inst_seq(i);
+    
+    if l_cnt = 0 then
+      execute immediate 'CREATE SEQUENCE ' || l_inst_seq(i);
+    end if;
+          
+  end loop;
+  
+  for i in l_inst_tab.first..l_inst_tab.last loop
+  
+    select count(*)
+    into l_cnt
+    from user_objects
+    where object_name = l_inst_tab(i);
+    
+    if l_cnt = 0 and l_inst_tab(i) = 'TM_LANGUAGES' then 
+
+      execute immediate 'CREATE TABLE  TM_LANGUAGES(
+                            ID NUMBER NOT NULL ENABLE,
+                            CODE VARCHAR2(10) NOT NULL ENABLE, 
+                            LANGUAGE VARCHAR2(200) NOT NULL ENABLE, 
+                            TEXT_DIRECTION VARCHAR2(10),
+                            CREATED_BY VARCHAR2(255), 
+                            CREATED_ON DATE, 
+                            UPDATED_BY VARCHAR2(255), 
+                            UPDATED_ON DATE, 
+                            CONSTRAINT TM_LANGUAGE_PK PRIMARY KEY (ID),
+                            CONSTRAINT TM_LANGUAGE_UQ UNIQUE (CODE)
+                         )';
+    
+    end if;
+    
+    if l_cnt = 0 and l_inst_tab(i) = 'TM_BACKUP' then 
+      execute immediate 'CREATE TABLE  TM_BACKUP( 
+                            ID NUMBER NOT NULL ENABLE, 
+                            APP_ID VARCHAR2(255) NOT NULL ENABLE, 
+                            LANGUAGE_CODE VARCHAR2(50) NOT NULL ENABLE, 
+                            BACKUP_TIME DATE, 
+                            CREATED_BY VARCHAR2(255), 
+                            CREATED_ON DATE, 
+                            UPDATED_BY VARCHAR2(255), 
+                            UPDATED_ON DATE, 
+                            OPERATION VARCHAR2(100), 
+                            CONSTRAINT TM_BACKUP_PK PRIMARY KEY (ID)
+                         )';
+    end if;
+
+    if l_cnt = 0 and l_inst_tab(i) = 'TM_BACKUP_MESSAGES' then 
+      execute immediate 'CREATE TABLE  TM_BACKUP_MESSAGES( 
+                          ID NUMBER NOT NULL ENABLE, 
+                          FK_TM_BACKUP NUMBER NOT NULL ENABLE, 
+                          TRANSLATABLE_MESSAGE VARCHAR2(255) NOT NULL ENABLE, 
+                          MESSAGE_TEXT VARCHAR2(4000) NOT NULL ENABLE, 
+                          LANGUAGE_CODE VARCHAR2(50) NOT NULL ENABLE, 
+                          CREATED_BY VARCHAR2(255), 
+                          CREATED_ON DATE, 
+                          UPDATED_BY VARCHAR2(255), 
+                          UPDATED_ON DATE, 
+                          CONSTRAINT TM_BACKUP_MESSAGE_PK PRIMARY KEY (ID)
+                         )';
+
+      execute immediate 'CREATE INDEX  IDX_TM_BACKUP_MESSAGES_1 ON  TM_BACKUP_MESSAGES (LANGUAGE_CODE)';
+    end if;
+
+    if l_cnt = 0 and l_inst_tab(i) = 'TM_DOC_MESSAGES' then 
+      execute immediate 'CREATE TABLE  TM_DOC_MESSAGES( 
+                            ID NUMBER NOT NULL ENABLE, 
+                            TRANSLATABLE_MESSAGE VARCHAR2(255) NOT NULL ENABLE, 
+                            MESSAGE_TEXT VARCHAR2(4000) NOT NULL ENABLE, 
+                            INTERNAL_IR VARCHAR2(30) NOT NULL ENABLE, 
+                            CREATED_BY VARCHAR2(255), 
+                            CREATED_ON DATE, 
+                            UPDATED_BY VARCHAR2(255), 
+                            UPDATED_ON DATE, 
+                            CONSTRAINT TM_DOC_MESSAGES_PK PRIMARY KEY (ID), 
+                            CONSTRAINT TM_DOC_MESSAGES_UK1 UNIQUE (TRANSLATABLE_MESSAGE)
+                         )';
+    end if;
+
+    if l_cnt = 0 and l_inst_tab(i) = 'TM_PREP_MESSAGES' then 
+      execute immediate 'CREATE TABLE  TM_PREP_MESSAGES( 
+                            ID NUMBER NOT NULL ENABLE, 
+                            TRANSLATABLE_MESSAGE VARCHAR2(255) NOT NULL ENABLE, 
+                            MESSAGE_TEXT VARCHAR2(4000) NOT NULL ENABLE, 
+                            LANGUAGE_CODE VARCHAR2(50) NOT NULL ENABLE, 
+                            ORIGINAL_TEXT VARCHAR2(4000),
+                            CREATED_BY VARCHAR2(255), 
+                            CREATED_ON DATE, 
+                            UPDATED_BY VARCHAR2(255), 
+                            UPDATED_ON DATE, 
+                            CONSTRAINT TM_PREP_MESSAGE_PK PRIMARY KEY (ID), 
+                            CONSTRAINT TM_PREP_MESSAGES_UK1 UNIQUE (TRANSLATABLE_MESSAGE, LANGUAGE_CODE)
+                         )';
+      execute immediate 'CREATE INDEX  IDX_PREP_MESSAGES_1 ON  TM_PREP_MESSAGES (LANGUAGE_CODE)';
+
+    end if;
+          
+  end loop;
+ 
+ 
+  for i in l_inst_con.first..l_inst_con.last loop
+    select count(*)
+    into l_cnt
+    from user_constraints
+    where constraint_name = l_inst_con(i);
+    
+    if l_cnt = 0 and l_inst_con(i) = 'CON_BACKUP_FK_CODE' then 
+      execute immediate 'ALTER TABLE  TM_BACKUP ADD CONSTRAINT CON_BACKUP_FK_CODE FOREIGN KEY (LANGUAGE_CODE)
+                            REFERENCES  TM_LANGUAGES (CODE) ENABLE'; 
+    end if;
+    
+    if l_cnt = 0 and l_inst_con(i) = 'CON_BACKUPMESS_FK_CODE' then 
+      execute immediate 'ALTER TABLE  TM_BACKUP_MESSAGES ADD CONSTRAINT CON_BACKUPMESS_FK_CODE FOREIGN KEY (LANGUAGE_CODE)
+                            REFERENCES  TM_LANGUAGES (CODE) ENABLE';
+    end if;
+    
+    if l_cnt = 0 and l_inst_con(i) = 'CON_PREPM_FK_CODE' then 
+      execute immediate 'ALTER TABLE  TM_PREP_MESSAGES ADD CONSTRAINT CON_PREPM_FK_CODE FOREIGN KEY (LANGUAGE_CODE)
+                            REFERENCES  TM_LANGUAGES (CODE) ENABLE';
+    end if;
+    
+  end loop;
+    
+end;
+/
+
+CREATE OR REPLACE TRIGGER  TRG_BIU_TM_LANGUAGES 
+  before insert or update on TM_LANGUAGES              
+  for each row 
+begin  
+
+  if :NEW.ID is null then
+    select TM_LANGUAGES_SEQ.nextval into :NEW.ID from sys.dual;
+  end if;
+
+  :new.code := lower(:new.code);
+
+  if inserting then
+    :new.CREATED_ON := sysdate;
+    :new.CREATED_BY := nvl(v('APP_USER'), user);
+  end if;
+  if updating then 
+    :new.UPDATED_ON := sysdate;
+    :new.UPDATED_BY := nvl(v('APP_USER'), user);
+  end if;
+end;
+/
+
+CREATE OR REPLACE TRIGGER  TRG_BIU_TM_BACKUP 
+  before insert or update on TM_BACKUP              
+  for each row 
+begin  
+  
+  if :NEW.ID is null then
+    select TM_BACKUP_SEQ.nextval into :NEW.ID from sys.dual;
+  end if;
+  if inserting then
+    :new.CREATED_ON := sysdate;
+    :new.CREATED_BY := nvl(v('APP_USER'), user);
+  end if;
+  if updating then 
+    :new.UPDATED_ON := sysdate;
+    :new.UPDATED_BY := nvl(v('APP_USER'), user);
+  end if;
+end;
+/
+
+CREATE OR REPLACE TRIGGER  TRG_BIU_TM_BACKUP_MESSAGES 
+  before insert or update on TM_BACKUP_MESSAGES              
+  for each row 
+begin  
+  if :NEW.ID is null then
+    select TM_BACKUP_MESSAGES_SEQ.nextval into :NEW.ID from sys.dual;
+  end if;
+  if inserting then
+    :new.CREATED_ON := sysdate;
+    :new.CREATED_BY := nvl(v('APP_USER'), user);
+  end if;
+  if updating then 
+    :new.UPDATED_ON := sysdate;
+    :new.UPDATED_BY := nvl(v('APP_USER'), user);
+  end if;
+end;
+/
+
+CREATE OR REPLACE TRIGGER  TRG_BIU_TM_DOC_MESSAGES 
+  before insert or update on TM_DOC_MESSAGES              
+  for each row 
+begin  
+  if :NEW.ID is null then
+    select TM_DOC_MESSAGES_SEQ.nextval into :NEW.ID from sys.dual;
+  end if;
+  if inserting then
+    :new.CREATED_ON := sysdate;
+    :new.CREATED_BY := nvl(v('APP_USER'), user);
+  end if;
+  if updating then 
+    :new.UPDATED_ON := sysdate;
+    :new.UPDATED_BY := nvl(v('APP_USER'), user);
+  end if;
+end;
+/
+
+create or replace TRIGGER  TRG_BIU_TM_PREP_MESSAGE 
+  before insert or update on TM_PREP_MESSAGES              
+  for each row 
+begin  
+  
+  :new.translatable_message := upper(:new.translatable_message);
+  :new.language_code := lower(:new.language_code);
+
+  if :NEW.ID is null then
+    select TM_PREP_MESSAGES_SEQ.nextval into :NEW.ID from sys.dual;
+  end if;
+  if inserting then
+    :new.CREATED_ON := sysdate;
+    :new.CREATED_BY := nvl(v('APP_USER'), user);
+    
+    
+    if :new.language_code is null and v('APP_PAGE_ID') = 22 then
+      :new.language_code := lower(v('P20_CODE'));
+    end if;
+    
+  end if;
+  if updating then 
+    :new.UPDATED_ON := sysdate;
+    :new.UPDATED_BY := nvl(v('APP_USER'), user);
+  end if;
+
+end;
+/
+
+CREATE OR REPLACE PROCEDURE TM_P_PARSE_CSV
+IS
+  --
+  p_clob clob;
+  p_blob blob;
+  p_blob_new blob;
+  p_delim varchar2(10) default ';';
+  p_optionally_enclosed varchar2(10) default '"';
+  p_amount number;
+  p_offset number;
+  p_message_code varchar2(4000);
+  p_translated_text varchar2(4000);
+  --
+  l_cr constant char(1) := chr(13);
+  l_lf constant char(1) := chr(10);
+  --
+  l_char nchar(1);
+  l_lookahead nchar(1);
+  l_pos number := 0;
+  l_token varchar2(32767) := null;
+  l_token_complete boolean := false;
+  l_line_complete boolean := false;
+  l_new_token boolean := true;
+  l_enclosed boolean := false;
+  --
+  l_line_no number := 1;
+  l_column_no number := 1;
+ 
+  --
+  l_file_size     integer := dbms_lob.lobmaxsize;
+  l_dest_offset   integer := 1;
+  l_src_offset    integer := 1;
+  l_blob_csid     number := 871; --dbms_lob.default_csid;
+  l_lang_context  number := dbms_lob.default_lang_ctx;
+  l_warning       integer;
+  --
+  l_blob_len      number;
+  l_clob_len      number;
+  --
+  l_string_arr      APEX_APPLICATION_GLOBAL.VC_ARR2;
+  l_offset          NUMBER := 1;
+  l_amount          NUMBER := 15000;
+  l_buf             VARCHAR2(32000);
+  l_cnt_arr_chunks  NUMBER := 0;
+  l_pos_arr_chunks  NUMBER;
+  l_buf_len         NUMBER;
+  l_buf_pos         NUMBER := 0;
+  --
+
+BEGIN
+
+  if upper(v('P12_CHAR_SET')) = 'UTF-8' then
+    l_blob_csid := 871;
+  else
+    select min(NLS_CHARSET_ID(v('P12_CHAR_SET')))
+    into l_blob_csid
+    from  dual;    
+  end if;
+
+  APEX_COLLECTION.CREATE_OR_TRUNCATE_COLLECTION(p_collection_name => 'TM_PARSE_CSV');
+
+  select blob_content
+  into p_blob
+  from  apex_application_temp_files 
+  where name = v('P12_FILE_NAME');  
+
+  DBMS_LOB.CREATETEMPORARY(p_blob_new, false);
+  
+  l_blob_len := dbms_lob.getlength(p_blob);
+   
+  if DBMS_LOB.substr(p_blob, 4, l_blob_len - 3) = '0D0A0D0A' then
+    p_amount := l_blob_len - 4;
+  else
+    p_amount := l_blob_len;
+  end if;
+  --
+  
+  if DBMS_LOB.SUBSTR(p_blob, 3, 1) = 'EFBBBF' then
+    p_offset := 3;
+  else
+    p_offset := 0;
+  end if;
+    
+  DBMS_LOB.COPY (
+    dest_lob    => p_blob_new,
+    src_lob     => p_blob,
+    amount      => p_amount - p_offset + 1,
+    dest_offset => 1,
+    src_offset  => p_offset + 1);
+ 
+
+  DBMS_LOB.CREATETEMPORARY(p_clob, false);
+
+  dbms_lob.convertToClob(
+    p_clob, 
+    p_blob_new, 
+    l_file_size,
+    l_dest_offset,
+    l_src_offset, 
+    l_blob_csid,
+    l_lang_context,
+    l_warning);
+
+  l_clob_len := dbms_lob.getLength( p_clob );
+
+  if  l_clob_len = 0 then 
+    return;
+  end  if;  
+
+  WHILE l_offset < l_clob_len LOOP
+      l_cnt_arr_chunks := l_cnt_arr_chunks + 1;
+      DBMS_LOB.read(p_clob, l_amount, l_offset, l_buf);
+      l_offset := l_offset + l_amount;
+      l_string_arr(l_cnt_arr_chunks) := l_buf;
+  END LOOP;     
+  
+  l_pos_arr_chunks := 1;
+  l_buf := l_string_arr(l_pos_arr_chunks);
+  l_buf_len := length(l_buf);
+
+  loop
+    -- increment position index
+    l_pos := l_pos + 1;
+    l_buf_pos := l_buf_pos + 1;
+    
+    --new chunk?
+    if l_pos_arr_chunks < l_cnt_arr_chunks then
+      if l_buf_pos+1 >= l_buf_len then
+         
+        l_pos_arr_chunks := l_pos_arr_chunks + 1;
+        l_buf := substr(l_string_arr(l_pos_arr_chunks-1), l_buf_pos, l_buf_len - l_buf_pos + 1)   ||   l_string_arr(l_pos_arr_chunks);
+        l_buf_len := length(l_buf);
+        l_buf_pos := 1;
+        
+      end if;      
+    end if;       
+ 
+    -- get next character
+    l_char := substr( l_buf, l_buf_pos, 1);
+ 
+    -- exit when no more characters to process
+    exit when l_char is null or l_pos > l_clob_len;
+ 
+    -- if first character of new token is optionally enclosed character
+    -- note that and skip it and get next character
+    if l_new_token and l_char = p_optionally_enclosed then
+      l_enclosed := true;
+      l_pos := l_pos + 1;
+      l_buf_pos := l_buf_pos + 1;
+      l_char := substr( l_buf, l_buf_pos, 1);
+    end if;
+    l_new_token := false;
+ 
+    -- get look ahead character
+    l_lookahead := substr( l_buf, l_buf_pos + 1, 1);
+ 
+    -- inspect character (and lookahead) to determine what to do
+    if l_char = p_optionally_enclosed and l_enclosed then
+ 
+      if l_lookahead = p_optionally_enclosed then
+        l_pos := l_pos + 1;
+        l_buf_pos := l_buf_pos + 1;
+        l_token := l_token || l_lookahead;
+      elsif l_lookahead = p_delim then
+        l_pos := l_pos + 1;
+        l_buf_pos := l_buf_pos + 1;
+        l_token_complete := true;
+      else
+        l_enclosed := false;
+      end if;
+ 
+    elsif l_char in ( l_cr, l_lf ) and NOT l_enclosed then
+      l_token_complete := true;
+      l_line_complete := true;
+ 
+      if l_lookahead in ( l_cr, l_lf ) then
+        l_pos := l_pos + 1;
+        l_buf_pos := l_buf_pos + 1;
+      end if;
+ 
+    elsif l_char = p_delim and not l_enclosed then
+      l_token_complete := true;
+ 
+    elsif l_pos = l_clob_len then
+      l_token := l_token || l_char;
+      l_token_complete := true;
+      l_line_complete := true;
+ 
+    else
+      l_token := l_token || l_char;
+    end if;
+ 
+    -- process a new token
+    if l_token_complete then
+      
+      if l_column_no = 1 then
+        p_message_code := l_token;
+      elsif l_column_no = 3 then
+        p_translated_text :=  l_token;
+      end if;
+    
+      l_column_no := l_column_no + 1;
+      l_token := null;
+      l_enclosed := false;
+      l_new_token := true;
+      l_token_complete := false;
+    end if;
+ 
+    -- process end-of-line here
+    if l_line_complete then
+    
+      if l_line_no > 1 then       
+        APEX_COLLECTION.ADD_MEMBER(
+                         p_collection_name => 'TM_PARSE_CSV',
+                         p_c001            => p_message_code,
+                         p_c002            => p_translated_text);        
+      end if;
+
+      p_message_code := '';
+      p_translated_text := '';
+      
+      l_line_no := l_line_no + 1;
+      l_column_no := 1;
+      l_line_complete := false;
+    end if;
+  end loop;
+  
+END TM_P_PARSE_CSV;
+/
+
+declare
+  l_cnt number;
+begin
+  select count(*)
+  into l_cnt
+  from user_objects
+  where object_name = 'TM_LANGUAGES_TMP';
+  
+  if l_cnt > 0 then 
+    execute immediate 'drop table TM_LANGUAGES_TMP';
+  end if;
+end;
+/
+
+CREATE TABLE  TM_LANGUAGES_TMP (
+	CODE VARCHAR2(10), 
+	LANGUAGE VARCHAR2(200), 
+	TEXT_DIRECTION VARCHAR2(10)
+)
+/  
+
+
+insert into tm_languages_tmp (code, language, text_direction) values ('af', 'Afrikaans', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('sq', 'Albanian', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('ar-dz', 'Arabic (Algeria)', 'RTL');
+insert into tm_languages_tmp (code, language, text_direction) values ('ar-bh', 'Arabic (Bahrain)', 'RTL');
+insert into tm_languages_tmp (code, language, text_direction) values ('ar-eg', 'Arabic (Egypt)', 'RTL');
+insert into tm_languages_tmp (code, language, text_direction) values ('ar-iq', 'Arabic (Iraq)', 'RTL');
+insert into tm_languages_tmp (code, language, text_direction) values ('ar-jo', 'Arabic (Jordan)', 'RTL');
+insert into tm_languages_tmp (code, language, text_direction) values ('ar-kw', 'Arabic (Kuwait)', 'RTL');
+insert into tm_languages_tmp (code, language, text_direction) values ('ar-lb', 'Arabic (Lebanon)', 'RTL');
+insert into tm_languages_tmp (code, language, text_direction) values ('ar-ly', 'Arabic (Libya)', 'RTL');
+insert into tm_languages_tmp (code, language, text_direction) values ('ar-ma', 'Arabic (Morocco)', 'RTL');
+insert into tm_languages_tmp (code, language, text_direction) values ('ar-om', 'Arabic (Oman)', 'RTL');
+insert into tm_languages_tmp (code, language, text_direction) values ('ar-qa', 'Arabic (Qatar)', 'RTL');
+insert into tm_languages_tmp (code, language, text_direction) values ('ar-sa', 'Arabic (Saudi Arabia)', 'RTL');
+insert into tm_languages_tmp (code, language, text_direction) values ('ar-sy', 'Arabic (Syria)', 'RTL');
+insert into tm_languages_tmp (code, language, text_direction) values ('ar-tn', 'Arabic (Tunisia)', 'RTL');
+insert into tm_languages_tmp (code, language, text_direction) values ('ar-ae', 'Arabic (U.A.E.)', 'RTL');
+insert into tm_languages_tmp (code, language, text_direction) values ('ar-ye', 'Arabic (Yemen)', 'RTL');
+insert into tm_languages_tmp (code, language, text_direction) values ('ar', 'Arabic', 'RTL');
+insert into tm_languages_tmp (code, language, text_direction) values ('hy', 'Armenian', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('as', 'Assamese', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('eu', 'Basque', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('be', 'Belarusian', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('bn', 'Bengali', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('bg', 'Bulgarian', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('ca', 'Catalan', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('zh-cn', 'Chinese (China)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('zh-hk', 'Chinese (Hong Kong SAR)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('zh-mo', 'Chinese (Macau SAR)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('zh-sg', 'Chinese (Singapore)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('zh-tw', 'Chinese (Taiwan)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('zh', 'Chinese', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('hr', 'Croatian', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('cs', 'Czech', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('da', 'Danish', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('nl-be', 'Dutch (Belgium)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('nl', 'Dutch (Netherlands)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('en-au', 'English (Australia)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('en-bz', 'English (Belize)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('en-ca', 'English (Canada)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('en-ie', 'English (Ireland)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('en-jm', 'English (Jamaica)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('en-nz', 'English (New Zealand)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('en-ph', 'English (Philippines)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('en-za', 'English (South Africa)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('en-tt', 'English (Trinidad)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('en-gb', 'English (United Kingdom)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('en-us', 'English (United States)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('en-zw', 'English (Zimbabwe)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('en', 'English', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('et', 'Estonian', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('mk', 'FYRO Macedonian', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('fo', 'Faeroese', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('fa', 'Farsi', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('fi', 'Finnish', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('fr-be', 'French (Belgium)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('fr-ca', 'French (Canada)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('fr', 'French (France)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('fr-lu', 'French (Luxembourg)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('fr-mc', 'French (Monaco)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('fr-ch', 'French (Switzerland)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('gd', 'Gaelic', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('gl', 'Galician', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('de-at', 'German (Austria)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('de', 'German (Germany)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('de-li', 'German (Liechtenstein)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('de-lu', 'German (Luxemgourg)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('de-ch', 'German (Switzerland)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('el', 'Greek', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('gu', 'Gujarati', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('he', 'Hebrew', 'RTL');
+insert into tm_languages_tmp (code, language, text_direction) values ('hi', 'Hindi', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('hu', 'Hungarian', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('is', 'Icelandic', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('id', 'Indonesian', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('ga', 'Irish', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('it', 'Italian (Italy)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('it-ch', 'Italian (Switzerland)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('ja', 'Japanese', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('kn', 'Kannada', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('kk', 'Kazakh', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('kok', 'Konkani', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('ko', 'Korean', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('kz', 'Kyrgyz', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('lv', 'Latvian', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('lt', 'Lithuanian', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('ms', 'Malay (Malaysia)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('ml', 'Malayalam', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('mt', 'Maltese', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('mr', 'Marathi', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('ne', 'Nepali (India)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('nb-no', 'Norwegian (Bokmal)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('no', 'Norwegian (Bokmal)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('nn-no', 'Norwegian (Nynorsk)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('or', 'Oriya', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('pl', 'Polish', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('pt-br', 'Portuguese (Brazil)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('pt', 'Portuguese (Portugal)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('pa', 'Punjabi', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('ro', 'Romanian', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('ru-md', 'Russian (Moldova)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('ru', 'Russian', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('sr', 'Serbian', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('sk', 'Slovak', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('sl', 'Slovenian', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('es-ar', 'Spanish (Argentina)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('es-bo', 'Spanish (Bolivia)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('es-cl', 'Spanish (Chile)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('es-co', 'Spanish (Columbia)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('es-cr', 'Spanish (Costa Rica)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('es-do', 'Spanish (Dominican Republic)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('es-ec', 'Spanish (Ecudor)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('es-sv', 'Spanish (El Salvador)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('es-gt', 'Spanish (Guatemala)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('es-hn', 'Spanish (Honduras)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('es-mx', 'Spanish (Mexico)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('es-ni', 'Spanish (Nicaragua)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('es-pa', 'Spanish (Panama)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('es-py', 'Spanish (Paraguay)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('es-pe', 'Spanish (Peru)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('es-pr', 'Spanish (Peurto Rico)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('es', 'Spanish (Traditional Sort)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('es-us', 'Spanish (United States)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('es-uy', 'Spanish (Uruguay)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('es-ve', 'Spanish (Venezuela)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('sv-fi', 'Swedish (Finland)', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('sv', 'Swedish', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('ta', 'Tamil', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('te', 'Telugu', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('th', 'Thai', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('tr', 'Turkish', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('uk', 'Ukrainian', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('ur', 'Urdu', 'RTL');
+insert into tm_languages_tmp (code, language, text_direction) values ('uz', 'Uzbek', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('vi', 'Vietnamese', 'LTR');
+insert into tm_languages_tmp (code, language, text_direction) values ('cy', 'Welsh', 'LTR');
+
+
+MERGE INTO tm_languages l
+  USING (SELECT code, language, text_direction
+         FROM tm_languages_tmp) l_tmp
+  ON
+    (upper(l.code) = upper(l_tmp.code))
+  WHEN MATCHED THEN
+    UPDATE SET 
+      l.language = l_tmp.language,
+      l.text_direction = l_tmp.text_direction
+  WHEN NOT MATCHED THEN
+    INSERT (code, language, text_direction)
+    VALUES (l_tmp.code, l_tmp.language, l_tmp.text_direction);
+  
+DROP TABLE TM_LANGUAGES_TMP;
+
+TRUNCATE TABLE TM_DOC_MESSAGES;
+
 Insert into TM_DOC_MESSAGES (TRANSLATABLE_MESSAGE,MESSAGE_TEXT,INTERNAL_IR) values ('APEXIR_EMAIL_NOT_CONFIGURED','Email has not been configured for this application. Please contact your administrator.','INTERACTIVEREPORT');
 Insert into TM_DOC_MESSAGES (TRANSLATABLE_MESSAGE,MESSAGE_TEXT,INTERNAL_IR) values ('APEXIR_HELP_COMPUTE','Computations allow you to add computed columns to your report. These can be mathematical computations (e.g. NBR_HOURS/24) or standard Oracle functions applied to existing columns (some have been displayed for example, others, like TO_DATE, can also be used).
 <p/>
@@ -519,4 +1192,9 @@ Insert into TM_DOC_MESSAGES (TRANSLATABLE_MESSAGE,MESSAGE_TEXT,INTERNAL_IR) valu
 Insert into TM_DOC_MESSAGES (TRANSLATABLE_MESSAGE,MESSAGE_TEXT,INTERNAL_IR) values ('APEXIR_ROW_TEXT_CONTAINS','Row text contains','INTERACTIVEREPORT');
 Insert into TM_DOC_MESSAGES (TRANSLATABLE_MESSAGE,MESSAGE_TEXT,INTERNAL_IR) values ('APEXIR_ROWS','Rows','INTERACTIVEREPORT');
 Insert into TM_DOC_MESSAGES (TRANSLATABLE_MESSAGE,MESSAGE_TEXT,INTERNAL_IR) values ('APEXIR_ROWS_PER_PAGE','Rows Per Page','INTERACTIVEREPORT');
+
 commit;
+
+spool off
+
+exit;
