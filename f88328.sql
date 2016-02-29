@@ -27,7 +27,7 @@ prompt APPLICATION 88328 - Text Messages
 -- Application Export:
 --   Application:     88328
 --   Name:            Text Messages
---   Date and Time:   20:13 Friday February 19, 2016
+--   Date and Time:   02:05 Saturday February 20, 2016
 --   Exported By:     ALJAZ
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -36,11 +36,11 @@ prompt APPLICATION 88328 - Text Messages
 --
 
 -- Application Statistics:
---   Pages:                     15
+--   Pages:                     17
 --     Items:                   60
 --     Validations:              5
 --     Processes:               38
---     Regions:                 49
+--     Regions:                 61
 --     Buttons:                 32
 --     Dynamic Actions:         24
 --   Shared Components:
@@ -119,7 +119,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_value_02=>'<link rel="shortcut icon" href="#APP_IMAGES#fav-icon.png"><link rel="icon" sizes="16x16" href="#APP_IMAGES#fav-icon-16.png"><link rel="icon" sizes="32x32" href="#APP_IMAGES#fav-icon-32.png"><link rel="apple-touch-icon" sizes="180x180" href="#APP_IMAG'
 ||'ES#fav-icon-128.png">'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160219201229'
+,p_last_upd_yyyymmddhh24miss=>'20160220015702'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>5
 ,p_ui_type_name => null
@@ -234,6 +234,24 @@ wwv_flow_api.create_list_item(
 ,p_list_item_icon=>'fa-recycle'
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'8'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(14288805310369879)
+,p_list_item_display_sequence=>90
+,p_list_item_link_text=>'Learn more'
+,p_list_item_link_target=>'f?p=&APP_ID.:LEARN:&SESSION.::&DEBUG.::::'
+,p_list_item_icon=>'fa-book'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'99'
+);
+wwv_flow_api.create_list_item(
+ p_id=>wwv_flow_api.id(14291646464408079)
+,p_list_item_display_sequence=>100
+,p_list_item_link_text=>'About'
+,p_list_item_link_target=>'f?p=&APP_ID.:ABOUT:&SESSION.::&DEBUG.::::'
+,p_list_item_icon=>'fa-info-circle'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'98'
 );
 wwv_flow_api.create_list(
  p_id=>wwv_flow_api.id(34529508826227082686)
@@ -9521,19 +9539,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160219183026'
-);
-wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(13350043774319321)
-,p_plug_name=>'Learn more'
-,p_region_template_options=>'#DEFAULT#:is-collapsed:t-Region--scrollBody'
-,p_plug_template=>wwv_flow_api.id(34529479232262082626)
-,p_plug_display_sequence=>10
-,p_include_in_reg_disp_sel_yn=>'Y'
-,p_plug_display_point=>'BODY'
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_attribute_01=>'N'
-,p_attribute_02=>'HTML'
+,p_last_upd_yyyymmddhh24miss=>'20160219201711'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(26394741342031241)
@@ -10717,7 +10723,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160219183707'
+,p_last_upd_yyyymmddhh24miss=>'20160219213908'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(25852969112553089370)
@@ -10728,7 +10734,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_sequence=>10
 ,p_include_in_reg_disp_sel_yn=>'Y'
 ,p_plug_display_point=>'REGION_POSITION_01'
-,p_plug_source=>'Repository of uploaded or imported existing text messages'
+,p_plug_source=>'Repository of uploaded or imported text messages'
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
@@ -11687,7 +11693,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160219190200'
+,p_last_upd_yyyymmddhh24miss=>'20160220011919'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(25683206838928145)
@@ -11730,7 +11736,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'select ',
 '  prep.translatable_message,',
-'  decode(trans.message_text,null, ''Not imported into application'',  decode( prep.message_text, trans.message_text, ''Matching'', ''Difference'')   ) status,',
+'  decode(trans.message_text,null, ''Message exists only in prepared messages'',  decode( prep.message_text, trans.message_text, ''Matching'', ''Difference'')   ) status,',
 '  prep.message_text prepared_message,',
 '  trans.message_text application_message',
 'from',
@@ -11851,7 +11857,7 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>50
-,p_report_columns=>'STATUS:TRANSLATABLE_MESSAGE::PREPARED_MESSAGE:APPLICATION_MESSAGE'
+,p_report_columns=>'STATUS:TRANSLATABLE_MESSAGE:APPLICATION_MESSAGE:PREPARED_MESSAGE:'
 ,p_flashback_enabled=>'N'
 );
 wwv_flow_api.create_page_button(
@@ -15899,6 +15905,365 @@ wwv_flow_api.create_page_process(
 );
 end;
 /
+prompt --application/pages/page_00098
+begin
+wwv_flow_api.create_page(
+ p_id=>98
+,p_user_interface_id=>wwv_flow_api.id(34529508928472082687)
+,p_name=>'About'
+,p_alias=>'ABOUT'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'&SUB_APP_NAME.'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_inline_css=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'pre {',
+'  font-size: 1.4rem;',
+'}'))
+,p_page_template_options=>'#DEFAULT#'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_cache_mode=>'NOCACHE'
+,p_help_text=>'No help is available for this page.'
+,p_last_updated_by=>'ALJAZ'
+,p_last_upd_yyyymmddhh24miss=>'20160219231645'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(13351126683319332)
+,p_plug_name=>'About'
+,p_icon_css_classes=>'fa-info-circle'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(34722357068375879027)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(13351276148319333)
+,p_plug_name=>'Author'
+,p_icon_css_classes=>'fa-bank'
+,p_region_template_options=>'#DEFAULT#:t-Alert--horizontal:t-Alert--customIcons:t-Alert--info'
+,p_plug_template=>wwv_flow_api.id(34529473378052082613)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<b>Aljaz Mali</b>, Abakus Plus, Slovenia',
+'<br/>',
+'Web site: <a href="http://www.abakus.si/en/home" target="_blank">www.abakus.si</a>',
+'<br/>',
+'Twitter: <a href="https://twitter.com/AljazMali" target="_blank">@AljazMali</a>',
+'',
+''))
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(13351313203319334)
+,p_plug_name=>'Collaborators'
+,p_icon_css_classes=>'fa-group'
+,p_region_template_options=>'#DEFAULT#:t-Alert--horizontal:t-Alert--customIcons:t-Alert--info'
+,p_plug_template=>wwv_flow_api.id(34529473378052082613)
+,p_plug_display_sequence=>20
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<b>Przemyslaw Staniszewski</b>, Pretius, Poland',
+'<br/>',
+'<b>Bartosz Ostrowski</b>, Pretius, Poland'))
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(14318607674438689)
+,p_plug_name=>'License'
+,p_icon_css_classes=>'fa-legal'
+,p_region_template_options=>'#DEFAULT#:t-Alert--horizontal:t-Alert--defaultIcons:t-Alert--warning'
+,p_plug_template=>wwv_flow_api.id(34529473378052082613)
+,p_plug_display_sequence=>30
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'<pre>',
+'The MIT License (MIT)',
+'',
+'Copyright (c) 2016 OraOpenSource',
+'',
+'Permission is hereby granted, free of charge, to any person obtaining a copy',
+'of this software and associated documentation files (the "Software"), to deal',
+'in the Software without restriction, including without limitation the rights',
+'to use, copy, modify, merge, publish, distribute, sublicense, and/or sell',
+'copies of the Software, and to permit persons to whom the Software is',
+'furnished to do so, subject to the following conditions:',
+'',
+'The above copyright notice and this permission notice shall be included in all',
+'copies or substantial portions of the Software.',
+'',
+'THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR',
+'IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,',
+'FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE',
+'AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER',
+'LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,',
+'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE',
+'SOFTWARE.',
+'</pre>'))
+,p_plug_query_row_template=>1
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+end;
+/
+prompt --application/pages/page_00099
+begin
+wwv_flow_api.create_page(
+ p_id=>99
+,p_user_interface_id=>wwv_flow_api.id(34529508928472082687)
+,p_name=>'Learn more'
+,p_alias=>'LEARN'
+,p_page_mode=>'NORMAL'
+,p_step_title=>'&SUB_APP_NAME.'
+,p_step_sub_title_type=>'TEXT_WITH_SUBSTITUTIONS'
+,p_first_item=>'NO_FIRST_ITEM'
+,p_inline_css=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'pre {',
+'  font-size: 1.4rem;',
+'}'))
+,p_page_template_options=>'#DEFAULT#'
+,p_overwrite_navigation_list=>'N'
+,p_page_is_public_y_n=>'N'
+,p_cache_mode=>'NOCACHE'
+,p_help_text=>'No help is available for this page.'
+,p_last_updated_by=>'ALJAZ'
+,p_last_upd_yyyymmddhh24miss=>'20160220015702'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(13351082770319331)
+,p_plug_name=>'Learn  more'
+,p_icon_css_classes=>'fa-book'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(34722357068375879027)
+,p_plug_display_sequence=>10
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(13351952106319340)
+,p_plug_name=>'Region Display Selector'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(34529474822657082621)
+,p_plug_display_sequence=>20
+,p_include_in_reg_disp_sel_yn=>'N'
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_plug_source_type=>'NATIVE_DISPLAY_SELECTOR'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'JUMP'
+,p_attribute_03=>'Y'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(13352083781319341)
+,p_plug_name=>'Apex Text Messages'
+,p_icon_css_classes=>'fa-language'
+,p_region_template_options=>'#DEFAULT#:t-Alert--horizontal:t-Alert--customIcons:t-Alert--info'
+,p_plug_template=>wwv_flow_api.id(34529473378052082613)
+,p_plug_display_sequence=>20
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'When running an application and when an error occurs your users will see the message <b>“1 error has occurred”.</b> If you want to translate this message for example in Slovenian or Polish language you must define a Text Message in Shared Components.'
+||' In this case you create a text message with a name <b>"FLOW.SINGLE_VALIDATION_ERROR"</b>, a language code <b>"sl"</b> and a text with Slovenian translation. If you also want to have a Polish translation, then you create a new text message with the s'
+||'ame name <b>"FLOW.SINGLE_VALIDATION_ERROR"</b>, but with a different language code <b>"pl"</b> and a text with Polish translation. And you have to do this for every application. ',
+'<br/>',
+'<br/>',
+'In current release of Oracle Application Express (5.0) there are 462 documented internal text messages. With increasing  number of applications and languages, management of text messages must be centralized, consolidated and simplified. ',
+'<br/>',
+'<br/>',
+'Purpose of this application is to help you with management of Oracle Application Express internal text messages.'))
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(13352511304319346)
+,p_plug_name=>'How to start'
+,p_icon_css_classes=>'fa-question-circle'
+,p_region_template_options=>'#DEFAULT#:t-Alert--horizontal:t-Alert--customIcons:t-Alert--info'
+,p_plug_template=>wwv_flow_api.id(34529473378052082613)
+,p_plug_display_sequence=>30
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'First thing that you need are translated internal text messages. If you don''t already have them, then there is a good chance that you will find them at <a href="http://translate-apex.com" target="_blank">translate-apex.com</a>',
+'<ul>',
+'  <li>Download translations (CSV file) from <a href="http://translate-apex.com" target="_blank">translate-apex.com</a></li>',
+'  <li><a href="f?p=&APP_ID.:UPLOAD:&SESSION.">Upload CSV</a> file to Apex Text Messages application</li> ',
+'  <li>Review uploaded text messages (translations) in <a href="f?p=&APP_ID.:PREPARED:&SESSION.">Prepared Messages</a></li>',
+'  <li>Import prepared text messages into your applications in <a href="f?p=&APP_ID.:MANAGE:&SESSION.">Manage Messages</a></li>',
+'  <br/>',
+'</ul>',
+'If you already have a a translated application and you want to use this text messages, then you can <a href="f?p=&APP_ID.:IMPORT:&SESSION.">Import this application text messages to Prepared Messages</a>'))
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(13352661643319347)
+,p_plug_name=>'Upload CSV'
+,p_icon_css_classes=>'fa-upload'
+,p_region_template_options=>'#DEFAULT#:t-Alert--horizontal:t-Alert--customIcons:t-Alert--info'
+,p_plug_template=>wwv_flow_api.id(34529473378052082613)
+,p_plug_display_sequence=>40
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'On page Upload CSV you can upload CSV file from <a href="http://translate-apex.com" target="_blank">translate-apex.com</a>. translate-apex.com is an initiative from company <a href="http://pretius.com/" target="_blank">Pretius</a>, for community-prov'
+||'ided translations for APEX applications. Apex Text Messages application is compatible with CSV files, that are availabe at translate-apex.com. Uploaded file will be imported into prepared messages. Prepared messages are repository of all uploaded and'
+||' imported messages. Once you have a prepared messages, you can import this messages to all other applications. ',
+'',
+'',
+''))
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(13352780399319348)
+,p_plug_name=>'Import to Prepared'
+,p_icon_css_classes=>'fa-hdd-o'
+,p_region_template_options=>'#DEFAULT#:t-Alert--horizontal:t-Alert--customIcons:t-Alert--info'
+,p_plug_template=>wwv_flow_api.id(34529473378052082613)
+,p_plug_display_sequence=>50
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'Alternative to Upload CSV, if you already have a translated application and you want to use this text messages also for all other (future) applications, then you can import this application text messages to Prepared Messages. Prepared messages are re'
+||'pository of all uploaded and imported messages. Once you have a prepared messages, you can import this messages to all other applications.',
+'<br/>',
+'<br/>',
+'Report on this page will show you comparison between existing application text messages and prepared messages for selected language. Report will show you status for each message.',
+'<ul>',
+'<li>Matching : Text message is the same in select application and in prepared messages</li>',
+'<li>Difference :  Text message is not the same in select application and in prepared messages</li>',
+'<li>Message exists only in prepared messages : Text message exists only in current prepared messages.</li>',
+'<li>Message exists only in application: Text message exists only in selected application.</li>',
+'</ul>',
+'<br/>',
+'When you do an import to prepared messages, then current prepared messages for selected language will be deleted and replace with selected application text messages.'))
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(13352894569319349)
+,p_plug_name=>'Prepared Messages'
+,p_icon_css_classes=>'fa-edit'
+,p_region_template_options=>'#DEFAULT#:t-Alert--horizontal:t-Alert--customIcons:t-Alert--info'
+,p_plug_template=>wwv_flow_api.id(34529473378052082613)
+,p_plug_display_sequence=>60
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'Prepared messages are repository of all uploaded and imported messages. Once you have a prepared messages, you can import this messages to all other applications. There a three possible ways to prepare messages',
+'<ul>',
+'<li>Upload CSV</li>',
+'<li>Import from existing application (Import to Prepared)</li>',
+'<li>Create manually (suitable for adding small number of new messages)</li>',
+'</ul>',
+'Report on this page will show you all prepared messages for selected language.',
+'<br/>',
+'<br/>',
+'All messages in report can also be edited and deleted.'))
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(13352960967319350)
+,p_plug_name=>'Manage Messages'
+,p_icon_css_classes=>'fa-language'
+,p_region_template_options=>'#DEFAULT#:t-Alert--horizontal:t-Alert--customIcons:t-Alert--info'
+,p_plug_template=>wwv_flow_api.id(34529473378052082613)
+,p_plug_display_sequence=>70
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'Manage Messages is central part of this application. On this page you can import or merge prepared text messages into your applications. You can also delete existing application messages. This operations can be applied to all applications in workspac'
+||'e where Apex Text Messages application is installed.',
+'<br/>',
+'<br/>',
+'Until you select an application to import messages to and language of prepared messages, only a report with all existing applications and their translations is shown - Applications and languages.',
+'<br/>',
+'<br/>',
+'When an application is selected, second select list with languages is refreshed. Language names with icon in front of the name indicates that text messages for this application and language already exists.',
+'<br/>',
+'<br/>',
+'After both, an application and a language is selected, different operations can be performed',
+'<ul>',
+'<li>Import messages: Import (insert) prepared text messages into application. This option is possible only when there are no existing text messages in application.</li>',
+'<li>Merge messages: Merge (insert and update) prepared text messages into/with application.</li>',
+'<li>Append messages: Append (add only new) prepared text messages to application.</li>',
+'<li>Delete messages: Delete all text messages for selected language and selected application"</li>',
+'</ul>',
+'<b>After any of this operation a backup of existing state is performed.</b>',
+'<br/>',
+'<br/>',
+'After both, an application and a language is selected, additional report is shown - Messages. This report will is showing comparison between existing application text messages and prepared messages. Report is also showing status for each text message'
+||'.',
+'<ul>',
+'<li>Matching : Text message is the same in select application and in prepared messages</li>',
+'<li>Difference :  Text message is not the same in select application and in prepared messages</li>',
+'<li>Not imported into application : Text message exists only in prepared messages</li>',
+'<li>Message exists only in application: Text message exists only in selected application.</li>',
+'</ul>'))
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(14329983638282701)
+,p_plug_name=>'Copy Messages'
+,p_icon_css_classes=>'fa-copy'
+,p_region_template_options=>'#DEFAULT#:t-Alert--horizontal:t-Alert--customIcons:t-Alert--info'
+,p_plug_template=>wwv_flow_api.id(34529473378052082613)
+,p_plug_display_sequence=>80
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'With Copy Messages, messages can be copied or merged directly between two applications. ',
+'For source application only applications with existing translations are shown. After you select source application, all languages with existing text messages for selected source application are shown in language select list. Only after both, source a'
+||'pplication and language are select, it is possible to select target application. Target application names with icon in front of the name indicates that text messages for target application and selected language already exists.',
+'<br/>',
+'<br/>',
+'After all, an source and target application and a language is selected, different operations can be performed',
+'<ul>',
+'<li>Copy messages: Copy (insert) source text messages into target application. This option is possible only when there are no existing text messages in target application.</li>',
+'<li>Merge messages: Merge (insert and update) source text messages into/with target application.</li>',
+'<li>Append messages: Append (add only new) source text messages to target application.</li>',
+'</ul>',
+'<b>After any of this operation a backup of existing state is performed.</b>',
+'<br/>',
+'<br/>',
+'Report on this page will show you comparison between existing source application and target application text messages. Report will show you status for each message.',
+'<ul>',
+'<li>Matching : Text message is the same in source application and target application</li>',
+'<li>Difference :  Text message is not the same in source application and target application</li>',
+'<li>Only in source application : Text message exists only in source application</li>',
+'<li>Only in target application: Text message exists only in target application.</li>',
+'</ul>'))
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+end;
+/
 prompt --application/pages/page_00100
 begin
 wwv_flow_api.create_page(
@@ -15916,7 +16281,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160219192546'
+,p_last_upd_yyyymmddhh24miss=>'20160219223846'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(13349040333319311)
@@ -15960,7 +16325,7 @@ wwv_flow_api.create_report_region(
 '    2 rn, ',
 '    ''fa-edit'' card_icon,',
 '    ''Prepared Messages'' card_title,',
-'    ''Repository of uploaded or imported existing text messages'' card_text,',
+'    ''Repository of uploaded or imported text messages'' card_text,',
 '    '''' card_subtext,',
 '    ''f?p=&APP_ID.:PREPARED:&SESSION.''  card_link',
 '  from dual',
@@ -16019,7 +16384,28 @@ wwv_flow_api.create_report_region(
 '    '''' card_subtext,',
 '    ''f?p=&APP_ID.:BACKUPS:&SESSION.''  card_link',
 '  from dual',
-'  ',
+'  --',
+'  union all',
+'  --',
+'  select ',
+'    8 rn, ',
+'    ''fa-book'' card_icon,',
+'    ''Learn more'' card_title,',
+'    ''Additional information about application'' card_text,',
+'    '''' card_subtext,',
+'    ''f?p=&APP_ID.:LEARN:&SESSION.''  card_link',
+'  from dual  ',
+'  --',
+'  union all',
+'  --',
+'  select ',
+'    9 rn, ',
+'    ''fa-info-circle'' card_icon,',
+'    ''About'' card_title,',
+'    ''Author and Collaborators'' card_text,',
+'    '''' card_subtext,',
+'    ''f?p=&APP_ID.:ABOUT:&SESSION.''  card_link',
+'  from dual',
 '',
 ')',
 'order by ',
@@ -16128,7 +16514,7 @@ wwv_flow_api.create_page_plug(
 'In current release of Oracle Application Express (5.0) there are 462 documented internal text messages. With increasing  number of applications and languages, management of text messages must be centralized, consolidated and simplified. ',
 '<br/>',
 '<br/>',
-'Purpose of this application is to help you with all this tasks.'))
+'Purpose of this application is to help you with management of Oracle Application Express internal text messages.'))
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
@@ -16143,16 +16529,15 @@ wwv_flow_api.create_page_plug(
 ,p_include_in_reg_disp_sel_yn=>'N'
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'First thing that you need are translated internal text messages. If you don''t already have them, then there is a good chance that you will find them at <a href="http://translate-apex.com" target="_blank">translate-apex.com</a>',
 '<ul>',
 '  <li>Download translations (CSV file) from <a href="http://translate-apex.com" target="_blank">translate-apex.com</a></li>',
 '  <li><a href="f?p=&APP_ID.:UPLOAD:&SESSION.">Upload CSV</a> file to Apex Text Messages application</li> ',
 '  <li>Review uploaded text messages (translations) in <a href="f?p=&APP_ID.:PREPARED:&SESSION.">Prepared Messages</a></li>',
 '  <li>Import prepared text messages into your applications in <a href="f?p=&APP_ID.:MANAGE:&SESSION.">Manage Messages</a></li>',
 '  <br/>',
-'  <li>You already have a translated application, you can <a href="f?p=&APP_ID.:IMPORT:&SESSION.">Import this text messages to Prepared Messages</a></li>',
 '</ul>',
-'',
-'',
+'If you already have a a translated application and you want to use this text messages, then you can <a href="f?p=&APP_ID.:IMPORT:&SESSION.">Import this application text messages to Prepared Messages</a>',
 '',
 '',
 '',
