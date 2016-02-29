@@ -27,7 +27,7 @@ prompt APPLICATION 88328 - Text Messages
 -- Application Export:
 --   Application:     88328
 --   Name:            Text Messages
---   Date and Time:   02:05 Saturday February 20, 2016
+--   Date and Time:   02:44 Saturday February 20, 2016
 --   Exported By:     ALJAZ
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -40,7 +40,7 @@ prompt APPLICATION 88328 - Text Messages
 --     Items:                   60
 --     Validations:              5
 --     Processes:               38
---     Regions:                 61
+--     Regions:                 63
 --     Buttons:                 32
 --     Dynamic Actions:         24
 --   Shared Components:
@@ -119,7 +119,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_value_02=>'<link rel="shortcut icon" href="#APP_IMAGES#fav-icon.png"><link rel="icon" sizes="16x16" href="#APP_IMAGES#fav-icon-16.png"><link rel="icon" sizes="32x32" href="#APP_IMAGES#fav-icon-32.png"><link rel="apple-touch-icon" sizes="180x180" href="#APP_IMAG'
 ||'ES#fav-icon-128.png">'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160220015702'
+,p_last_upd_yyyymmddhh24miss=>'20160220024408'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>5
 ,p_ui_type_name => null
@@ -229,7 +229,7 @@ wwv_flow_api.create_list_item(
 wwv_flow_api.create_list_item(
  p_id=>wwv_flow_api.id(25851972578215959599)
 ,p_list_item_display_sequence=>80
-,p_list_item_link_text=>'Backup'
+,p_list_item_link_text=>'Backup & Restore'
 ,p_list_item_link_target=>'f?p=&APP_ID.:BACKUPS:&SESSION.::&DEBUG.::::'
 ,p_list_item_icon=>'fa-recycle'
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
@@ -12640,7 +12640,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160219200556'
+,p_last_upd_yyyymmddhh24miss=>'20160220024008'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(15462431705147143)
@@ -12752,7 +12752,7 @@ wwv_flow_api.create_page_button(
 ,p_button_template_options=>'#DEFAULT#:t-Button--iconLeft'
 ,p_button_template_id=>wwv_flow_api.id(34529503869723082663)
 ,p_button_is_hot=>'Y'
-,p_button_image_alt=>'Restore Messages'
+,p_button_image_alt=>'Restore messages'
 ,p_button_position=>'BODY'
 ,p_button_redirect_url=>'javascript:do_restore();'
 ,p_button_condition=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
@@ -16040,7 +16040,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160220015702'
+,p_last_upd_yyyymmddhh24miss=>'20160220024408'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(13351082770319331)
@@ -16262,6 +16262,52 @@ wwv_flow_api.create_page_plug(
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(14330027891282702)
+,p_plug_name=>'Application Messages'
+,p_icon_css_classes=>'fa-newspaper-o'
+,p_region_template_options=>'#DEFAULT#:t-Alert--horizontal:t-Alert--customIcons:t-Alert--info'
+,p_plug_template=>wwv_flow_api.id(34529473378052082613)
+,p_plug_display_sequence=>90
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'Text messages in Oracle Application Express can be managed in Shared Components. If you have many applications in a single workspace, you have to switch between applications to access their text messages.',
+'<br/>',
+'<br/>',
+'Application Messages enables you to view, create, edit and delete text messages for all applications in current workspace on a single page.'))
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(14330174257282703)
+,p_plug_name=>'Backup & Restore'
+,p_icon_css_classes=>'fa-recycle'
+,p_region_template_options=>'#DEFAULT#:t-Alert--horizontal:t-Alert--customIcons:t-Alert--info'
+,p_plug_template=>wwv_flow_api.id(34529473378052082613)
+,p_plug_display_sequence=>100
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'Whenever an operation on existing text messages is performed, a backup of existing state is created. This backups are performed automatically. ',
+'<br/><br/>',
+'If you wish you can also perform a manual backup. If "- all -" is selected as an application then you can perform backups of all applications. This operation will create a backups of all applications and all text messages in all languages. ',
+'<br/>',
+'If specific application is selected then backups are created for all text messages for all languages for this application.',
+'</br>',
+'</br>',
+'By clicking a magnifier icon at individual backup a new modal page is opened. On this page you can',
+'<ul>',
+'<li>View text messages that were backed up</li>',
+'<li>Perfom a restore</li>',
+'<li>Delete this backup</li>',
+'</ul>',
+'<b>When you perform a restore, existing text messages for this application and language will be deleted and replaced with backed up text messages. Before this operation, a backup of existing state is automatically created.</b>'))
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
 end;
 /
 prompt --application/pages/page_00100
@@ -16281,7 +16327,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160219223846'
+,p_last_upd_yyyymmddhh24miss=>'20160220022251'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(13349040333319311)
@@ -16379,7 +16425,7 @@ wwv_flow_api.create_report_region(
 '  select ',
 '    7 rn, ',
 '    ''fa-recycle'' card_icon,',
-'    ''Backup'' card_title,',
+'    ''Backup & Restore'' card_title,',
 '    ''Backup and restore of text messages'' card_text,',
 '    '''' card_subtext,',
 '    ''f?p=&APP_ID.:BACKUPS:&SESSION.''  card_link',
