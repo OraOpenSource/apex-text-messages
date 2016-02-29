@@ -27,7 +27,7 @@ prompt APPLICATION 88328 - Text Messages
 -- Application Export:
 --   Application:     88328
 --   Name:            Text Messages
---   Date and Time:   02:44 Saturday February 20, 2016
+--   Date and Time:   03:43 Saturday February 20, 2016
 --   Exported By:     ALJAZ
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -119,7 +119,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_value_02=>'<link rel="shortcut icon" href="#APP_IMAGES#fav-icon.png"><link rel="icon" sizes="16x16" href="#APP_IMAGES#fav-icon-16.png"><link rel="icon" sizes="32x32" href="#APP_IMAGES#fav-icon-32.png"><link rel="apple-touch-icon" sizes="180x180" href="#APP_IMAG'
 ||'ES#fav-icon-128.png">'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160220024408'
+,p_last_upd_yyyymmddhh24miss=>'20160220025325'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>5
 ,p_ui_type_name => null
@@ -16040,7 +16040,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160220024408'
+,p_last_upd_yyyymmddhh24miss=>'20160220025325'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(13351082770319331)
@@ -16212,14 +16212,13 @@ wwv_flow_api.create_page_plug(
 '<li>Append messages: Append (add only new) prepared text messages to application.</li>',
 '<li>Delete messages: Delete all text messages for selected language and selected application"</li>',
 '</ul>',
-'<b>After any of this operation a backup of existing state is performed.</b>',
+'<b>Before any of this operation a backup of existing state is performed.</b>',
 '<br/>',
 '<br/>',
-'After both, an application and a language is selected, additional report is shown - Messages. This report will is showing comparison between existing application text messages and prepared messages. Report is also showing status for each text message'
-||'.',
+'After both, an application and a language is selected, additional report is shown - Messages. This report is showing comparison between existing application text messages and prepared messages. Report is also showing status for each text message.',
 '<ul>',
-'<li>Matching : Text message is the same in select application and in prepared messages</li>',
-'<li>Difference :  Text message is not the same in select application and in prepared messages</li>',
+'<li>Matching : Text message is the same in selected application and in prepared messages</li>',
+'<li>Difference :  Text message is not the same in selected application and in prepared messages</li>',
 '<li>Not imported into application : Text message exists only in prepared messages</li>',
 '<li>Message exists only in application: Text message exists only in selected application.</li>',
 '</ul>'))
@@ -16239,16 +16238,16 @@ wwv_flow_api.create_page_plug(
 ,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'With Copy Messages, messages can be copied or merged directly between two applications. ',
 'For source application only applications with existing translations are shown. After you select source application, all languages with existing text messages for selected source application are shown in language select list. Only after both, source a'
-||'pplication and language are select, it is possible to select target application. Target application names with icon in front of the name indicates that text messages for target application and selected language already exists.',
+||'pplication and language are selected, it is possible to select target application. Target application names with icon in front of the name indicates that text messages for target application and selected language already exists.',
 '<br/>',
 '<br/>',
-'After all, an source and target application and a language is selected, different operations can be performed',
+'After a source and a target application and a language is selected, different operations can be performed',
 '<ul>',
 '<li>Copy messages: Copy (insert) source text messages into target application. This option is possible only when there are no existing text messages in target application.</li>',
 '<li>Merge messages: Merge (insert and update) source text messages into/with target application.</li>',
 '<li>Append messages: Append (add only new) source text messages to target application.</li>',
 '</ul>',
-'<b>After any of this operation a backup of existing state is performed.</b>',
+'<b>Before any of this operation a backup of existing state is performed.</b>',
 '<br/>',
 '<br/>',
 'Report on this page will show you comparison between existing source application and target application text messages. Report will show you status for each message.',
