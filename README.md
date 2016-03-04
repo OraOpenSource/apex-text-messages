@@ -4,3 +4,12 @@ When running an application and when an error occurs your users will see the mes
 In current release of Oracle Application Express (5.0) there are 462 documented internal text messages. With increasing number of applications and languages, management of text messages must be centralized, consolidated and simplified. 
 
 Purpose of this application is to help you with management of Oracle Application Express internal text messages.
+
+## How to start
+First thing that you need are translated internal text messages. If you don't already have them, then there is a good chance that you will find them at translate-apex.com
+* Download translations (CSV file) from translate-apex.com
+* Upload CSV file to Apex Text Messages application
+* Review uploaded text messages (translations) in Prepared Messages
+* Import prepared text messages into your applications in Manage Messages
+
+If you already have a a translated application and you want to use this text messages, then you can Import this application text messages to Prepared Messages
