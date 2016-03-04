@@ -37,3 +37,24 @@ Prepared messages are repository of all uploaded and imported messages. Once you
 Report on this page will show you all prepared messages for selected language. 
 
 All messages in report can also be edited and deleted.
+
+## Manage Messages
+Manage Messages is central part of this application. On this page you can import or merge prepared text messages into your applications. You can also delete existing application messages. This operations can be applied to all applications in workspace where Apex Text Messages application is installed. 
+
+Until you select an application to import messages to and language of prepared messages, only a report with all existing applications and their translations is shown - Applications and languages. 
+
+When an application is selected, second select list with languages is refreshed. Language names with icon in front of the name indicates that text messages for this application and language already exists. 
+
+After both, an application and a language is selected, different operations can be performed
+* Import messages: Import (insert) prepared text messages into application. This option is possible only when there are no existing text messages in application.
+* Merge messages: Merge (insert and update) prepared text messages into/with application.
+* Append messages: Append (add only new) prepared text messages to application.
+* Delete messages: Delete all text messages for selected language and selected application"
+
+**Before any of this operation a backup of existing state is performed.**
+
+After both, an application and a language is selected, additional report is shown - Messages. This report is showing comparison between existing application text messages and prepared messages. Report is also showing status for each text message.
+Matching : Text message is the same in selected application and in prepared messages
+Difference : Text message is not the same in selected application and in prepared messages
+Not imported into application : Text message exists only in prepared messages
+Message exists only in application: Text message exists only in selected application.
