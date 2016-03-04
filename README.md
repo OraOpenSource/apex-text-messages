@@ -1,3 +1,5 @@
+* [How to start](#howtostart)
+
 # Apex Text Messages
 Oracle Application Express is from English translated into German, Spanish, French, Italian, Japanese, Korean, Brazilian Portuguese, Simplified Chinese, and Traditional Chinese. If your application uses a language that is not among the ten languages into which Oracle Application Express is translated, you must translate messages displayed by the Application Express reporting engine. 
 
@@ -7,7 +9,7 @@ In current release of Oracle Application Express (5.0) there are 462 documented 
 
 Purpose of this application is to help you with management of Oracle Application Express internal text messages.
 
-## How to start
+## <a name="howtostart"></a> How to start
 First you download and install this application. After installation you need translations for internal text messages. If you don't already have them, then there is a good chance that you will find them at [translate-apex.com](http://translate-apex.com). So first step are:
 
 * Download and install this application
