@@ -1,12 +1,12 @@
 * [How to start](#howtostart)
-* [Upload CSV](#)
-* [Import to Prepared](#)
-* [Prepared Messages](#)
-* [Manage Messages](#)
-* [Copy Messages](#)
-* [Application Messages](#)
-* [Backup & Restore](#)
-* [Supported Apex Versions](#)
+* [Upload CSV](#upload)
+* [Import to Prepared](#import)
+* [Prepared Messages](#prepared)
+* [Manage Messages](#manage)
+* [Copy Messages](#copy)
+* [Application Messages](#appmessages)
+* [Backup & Restore](#backup)
+* [Supported Apex Versions](#appver)
 
 # Apex Text Messages
 Oracle Application Express is from English translated into German, Spanish, French, Italian, Japanese, Korean, Brazilian Portuguese, Simplified Chinese, and Traditional Chinese. If your application uses a language that is not among the ten languages into which Oracle Application Express is translated, you must translate messages displayed by the Application Express reporting engine. 
