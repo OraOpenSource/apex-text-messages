@@ -8,7 +8,9 @@ In current release of Oracle Application Express (5.0) there are 462 documented 
 Purpose of this application is to help you with management of Oracle Application Express internal text messages.
 
 ## How to start
-First you download and install this application. After installation you need translations for internal text messages. If you don't already have them, then there is a good chance that you will find them at [translate-apex.com](http://translate-apex.com)
+First you download and install this application. After installation you need translations for internal text messages. If you don't already have them, then there is a good chance that you will find them at [translate-apex.com](http://translate-apex.com). So first step are:
+
+* Download and install this application
 * Download translations (CSV file) from translate-apex.com
 * Upload CSV file to Apex Text Messages application
 * Review uploaded text messages (translations) in Prepared Messages
