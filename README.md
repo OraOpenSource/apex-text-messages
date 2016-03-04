@@ -101,3 +101,10 @@ By clicking a magnifier icon at individual backup a new modal page is opened. On
 Apex Text Messages application is compatible with Oracle Application Express 5.0 and above. If you are using version below 5.0, you won't be able to use this application. But you can still simplify management of your traslations by going to [translate-apex.com](http://translate-apex.com). You can download installation script for older versions of Apex and you can use this script to install traslation into your application. 
 
 There is also another, even better option. Upgrade your Apex to version 5.0 - you will not regret it!
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> a55d2705f0d1d6321cdcf2051361638e7fd9e487
