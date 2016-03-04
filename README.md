@@ -54,7 +54,26 @@ After both, an application and a language is selected, different operations can 
 **Before any of this operation a backup of existing state is performed.**
 
 After both, an application and a language is selected, additional report is shown - Messages. This report is showing comparison between existing application text messages and prepared messages. Report is also showing status for each text message.
-Matching : Text message is the same in selected application and in prepared messages
-Difference : Text message is not the same in selected application and in prepared messages
-Not imported into application : Text message exists only in prepared messages
-Message exists only in application: Text message exists only in selected application.
+* Matching : Text message is the same in selected application and in prepared messages
+* Difference : Text message is not the same in selected application and in prepared messages
+* Not imported into application : Text message exists only in prepared messages
+* Message exists only in application: Text message exists only in selected application.
+
+## Copy Messages
+With Copy Messages, messages can be copied or merged directly between two applications. For source application only applications with existing translations are shown. After you select source application, all languages with existing text messages for selected source application are shown in language select list. Only after both, source application and language are selected, it is possible to select target application. Target application names with icon in front of the name indicates that text messages for target application and selected language already exists. 
+
+After a source and a target application and a language is selected, different operations can be performed
+* Copy messages: Copy (insert) source text messages into target application. This option is possible only when there are no existing text messages in target application.
+* Merge messages: Merge (insert and update) source text messages into/with target application.
+* Append messages: Append (add only new) source text messages to target application.
+
+**Before any of this operation a backup of existing state is performed.**
+
+Report on this page will show you comparison between existing source application and target application text messages. Report will show you status for each message.
+* Matching : Text message is the same in source application and target application
+* Difference : Text message is not the same in source application and target application
+* Only in source application : Text message exists only in source application
+* Only in target application: Text message exists only in target application.
+
+
+
