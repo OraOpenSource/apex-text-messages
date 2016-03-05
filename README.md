@@ -7,7 +7,7 @@
 * [Application Messages](#appmessages)
 * [Backup & Restore](#backup)
 * [Supported Apex Versions](#appver)
-* [Install](#install)
+* [Installation](#install)
 
 # Apex Text Messages
 Oracle Application Express is from English translated into German, Spanish, French, Italian, Japanese, Korean, Brazilian Portuguese, Simplified Chinese, and Traditional Chinese. If your application uses a language that is not among the ten languages into which Oracle Application Express is translated, you must translate messages displayed by the Application Express reporting engine. 
@@ -113,4 +113,4 @@ Apex Text Messages application is compatible with Oracle Application Express 5.0
 
 There is also another, even better option. Upgrade your Apex to version 5.0 - you will not regret it!
 
-## <a name="install"></a> Install
+## <a name="install"></a> Installation
