@@ -114,3 +114,10 @@ Apex Text Messages application is compatible with Oracle Application Express 5.0
 There is also another, even better option. Upgrade your Apex to version 5.0 - you will not regret it!
 
 ## <a name="install"></a> Installation
+All you need for installation is export file with Apex application. This export file already includes supporting objects (tables, triggers, ...). If you wish you can do install or remove database objects with a separate scripts.
+
+* f88328.sql            Apex application export ( including supporting objects )
+* tm_db_install.sql     Create Apex Text Messages database objects ( if needed to run separately )
+* tm_db_remove.sql      Remove Apex Text Messages database objects ( if needed to run separately )
+
+
