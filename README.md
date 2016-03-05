@@ -30,7 +30,7 @@ First you download and install this application. After installation you need tra
 If you already have a a translated application and you want to use this text messages, then you can Import this application text messages to Prepared Messages
 
 ## <a name="upload"></a> Upload CSV
-On page Upload CSV you can upload CSV file from [translate-apex.com](http://translate-apex.com). Translate-apex.com is an initiative from company [Pretius](http://pretius.com), for community-provided translations for APEX applications. Apex Text Messages application is compatible with CSV files, that are availabe at translate-apex.com. Uploaded file will be imported into prepared messages. Prepared messages are repository of all uploaded and imported messages. Once you have a prepared messages, you can import this messages to all other applications.
+On page Upload CSV you can upload CSV file from [translate-apex.com](http://translate-apex.com). Translate-apex.com is an initiative from company [Pretius](http://pretius.com), for community-provided translations for APEX applications. Apex Text Messages application is compatible with CSV files, that are available at translate-apex.com. Uploaded file will be imported into prepared messages. Prepared messages are repository of all uploaded and imported messages. Once you have a prepared messages, you can import this messages to all other applications.
 
 ## <a name="import"></a> Import to Prepared
 Alternative to Upload CSV, if you already have a translated application and you want to use this text messages also for all other (future) applications, then you can import this application text messages to Prepared Messages. Prepared messages are repository of all uploaded and imported messages. Once you have a prepared messages, you can import this messages to all other applications.
@@ -98,20 +98,20 @@ Application Messages enables you to view, create, edit and delete text messages 
 ## <a name="backup"></a> Backup & Restore
 Whenever an operation on existing text messages is performed, a backup of existing state is created. This backups are performed automatically.
 
-If you wish you can also perform a manual backup. If "- all -" is selected as an application then you can perform backups of all applications. This operation will create a backups of all applications and all text messages in all languages.
+If you wish you can also perform a manual backup. If `- all -` is selected as an application then you can perform backups of all applications. This operation will create a backups of all applications and all text messages in all languages.
 If specific application is selected then backups are created for all text messages for all languages for this application.
 
 By clicking a magnifier icon at individual backup a new modal page is opened. On this page you can
 * View text messages that were backed up
-* Perfom a restore
+* Perform a restore
 * Delete this backup
 
 **When you perform a restore, existing text messages for this application and language will be deleted and replaced with backed up text messages. Before this operation, a backup of existing state is automatically created.**
 
 ## <a name="appver"></a> Supported Apex Versions
-Apex Text Messages application is compatible with Oracle Application Express 5.0 and above. If you are using version below 5.0, you won't be able to use this application. But you can still simplify management of your traslations by going to [translate-apex.com](http://translate-apex.com). You can download installation script for older versions of Apex and you can use this script to install traslation into your application.
+Apex Text Messages application is compatible with Oracle Application Express 5.0 and above. If you are using version below 5.0, you won't be able to use this application. But you can still simplify management of your translations by going to [translate-apex.com](http://translate-apex.com). You can download installation script for older versions of Apex and you can use this script to install translation into your application.
 
 There is also another, even better option. Upgrade your Apex to version 5.0 - you will not regret it!
 
 ## <a name="install"></a> Installation
-All you need for installation is export file with Apex application (f88328.sql). This export file already includes supporting objects (tables, triggers, ...). If you wish you can install or remove database objects also with a separate scripts (tm_db_install.sql or tm_db_remove.sql).
+All you need for installation is export file with Apex application (`f88328.sql`). This export file already includes supporting objects (tables, triggers, ...). If you wish you can install or remove database objects also with a separate scripts (`tm_db_install.sql` or `tm_db_remove.sql`).
