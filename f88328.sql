@@ -27,7 +27,7 @@ prompt APPLICATION 88328 - Text Messages
 -- Application Export:
 --   Application:     88328
 --   Name:            Text Messages
---   Date and Time:   09:24 Saturday February 20, 2016
+--   Date and Time:   14:09 Saturday February 20, 2016
 --   Exported By:     ALJAZ
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -119,7 +119,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_value_02=>'<link rel="shortcut icon" href="#APP_IMAGES#fav-icon.png"><link rel="icon" sizes="16x16" href="#APP_IMAGES#fav-icon-16.png"><link rel="icon" sizes="32x32" href="#APP_IMAGES#fav-icon-32.png"><link rel="apple-touch-icon" sizes="180x180" href="#APP_IMAG'
 ||'ES#fav-icon-128.png">'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160220092400'
+,p_last_upd_yyyymmddhh24miss=>'20160220140749'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>6
 ,p_ui_type_name => null
@@ -9670,12 +9670,12 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160220063146'
+,p_last_upd_yyyymmddhh24miss=>'20160220140124'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(26394741342031241)
 ,p_plug_name=>'Info'
-,p_region_template_options=>'#DEFAULT#:t-Alert--horizontal:t-Alert--defaultIcons:t-Alert--warning'
+,p_region_template_options=>'#DEFAULT#:t-Alert--horizontal:t-Alert--defaultIcons:t-Alert--info'
 ,p_plug_template=>wwv_flow_api.id(34529473378052082613)
 ,p_plug_display_sequence=>30
 ,p_include_in_reg_disp_sel_yn=>'N'
@@ -9697,23 +9697,11 @@ wwv_flow_api.create_page_plug(
 '    count(*)',
 '  into',
 '    l_cnt',
-'  from (  ',
-'    select ',
-'      1',
-'    from',
-'      tm_prep_messages ',
-'    where',
-'      language_code = :P1_CODE and',
-'      rownum < 2',
-'  union all',
-'    select',
-'      1',
-'    from ',
-'      apex_application_translations',
-'    where ',
-'      language_code = :P1_CODE',
-'  );',
-'  ',
+'  from',
+'    tm_prep_messages ',
+'  where',
+'    language_code = :P1_CODE and',
+'    rownum < 2;',
 '    ',
 '  if l_cnt = 0 then',
 '    return true;',
@@ -9759,6 +9747,7 @@ wwv_flow_api.create_page_plug(
 '    tm_languages lang',
 '  where ',
 '    trans.language_code = lang.code (+) and',
+'    trans.workspace = :TM_CURRENT_WORKSPACE and',
 '    (lang.code = :P1_CODE or :P1_CODE is null) and',
 '    (trans.application_id = :P1_APP_ID or :P1_APP_ID is null)',
 'order by',
@@ -9800,6 +9789,7 @@ wwv_flow_api.create_page_plug(
 wwv_flow_api.create_worksheet(
  p_id=>wwv_flow_api.id(23644320072109766)
 ,p_max_row_count=>'1000000'
+,p_no_data_found_message=>'No data found.'
 ,p_show_nulls_as=>'-'
 ,p_pagination_type=>'ROWS_X_TO_Y'
 ,p_pagination_display_pos=>'BOTTOM_RIGHT'
@@ -10481,8 +10471,8 @@ wwv_flow_api.create_page_item(
 '<pre>',
 'Select language to import. ',
 '',
-'Lines with icon in front of language name indicates that text messages for this language already ',
-'exists.',
+'Lines with icon in front of language name indicates that text messages for this ',
+'language already exists.',
 '',
 'Only languages with prepared text messages are shown.',
 '</pre>'))
@@ -10758,6 +10748,7 @@ wwv_flow_api.create_page_process(
 'declare ',
 '',
 '  l_id number;',
+'  l_cnt number;',
 '  ',
 'begin',
 '',
@@ -10789,6 +10780,16 @@ wwv_flow_api.create_page_process(
 '    loop',
 '        apex_lang.delete_message(cur.translation_entry_id);',
 '    end loop;',
+'    ',
+'    ',
+'    select count(*)',
+'    into l_cnt',
+'    from tm_prep_messages',
+'    where language_code = :P1_CODE;',
+'    ',
+'    if l_cnt = 0 then',
+'      :P1_CODE := null;',
+'    end if;   ',
 '    ',
 'end;'))
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
@@ -13185,7 +13186,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160220064235'
+,p_last_upd_yyyymmddhh24miss=>'20160220140310'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(23640714797109730)
@@ -13687,7 +13688,7 @@ wwv_flow_api.create_page_item(
 ,p_lov_null_text=>'- choose application -'
 ,p_cHeight=>1
 ,p_tag_attributes=>'style="font-family: ''FontAwesome'', Helvetica;"'
-,p_grid_label_column_span=>1
+,p_grid_label_column_span=>2
 ,p_field_template=>wwv_flow_api.id(34529503210378082660)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'NO'
@@ -13695,8 +13696,8 @@ wwv_flow_api.create_page_item(
 '<pre>',
 'Select target application.',
 '',
-'Lines with icon in front of target application name indicates that text messages for this selected ',
-'language and target application already exists.',
+'Lines with icon in front of target application name indicates that text messages',
+'for this selected language and target application already exists.',
 '</pre>',
 '',
 ''))
@@ -13763,7 +13764,8 @@ wwv_flow_api.create_page_item(
 ,p_lov_display_extra=>'NO'
 ,p_help_text=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 '<pre>',
-'All languages with existing text messages for selected source application are shown.',
+'All languages with existing text messages for selected source application are ',
+'shown.',
 '</pre>'))
 ,p_attribute_01=>'NONE'
 ,p_attribute_02=>'N'
@@ -13792,7 +13794,7 @@ wwv_flow_api.create_page_item(
 ,p_lov_display_null=>'YES'
 ,p_lov_null_text=>'- choose application -'
 ,p_cHeight=>1
-,p_grid_label_column_span=>1
+,p_grid_label_column_span=>2
 ,p_field_template=>wwv_flow_api.id(34529503210378082660)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'NO'
@@ -14994,7 +14996,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160220065804'
+,p_last_upd_yyyymmddhh24miss=>'20160220135934'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(23645041625109773)
@@ -15183,6 +15185,7 @@ wwv_flow_api.create_page_plug(
 wwv_flow_api.create_worksheet(
  p_id=>wwv_flow_api.id(25277915226549878)
 ,p_max_row_count=>'1000000'
+,p_no_data_found_message=>'No data found.'
 ,p_show_nulls_as=>'-'
 ,p_pagination_type=>'ROWS_X_TO_Y'
 ,p_pagination_display_pos=>'BOTTOM_RIGHT'
@@ -16108,7 +16111,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160220091925'
+,p_last_upd_yyyymmddhh24miss=>'20160220140749'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(13351126683319332)
@@ -16161,9 +16164,11 @@ wwv_flow_api.create_page_plug(
 ,p_include_in_reg_disp_sel_yn=>'Y'
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'<b>Przemyslaw Staniszewski</b>, Pretius, Poland',
+'<b>Przemyslaw Staniszewski</b>, <a href="http://pretius.com" target="_blank">Pretius</a>, Poland',
 '<br/>',
-'<b>Bartosz Ostrowski</b>, Pretius, Poland'))
+'<b>Bartosz Ostrowski</b>, <a href="http://pretius.com" target="_blank">Pretius</a>, Poland',
+'',
+''))
 ,p_plug_query_row_template=>1
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
