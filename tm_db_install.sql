@@ -2,6 +2,7 @@ spool tm_db_install.log
 
 SET DEFINE OFF;
 
+
 declare 
 
   type arr_install_objects is table of varchar2(30) index by pls_integer;
