@@ -10,13 +10,15 @@
 * [Installation](#install)
 
 # Apex Text Messages
-Oracle Application Express is from English translated into German, Spanish, French, Italian, Japanese, Korean, Brazilian Portuguese, Simplified Chinese, and Traditional Chinese. If your application uses a language that is not among the ten languages into which Oracle Application Express is translated, you must translate messages displayed by the Application Express reporting engine.
+Oracle Application Express supports English, German, Spanish, French, Italian, Japanese, Korean, Brazilian Portuguese, Simplified Chinese, and Traditional Chinese languages. If your application uses a language that is not among the ten languages into which APEX is translated, you must translate messages displayed by the APEX reporting engine.
 
-When running an application and when an error occurs your users will see the message `1 error has occurred` If you want to translate this message for example in Slovenian or Polish language you must define a Text Message in Shared Components. In this case you create a text message with a name `FLOW.SINGLE_VALIDATION_ERROR`, a language code `sl` and a text with Slovenian translation. If you also want to have a Polish translation, then you create a new text message with the same name `FLOW.SINGLE_VALIDATION_ERROR`, but with a different language code `pl` and a text with Polish translation. And you have to do this for every application.
+When running an application and an error occurs users will see the message `1 error has occurred`. If you want to translate this message to a different language, Slovenian or Polish for example, you must define a Text Message in Shared Components. In this case you create a Text Message with a name `FLOW.SINGLE_VALIDATION_ERROR`, a language code `sl`, and a text with Slovenian translation. If you also want to have a Polish translation, then you create a new text message with the same name `FLOW.SINGLE_VALIDATION_ERROR`, but with a different language code `pl` and a text with Polish translation. You have to do this for every application.
 
-In current release of Oracle Application Express (5.0) there are 462 documented internal text messages. With increasing number of applications and languages, management of text messages must be centralized, consolidated and simplified.
+In current release of Oracle Application Express (5.0) there are 462 documented internal text messages. With increasing number of applications and languages, management of text messages must be centralized, consolidated, and simplified.
 
-Purpose of this application is to help you with management of Oracle Application Express internal text messages.
+The Purpose of this application is to help you manage APEX's internal Text Messages. For more infomation and to download the application go to the project's [Github page](https://github.com/OraOpenSource/apex-text-messages)
+
+**Demo:** [apex.oracle.com/pls/apex/f?p=88328](https://apex.oracle.com/pls/apex/f?p=88328)  username/password: `demo/demo123`
 
 ## <a name="howtostart"></a> How to start
 First you download and install this application. After installation you need translations for internal text messages. If you don't already have them, then there is a good chance that you will find them at [translate-apex.com](http://translate-apex.com). So first step are:
