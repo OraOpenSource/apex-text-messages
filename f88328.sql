@@ -27,7 +27,7 @@ prompt APPLICATION 88328 - Text Messages
 -- Application Export:
 --   Application:     88328
 --   Name:            Text Messages
---   Date and Time:   14:09 Saturday February 20, 2016
+--   Date and Time:   15:29 Saturday February 20, 2016
 --   Exported By:     ALJAZ
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -89,7 +89,7 @@ wwv_flow_api.create_flow(
 ,p_display_id=>nvl(wwv_flow_application_install.get_application_id,88328)
 ,p_owner=>nvl(wwv_flow_application_install.get_schema,'TM')
 ,p_name=>nvl(wwv_flow_application_install.get_application_name,'Text Messages')
-,p_alias=>nvl(wwv_flow_application_install.get_application_alias,'F_766882376288328')
+,p_alias=>nvl(wwv_flow_application_install.get_application_alias,'ATM')
 ,p_page_view_logging=>'YES'
 ,p_page_protection_enabled_y_n=>'Y'
 ,p_checksum_salt=>'30BBCEA5CBA222E7D6BA3D6B7703AC3C626058D39E05005E4667724CBA199BE6'
@@ -114,12 +114,12 @@ wwv_flow_api.create_flow(
 ,p_csv_encoding=>'Y'
 ,p_auto_time_zone=>'N'
 ,p_substitution_string_01=>'SUB_APP_NAME'
-,p_substitution_value_01=>'Apex Text Messages'
+,p_substitution_value_01=>'APEX Text Messages'
 ,p_substitution_string_02=>'APP_FAVICONS'
 ,p_substitution_value_02=>'<link rel="shortcut icon" href="#APP_IMAGES#fav-icon.png"><link rel="icon" sizes="16x16" href="#APP_IMAGES#fav-icon-16.png"><link rel="icon" sizes="32x32" href="#APP_IMAGES#fav-icon-32.png"><link rel="apple-touch-icon" sizes="180x180" href="#APP_IMAG'
 ||'ES#fav-icon-128.png">'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160220140749'
+,p_last_upd_yyyymmddhh24miss=>'20160220152132'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>6
 ,p_ui_type_name => null
@@ -16236,7 +16236,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160220092400'
+,p_last_upd_yyyymmddhh24miss=>'20160220152046'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(13351082770319331)
@@ -16268,7 +16268,7 @@ wwv_flow_api.create_page_plug(
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(13352083781319341)
-,p_plug_name=>'Apex Text Messages'
+,p_plug_name=>'APEX Text Messages'
 ,p_icon_css_classes=>'fa-language'
 ,p_region_template_options=>'#DEFAULT#:t-Alert--horizontal:t-Alert--customIcons:t-Alert--info'
 ,p_plug_template=>wwv_flow_api.id(34529473378052082613)
@@ -16303,7 +16303,7 @@ wwv_flow_api.create_page_plug(
 'First thing that you need are translated internal text messages. If you don''t already have them, then there is a good chance that you will find them at <a href="http://translate-apex.com" target="_blank">translate-apex.com</a>',
 '<ul>',
 '  <li>Download translations (CSV file) from <a href="http://translate-apex.com" target="_blank">translate-apex.com</a></li>',
-'  <li><a href="f?p=&APP_ID.:UPLOAD:&SESSION.">Upload CSV</a> file to Apex Text Messages application</li> ',
+'  <li><a href="f?p=&APP_ID.:UPLOAD:&SESSION.">Upload CSV</a> file to APEX Text Messages application</li> ',
 '  <li>Review uploaded text messages (translations) in <a href="f?p=&APP_ID.:PREPARED:&SESSION.">Prepared Messages</a></li>',
 '  <li>Import prepared text messages into your applications in <a href="f?p=&APP_ID.:MANAGE:&SESSION.">Manage Messages</a></li>',
 '  <br/>',
@@ -16325,7 +16325,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'On page Upload CSV you can upload CSV file from <a href="http://translate-apex.com" target="_blank">translate-apex.com</a>. translate-apex.com is an initiative from company <a href="http://pretius.com/" target="_blank">Pretius</a>, for community-prov'
-||'ided translations for APEX applications. Apex Text Messages application is compatible with CSV files, that are availabe at translate-apex.com. Uploaded file will be imported into prepared messages. Prepared messages are repository of all uploaded and'
+||'ided translations for APEX applications. APEX Text Messages application is compatible with CSV files, that are availabe at translate-apex.com. Uploaded file will be imported into prepared messages. Prepared messages are repository of all uploaded and'
 ||' imported messages. Once you have a prepared messages, you can import this messages to all other applications. ',
 '',
 '',
@@ -16399,7 +16399,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'Manage Messages is central part of this application. On this page you can import or merge prepared text messages into your applications. You can also delete existing application messages. This operations can be applied to all applications in workspac'
-||'e where Apex Text Messages application is installed.',
+||'e where APEX Text Messages application is installed.',
 '<br/>',
 '<br/>',
 'Until you select an application to import messages to and language of prepared messages, only a report with all existing applications and their translations is shown - Applications and languages.',
@@ -16524,7 +16524,7 @@ wwv_flow_api.create_page_plug(
 ,p_include_in_reg_disp_sel_yn=>'Y'
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'Apex Text Messages application is compatible with Apex 5.0 and above. If you are using version below 5.0, you won''t be able to use this application. But you can still simplify management of your traslations by going to <a href="http://translate-apex.'
+'APEX Text Messages application is compatible with APEX 5.0 and above. If you are using version below 5.0, you won''t be able to use this application. But you can still simplify management of your traslations by going to <a href="http://translate-apex.'
 ||'com" target="_blank">translate-apex.com</a>. You can download installation script for older versions of Apex and you can use this script to install traslation into your application.',
 '<br/>',
 '<br/>',
@@ -16554,11 +16554,11 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'ALJAZ'
-,p_last_upd_yyyymmddhh24miss=>'20160220092003'
+,p_last_upd_yyyymmddhh24miss=>'20160220152132'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(13349040333319311)
-,p_plug_name=>'Welcome to Apex Text Messages application'
+,p_plug_name=>'Welcome to APEX Text Messages application'
 ,p_icon_css_classes=>'fa-home'
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_api.id(34722357068375879027)
@@ -16808,7 +16808,7 @@ wwv_flow_api.create_page_plug(
 'First thing that you need are translated internal text messages. If you don''t already have them, then there is a good chance that you will find them at <a href="http://translate-apex.com" target="_blank">translate-apex.com</a>',
 '<ul>',
 '  <li>Download translations (CSV file) from <a href="http://translate-apex.com" target="_blank">translate-apex.com</a></li>',
-'  <li><a href="f?p=&APP_ID.:UPLOAD:&SESSION.">Upload CSV</a> file to Apex Text Messages application</li> ',
+'  <li><a href="f?p=&APP_ID.:UPLOAD:&SESSION.">Upload CSV</a> file to APEX Text Messages application</li> ',
 '  <li>Review uploaded text messages (translations) in <a href="f?p=&APP_ID.:PREPARED:&SESSION.">Prepared Messages</a></li>',
 '  <li>Import prepared text messages into your applications in <a href="f?p=&APP_ID.:MANAGE:&SESSION.">Manage Messages</a></li>',
 '  <br/>',
