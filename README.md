@@ -6,10 +6,10 @@
 * [Copy Messages](#copy)
 * [Application Messages](#appmessages)
 * [Backup & Restore](#backup)
-* [Supported Apex Versions](#appver)
+* [Supported APEX Versions](#appver)
 * [Installation](#install)
 
-# Apex Text Messages
+# APEX Text Messages
 Oracle Application Express supports English, German, Spanish, French, Italian, Japanese, Korean, Brazilian Portuguese, Simplified Chinese, and Traditional Chinese languages. If your application uses a language that is not among the ten languages into which APEX is translated, you must translate messages displayed by the APEX reporting engine.
 
 When running an application and an error occurs users will see the message `1 error has occurred`. If you want to translate this message to a different language, Slovenian or Polish for example, you must define a Text Message in Shared Components. In this case you create a Text Message with a name `FLOW.SINGLE_VALIDATION_ERROR`, a language code `sl`, and a text with Slovenian translation. If you also want to have a Polish translation, then you create a new text message with the same name `FLOW.SINGLE_VALIDATION_ERROR`, but with a different language code `pl` and a text with Polish translation. You have to do this for every application.
@@ -25,14 +25,14 @@ First you download and install this application. After installation you need tra
 
 * Download and install this application
 * Download translations (CSV file) from translate-apex.com
-* Upload CSV file to Apex Text Messages application
+* Upload CSV file to APEX Text Messages application
 * Review uploaded text messages (translations) in Prepared Messages
 * Import prepared text messages into your applications in Manage Messages
 
 If you already have a a translated application and you want to use this text messages, then you can Import this application text messages to Prepared Messages
 
 ## <a name="upload"></a> Upload CSV
-On page Upload CSV you can upload CSV file from [translate-apex.com](http://translate-apex.com). Translate-apex.com is an initiative from company [Pretius](http://pretius.com), for community-provided translations for APEX applications. Apex Text Messages application is compatible with CSV files, that are available at translate-apex.com. Uploaded file will be imported into prepared messages. Prepared messages are repository of all uploaded and imported messages. Once you have a prepared messages, you can import this messages to all other applications.
+On page Upload CSV you can upload CSV file from [translate-apex.com](http://translate-apex.com). Translate-apex.com is an initiative from company [Pretius](http://pretius.com), for community-provided translations for APEX applications. APEX Text Messages application is compatible with CSV files, that are available at translate-apex.com. Uploaded file will be imported into prepared messages. Prepared messages are repository of all uploaded and imported messages. Once you have a prepared messages, you can import this messages to all other applications.
 
 ## <a name="import"></a> Import to Prepared
 Alternative to Upload CSV, if you already have a translated application and you want to use this text messages also for all other (future) applications, then you can import this application text messages to Prepared Messages. Prepared messages are repository of all uploaded and imported messages. Once you have a prepared messages, you can import this messages to all other applications.
@@ -56,7 +56,7 @@ Report on this page will show you all prepared messages for selected language.
 All messages in report can also be edited and deleted.
 
 ## <a name="manage"></a> Manage Messages
-Manage Messages is central part of this application. On this page you can import or merge prepared text messages into your applications. You can also delete existing application messages. This operations can be applied to all applications in workspace where Apex Text Messages application is installed.
+Manage Messages is central part of this application. On this page you can import or merge prepared text messages into your applications. You can also delete existing application messages. This operations can be applied to all applications in workspace where APEX Text Messages application is installed.
 
 Until you select an application to import messages to and language of prepared messages, only a report with all existing applications and their translations is shown - Applications and languages.
 
@@ -110,10 +110,10 @@ By clicking a magnifier icon at individual backup a new modal page is opened. On
 
 **When you perform a restore, existing text messages for this application and language will be deleted and replaced with backed up text messages. Before this operation, a backup of existing state is automatically created.**
 
-## <a name="appver"></a> Supported Apex Versions
-Apex Text Messages application is compatible with Oracle Application Express 5.0 and above. If you are using version below 5.0, you won't be able to use this application. But you can still simplify management of your translations by going to [translate-apex.com](http://translate-apex.com). You can download installation script for older versions of Apex and you can use this script to install translation into your application.
+## <a name="appver"></a> Supported APEX Versions
+APEX Text Messages application is compatible with Oracle Application Express 5.0 and above. If you are using version below 5.0, you won't be able to use this application. But you can still simplify management of your translations by going to [translate-apex.com](http://translate-apex.com). You can download installation script for older versions of APEX and you can use this script to install translation into your application.
 
-There is also another, even better option. Upgrade your Apex to version 5.0 - you will not regret it!
+There is also another, even better option. Upgrade your APEX to version 5.0 - you will not regret it!
 
 ## <a name="install"></a> Installation
-All you need for installation is export file with Apex application (`f88328.sql`). This export file already includes supporting objects (tables, triggers, ...). If you wish you can install or remove database objects also with a separate scripts (`tm_db_install.sql` or `tm_db_remove.sql`).
+All you need for installation is export file with APEX application (`f88328.sql`). This export file already includes supporting objects (tables, triggers, ...). If you wish you can install or remove database objects also with a separate scripts (`tm_db_install.sql` or `tm_db_remove.sql`).
